@@ -2,20 +2,20 @@
 import sys
 import warnings
 from datetime import datetime
-from dumble_dash.crew import DumbleDash
+from dumble_dash.crew import WizardGame
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
     """
-    Kick off the crew to build and refine the Pacman game code.
+    Kick off the crew to build and refine the wizard game code.
     """
     inputs = {
-        'topic': 'Simple Pacman Game',
+        'topic': 'Wizard Dungeon Game',
         'current_year': str(datetime.now().year)
     }
     try:
-        DumbleDash().crew().kickoff(inputs=inputs)
+        WizardGame().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -23,9 +23,9 @@ def train():
     """
     Train the crew for a given number of iterations.
     """
-    inputs = {"topic": "Simple Pacman Game"}
+    inputs = {"topic": "Wizard Dungeon Game"}
     try:
-        DumbleDash().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        WizardGame().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
 
@@ -34,7 +34,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        DumbleDash().crew().replay(task_id=sys.argv[1])
+        WizardGame().crew().replay(task_id=sys.argv[1])
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
 
@@ -43,11 +43,11 @@ def test():
     Test the crew execution and return the results.
     """
     inputs = {
-        "topic": "Simple Pacman Game",
+        "topic": "Wizard Dungeon Game",
         "current_year": str(datetime.now().year)
     }
     try:
-        DumbleDash().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        WizardGame().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
 

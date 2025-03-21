@@ -1,0 +1,15 @@
+development_task:
+  description: >
+    Build a complete HTML5 and JavaScript implementation of a simple Pacman game.
+    The game should include a playable game loop, collision detection, scoring, and basic enemy AI.
+  expected_output: >
+    A complete HTML file (or HTML file with a separate JavaScript file) that runs a simple Pacman game in a browser.
+  agent: game_developer
+
+review_task:
+  description: >
+    Review the generated Pacman game code and optimize it.
+    Provide improvements, add comments, and ensure the code follows best practices.
+  expected_output: >
+    An optimized version of the HTML5 and JavaScript code with clear comments explaining the improvements.
+  agent: code_reviewer

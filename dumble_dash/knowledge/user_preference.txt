@@ -1,0 +1,4 @@
+User name is John Doe.
+User is a Web Developer.
+User is interested in building browser-based games.
+User is based in San Francisco, California.

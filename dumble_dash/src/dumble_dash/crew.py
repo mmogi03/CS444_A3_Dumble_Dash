@@ -10,14 +10,6 @@ llm = LLM(
     max_tokens=2048
 )
 
-# Create a separate LLM instance for art asset generation.
-art_llm = LLM(
-    model="cloudflare/@cf/stabilityai/stable-diffusion-xl-base-1.0",
-    base_url="https://api.cloudflare.com/client/v4/accounts/98847afe353db4215fcd843f27ad1bb8/ai/run/",
-    api_key=os.getenv("CLOUDFLARE_API_KEY"),
-    max_tokens=2048
-)
-
 @CrewBase
 class WizardGame():
     # Paths to the configuration files (relative to the project root).
@@ -74,14 +66,6 @@ class WizardGame():
         )
 
     @agent
-    def art_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['art_agent'],
-            llm=art_llm,
-            verbose=True
-        )
-
-    @agent
     def template_agent(self) -> Agent:
         return Agent(
             config=self.agents_config['template_agent'],
@@ -101,6 +85,14 @@ class WizardGame():
     def input_controls_agent(self) -> Agent:
         return Agent(
             config=self.agents_config['input_controls_agent'],
+            llm=llm,
+            verbose=True
+        )
+
+    @agent
+    def project_manager(self) -> Agent:
+        return Agent(
+            config=self.agents_config['project_manager'],
             llm=llm,
             verbose=True
         )
@@ -131,10 +123,6 @@ class WizardGame():
         return Task(config=self.tasks_config['spell_system_task'])
 
     @task
-    def art_creation_task(self) -> Task:
-        return Task(config=self.tasks_config['art_creation_task'])
-
-    @task
     def template_menu_task(self) -> Task:
         return Task(config=self.tasks_config['template_menu_task'])
 
@@ -145,6 +133,17 @@ class WizardGame():
     @task
     def controls_integration_task(self) -> Task:
         return Task(config=self.tasks_config['controls_integration_task'])
+
+    @task
+    def basic_art_task(self) -> Task:
+        return Task(config=self.tasks_config['basic_art_task'])
+
+    @task
+    def integration_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['integration_task'],
+            output_file="index.html"
+        )
 
     # --- Crew Assembly ---
     @crew

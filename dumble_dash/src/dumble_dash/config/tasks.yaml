@@ -4,96 +4,78 @@ player_system_task:
     mana (50 MP), and movement logic in a 2D top-down environment. Also integrate checks
     to prevent spell casting when mana is insufficient.
   expected_output: >
-    A JavaScript module or code section that controls player attributes (HP, MP),
-    movement, and basic collision with the environment.
+    A JavaScript module or code section that controls player attributes, movement, and collisions.
   agent: player_agent
 
 enemy_system_task:
   description: >
-    Implement the Enemy Agent’s behavior. Enemies should be randomly spawned in each room,
-    with health and damage values that increase with each successive room, and exhibit
-    simple movement or chase behavior toward the player.
+    Implement the Enemy Agent’s behavior with increasing difficulty as the player progresses.
   expected_output: >
-    JavaScript code that handles enemy initialization, movement AI, random spawning logic,
-    and updates health/damage values as rooms progress.
+    JavaScript code that manages enemy initialization, movement AI, and updates attributes.
   agent: enemy_agent
 
 boss_system_task:
   description: >
-    Develop the Boss Agent for special rooms (every 5th room). The boss should have significantly
-    higher health, deal more damage, and feature special attack patterns (e.g., area-of-effect
-    spells, high-damage single-target spells). The boss remains stationary but performs unique animations.
+    Develop the Boss Agent for special rooms. The boss should have significantly higher health,
+    deal more damage, and use unique attack patterns.
   expected_output: >
-    A specialized JavaScript module or function that manages the boss's health, attack patterns,
-    and triggers end-game conditions when the boss is defeated (or the player dies).
+    A specialized JavaScript module managing the boss's behavior and triggers.
   agent: boss_agent
 
 map_generation_task:
   description: >
-    Use the Map Agent to create and manage the dungeon layout. Design each room as a 2D grid with
-    obstacles and layout elements, manage room transitions, and gradually increase enemy difficulty.
+    Use the Map Agent to generate and manage the dungeon layout, including room transitions.
   expected_output: >
-    Functions or classes that procedurally generate or load dungeon rooms, track room progression,
-    and handle transitions from one room to the next.
+    Functions or classes to procedurally generate dungeon rooms and track progression.
   agent: map_agent
 
 interaction_system_task:
   description: >
-    Implement the Interactions Agent’s logic for entering combat screens and resolving battles.
-    When the player collides with an enemy, switch to a turn-based combat menu where spells
-    can be selected. Determine the outcome (damage, healing, special effects) and progress the game accordingly.
+    Implement the combat system that handles interactions when the player collides with enemies,
+    triggering turn-based combat.
   expected_output: >
-    A system of methods that trigger the turn-based combat UI, calculate spell damage,
-    update health values, and determine victory/defeat (e.g., moving to the next room or game over).
+    Methods that trigger combat UI, calculate damage, and manage victory/defeat.
   agent: interactions_agent
 
 spell_system_task:
   description: >
-    Build the Spells Agent to handle casting spells: Fireball (20 MP), Mud Spikes (10 MP),
-    and Heal (35 MP). Each spell should have distinct visuals and effects (damage, healing,
-    or special conditions like slowing an enemy).
+    Implement the Spells Agent to define spells (e.g., Fireball, Mud Spikes, Heal) with distinct effects.
   expected_output: >
-    A script or class defining spell objects, their costs, effects, and any animations or statuses
-    applied when cast. This should be accessible to both the player and boss where applicable.
+    A script or module defining spell objects and their effects.
   agent: spells_agent
-
-art_creation_task:
-  description: >
-    Use the Art Agent to generate or provide artwork. This includes 2D tile-based floor and wall sprites,
-    character sprites for the player and enemies, boss designs, spell effects, and UI icons. Ensure a cohesive visual theme.
-  expected_output: >
-    A collection of sprite assets and any necessary CSS/JS integration for displaying artwork in-game.
-  inputs:
-    prompt: "Create a visually striking set of assets for a wizard-themed dungeon game including a dark, atmospheric dungeon background, a heroic wizard character sprite, varied enemy sprites, a menacing boss design with arcane motifs, dynamic spell effect animations, and intuitive UI icons with an arcane aesthetic."
-    height: 512
-    width: 512
-    num_steps: 20
-    strength: 1
-    guidance: 7.5
-  agent: art_agent
 
 template_menu_task:
   description: >
-    Create the Template Agent’s main menu, in-game pause menu, and end-game screen. Include options for
-    restarting the game, viewing controls, and basic instructions on spell usage.
+    Create the main menu and UI screens.
   expected_output: >
-    HTML/CSS/JS code that renders menus and HUD elements, supports game restart functionality,
-    and displays controls/instructions in a user-friendly manner.
+    HTML/CSS/JS code that renders the game menu and HUD.
   agent: template_agent
 
 debugging_review_task:
   description: >
-    Have the Debugger/Code Reviewer conduct a thorough review of all integrated code. Identify bugs,
-    performance issues, or inconsistencies, and then optimize or fix them according to best practices.
+    Review and optimize all code for integration and performance.
   expected_output: >
-    A revised version of the entire codebase with comments, bug fixes, and performance optimizations.
+    A revised and well-commented codebase.
   agent: debugger_code_reviewer
 
 controls_integration_task:
   description: >
-    Implement the Input Controls Agent to capture keyboard, mouse, or touch inputs. This should allow
-    the player to move, cast spells, pause the game, or navigate menus on desktop and mobile devices.
+    Implement input handlers for keyboard, mouse, and touch.
   expected_output: >
-    Script(s) or modules that handle input event listeners for movement, spell-casting hotkeys,
-    and menu interactions across different devices.
+    Script(s) that capture and process user input for gameplay.
   agent: input_controls_agent
+
+basic_art_task:
+  description: >
+    Generate a basic placeholder art snippet using code (e.g., an HTML5 canvas drawing simple shapes).
+  expected_output: >
+    A snippet of HTML/JavaScript code that draws a simple art piece (for example, a canvas with a rectangle, circle, and text reading "Wizard Dungeon").
+  prompt: "Generate an HTML5 canvas snippet that draws a simple scene with a rectangle, circle, and text 'Wizard Dungeon'."
+  agent: project_manager
+
+integration_task:
+  description: >
+    Integrate all generated code, comments, and assets into a final index.html file that can be run in a browser.
+  expected_output: >
+    A complete index.html file that stitches together the game’s code, comments, and assets.
+  agent: project_manager

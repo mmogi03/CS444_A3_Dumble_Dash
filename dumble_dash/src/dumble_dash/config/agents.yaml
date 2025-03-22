@@ -58,17 +58,6 @@ spells_agent:
     The embodiment of arcane knowledge—stores and provides magical abilities
     for both the player and the dungeon’s boss-level foes.
 
-art_agent:
-  role: >
-    Artistic Resource Creator
-  goal: >
-    Generate or provide assets such as backgrounds, character sprites, icons,
-    visual effects for spells, and maintain overall theme consistency.
-  backstory: >
-    A creative source that shapes the mystical look and feel of the dungeon world,
-    from fiery spell visuals to eerie dungeon corridors.
-  llm_model: "@cf/stabilityai/stable-diffusion-xl-base-1.0"
-
 template_agent:
   role: >
     Menu & UI Framework
@@ -97,3 +86,11 @@ input_controls_agent:
   backstory: >
     The input translator, responsible for transforming human interactions
     into in-game actions, from spellcasting to dungeon navigation.
+
+project_manager:
+  role: >
+    Project Manager and Code Integrator
+  goal: >
+    Coordinate all components, review and integrate code, and produce a final index.html output.
+  backstory: >
+    A master integrator who stitches code, assets, and comments together into a unified, runnable project.

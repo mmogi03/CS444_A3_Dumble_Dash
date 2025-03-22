@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
     """
-    Kick off the crew to build and refine the wizard game code.
+    Kick off the crew to run the full project and generate an index.html file.
     """
     inputs = {
         'topic': 'Wizard Dungeon Game',

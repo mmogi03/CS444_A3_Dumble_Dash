@@ -1,62 +1,89 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
-
 @CrewBase
 class DumbleDashV2():
-    """DumbleDashV2 crew"""
+    """DumbleDashV2 crew for HTML5 Phaser.js game generated entirely by agents into an output folder"""
 
-    # Learn more about YAML configuration files here:
-    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def html_generator(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'],
+            config=self.agents_config['html_generator'],
             verbose=True
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def game_logic_generator(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'],
+            config=self.agents_config['game_logic_generator'],
             verbose=True
         )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
-    @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['research_task'],
+    @agent
+    def enemy_logic_generator(self) -> Agent:
+        return Agent(
+            config=self.agents_config['enemy_logic_generator'],
+            verbose=True
+        )
+
+    @agent
+    def ui_and_assets_manager(self) -> Agent:
+        return Agent(
+            config=self.agents_config['ui_and_assets_manager'],
+            verbose=True
+        )
+
+    @agent
+    def debug_and_review_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['debug_and_review_agent'],
+            verbose=True
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def generate_html(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'],
-            output_file='report.md'
+            config=self.tasks_config['generate_html'],
+            output_file='output/index.html'
+        )
+
+    @task
+    def generate_game_logic(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_game_logic'],
+            output_file='output/js/game.js'
+        )
+        
+    @task
+    def generate_enemy_logic(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_enemy_logic'],
+            output_file='output/js/game_enemies.js'
+        )
+
+    @task
+    def integrate_ui_assets(self) -> Task:
+        return Task(
+            config=self.tasks_config['integrate_ui_assets']
+        )
+
+    @task
+    def debug_and_review(self) -> Task:
+        return Task(
+            config=self.tasks_config['debug_and_review'],
+            output_file='debug_report.txt'
         )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the DumbleDashV2 crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
-
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
+            agents=self.agents,  # Automatically created by @agent decorators.
+            tasks=self.tasks,    # Automatically created by @task decorators.
             process=Process.sequential,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+            planning=True
+            # memory=True
         )

@@ -1,0 +1,23 @@
+[project]
+name = "dumble_dash_v2"
+version = "0.1.0"
+description = "dumble_dash_v2 using crewAI"
+authors = [{ name = "Dumble Dash", email = "csgenaidumbledash7@gmail.com" }]
+requires-python = "==3.11.9"
+dependencies = [
+    "crewai[tools]>=0.108.0,<1.0.0"
+]
+
+[project.scripts]
+dumble_dash_v2 = "dumble_dash_v2.main:run"
+run_crew = "dumble_dash_v2.main:run"
+train = "dumble_dash_v2.main:train"
+replay = "dumble_dash_v2.main:replay"
+test = "dumble_dash_v2.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

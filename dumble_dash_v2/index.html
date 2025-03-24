@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Crypts of Aetheria</title>
+    <style>
+      body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #1a1a2e;
+            color: #ffffff;
+        }
+        .screen {
+            display: none;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+        }
+        button {
+            background: linear-gradient(135deg, #283c86 0%, #45a247 100%);
+            border: 2px solid #fff;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            padding: 12px 30px;
+            margin: 20px auto 0;
+            display: block;
+            width: 215.15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #45a247 0%, #283c86 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        #game-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            color: #e94560;
+        }
+        #game-controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(26, 26, 46, 0.8);
+            padding: 10px 0;
+            z-index: 101;
+            display: none;
+            text-align: center;
+        }
+        #game-controls button {
+            display: inline-block;
+            width: auto;
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-size: 14px;
+        }
+        #hud {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
+            padding: 10px;
+            z-index: 100;
+            display: none;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 100px);
+            overflow: hidden;
+            background-color: #0f3460;
+            border: 2px solid #e94560;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        #game-screen {
+            background: none;
+        }
+        #instructions-screen {
+            z-index: 200;
+        }
+        #instructions-screen.overlay {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        #instructions-screen .container {
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+        @media (max-width: 600px) {
+            #game-title {
+                font-size: 2em;
+            }
+            button {
+                width: 80%;
+                font-size: 16px;
+            }
+            #game-controls button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+      /* Additional styles for HUD, Cards, etc. */
+      #hud {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .hud-element {
+        margin: 0 10px;
+      }
+      .card {
+        width: 100px;
+        height: 150px;
+        background-color: #fff;
+        border: 2px solid #000;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        display: inline-block;
+        margin: 5px;
+        cursor: pointer;
+        position: relative;
+      }
+      .card img {
+        width: 100%;
+        height: 80%;
+        border-bottom: 2px solid #000;
+      }
+      .card .card-info {
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+    <!-- Include Phaser Library -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+  </head>
+  <body>
+    <div id="game-controls">
+        <button id="game-menu-button">Menu</button>
+        <button id="game-restart-button">Restart</button>
+        <button id="game-instructions-button">Instructions</button>
+    </div>
+    <div id="hud">
+        <div class="hud-element" id="health-bar">Health: 100</div>
+        <div class="hud-element" id="ep-meter">EP: 50/50</div>
+        <div class="hud-element" id="artifact-slots">Artifacts: 3</div>
+    </div>
+    <div id="start-menu-screen" class="active screen">
+        <div class="container">
+            <h1 id="game-title">Crypts of Aetheria</h1>
+            <button id="play-button">Play</button>
+            <button id="settings-button">Settings</button>
+            <button id="instructions-button">Instructions</button>
+        </div>
+    </div>
+    <div id="settings-screen" class="screen">
+        <div class="container">
+            <h2>Settings</h2>
+            <button id="settings-back-button">Back</button>
+            <!-- Settings options can be added here -->
+        </div>
+    </div>
+    <div id="instructions-screen" class="screen">
+        <div class="container">
+            <h2>Instructions</h2>
+            <h3>How to Play:</h3>
+            <ul>
+                <li>Navigate the maze using arrow keys or WASD.</li>
+                <li>Interact with objects using the Spacebar or mouse clicks.</li>
+                <li>Engage in turn-based card battles to defeat enemies.</li>
+                <li>Manage your Energy Points (EP) to perform actions.</li>
+                <li>Collect artifacts to enhance your abilities.</li>
+            </ul>
+            <h3>Controls:</h3>
+            <ul>
+                <li>W/A/S/D or Arrow Keys: Move</li>
+                <li>Spacebar: Interact</li>
+                <li>Shift: Dash</li>
+                <li>Number Keys (1-5): Select Cards</li>
+                <li>Mouse: Click to move or interact</li>
+            </ul>
+            <button id="instructions-back-button">Back</button>
+        </div>
+    </div>
+    <div id="game-screen" class="screen">
+        <div id="game-container"></div>
+    </div>
+    <div id="game-over-screen" class="screen">
+        <div class="container">
+            <div id="game-over-message">Game Over</div>
+            <button id="play-again-button">Play Again</button>
+            <button id="main-menu-button">Main Menu</button>
+        </div>
+    </div>
+    <audio autoplay="" id="background-music" loop="">
+      <source src="background-music.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="start-game-sound">
+      <source src="start-game-sound.mp3" type="audio/mpeg" />
+    </audio>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Screen Management
+        const screens = {
+          startMenu: document.getElementById('start-menu-screen'),
+          settings: document.getElementById('settings-screen'),
+          instructions: document.getElementById('instructions-screen'),
+          game: document.getElementById('game-screen'),
+          gameOver: document.getElementById('game-over-screen')
+        };
+
+        const buttons = {
+          play: document.getElementById('play-button'),
+          settings: document.getElementById('settings-button'),
+          instructions: document.getElementById('instructions-button'),
+          settingsBack: document.getElementById('settings-back-button'),
+          instructionsBack: document.getElementById('instructions-back-button'),
+          playAgain: document.getElementById('play-again-button'),
+          mainMenu: document.getElementById('main-menu-button'),
+          gameMenu: document.getElementById('game-menu-button'),
+          gameRestart: document.getElementById('game-restart-button'),
+          gameInstructions: document.getElementById('game-instructions-button')
+        };
+
+        // Function to switch screens
+        const switchScreen = (target) => {
+          for (const screen in screens) {
+            screens[screen].classList.remove('active');
+          }
+          screens[target].classList.add('active');
+          if (target === 'game') {
+            startGame();
+          }
+          if (target === 'game-over') {
+            document.getElementById('game-over-message').innerText = 'Game Over';
+          }
+        };
+
+        // Event Listeners for Navigation
+        buttons.play.addEventListener('click', () => {
+          // Play button sound
+          document.getElementById('start-game-sound').play();
+          switchScreen('game');
+        });
+
+        buttons.settings.addEventListener('click', () => switchScreen('settings'));
+        buttons.instructions.addEventListener('click', () => switchScreen('instructions'));
+        buttons.settingsBack.addEventListener('click', () => switchScreen('startMenu'));
+        buttons.instructionsBack.addEventListener('click', () => switchScreen('startMenu'));
+        buttons.playAgain.addEventListener('click', () => {
+          switchScreen('game');
+          // Reset game state
+          game.scene.scenes[0].scene.restart();
+        });
+        buttons.mainMenu.addEventListener('click', () => switchScreen('startMenu'));
+
+        buttons.gameMenu.addEventListener('click', () => switchScreen('instructions')); // Example action
+        buttons.gameRestart.addEventListener('click', () => {
+          game.scene.scenes[0].scene.restart();
+        });
+        buttons.gameInstructions.addEventListener('click', () => switchScreen('instructions'));
+
+        // Initialize HUD
+        const hud = {
+          health: document.getElementById('health-bar'),
+          ep: document.getElementById('ep-meter'),
+          artifacts: document.getElementById('artifact-slots')
+        };
+
+        // Phaser Game Configuration
+        const config = {
+          type: Phaser.AUTO,
+          parent: 'game-container',
+          width: window.innerWidth,
+          height: window.innerHeight - 100,
+          physics: {
+            default: 'arcade',
+            arcade: {
+              debug: false
+            }
+          },
+          scene: {
+            preload: preload,
+            create: create,
+            update: update
+          }
+        };
+
+        const game = new Phaser.Game(config);
+
+        // Game Variables
+        let player;
+        let cursors;
+        let maze;
+        let currentTile;
+        let isInBattle = false;
+        let ep = 50;
+        let maxEp = 50;
+        let health = 100;
+        let inventory = {
+          cards: [],
+          artifacts: [],
+          consumables: [],
+          resources: []
+        };
+        let deck = [];
+        let hand = [];
+        let artifactsEquipped = [];
+
+        // Preload Assets
+        function preload() {
+          // Load assets here
+          this.load.image('player', 'assets/player.png');
+          this.load.image('tile_floor', 'assets/tile_floor.png');
+          this.load.image('tile_wall', 'assets/tile_wall.png');
+          this.load.image('enemy', 'assets/enemy.png');
+          // Load card images, artifacts, etc.
+          this.load.image('card_attack', 'assets/cards/attack.png');
+          this.load.image('card_defense', 'assets/cards/defense.png');
+          this.load.image('card_utility', 'assets/cards/utility.png');
+          this.load.image('card_artifact', 'assets/cards/artifact.png');
+        }
+
+        // Create Game Scene
+        function create() {
+          // Initialize maze
+          maze = generateMaze(20, 15); // Grid size can be adjusted
+
+          // Draw maze
+          for (let y = 0; y < maze.length; y++) {
+            for (let x = 0; x < maze[y].length; x++) {
+              let tile;
+              if (maze[y][x] === 1) {
+                tile = this.add.image(x * 32, y * 32, 'tile_wall').setOrigin(0);
+              } else {
+                tile = this.add.image(x * 32, y * 32, 'tile_floor').setOrigin(0);
+              }
+            }
+          }
+
+          // Initialize player
+          player = this.physics.add.sprite(64, 64, 'player');
+          player.setCollideWorldBounds(true);
+
+          // Initialize inputs
+          cursors = this.input.keyboard.createCursorKeys();
+          this.input.keyboard.addKeys('W,A,S,D,SPACE,SHIFT,ONE,TWO,THREE,FOUR,FIVE');
+
+          // Generate initial deck
+          generateInitialDeck();
+
+          // Display HUD
+          updateHUD();
+
+          // Setup camera
+          this.cameras.main.startFollow(player);
+          this.cameras.main.setBounds(0, 0, maze[0].length * 32, maze.length * 32);
+        }
+
+        // Update Loop
+        function update(time, delta) {
+          if (!isInBattle) {
+            handleMovement(this);
+          }
+          // Additional update logic
+        }
+
+        // Handle Player Movement
+        function handleMovement(scene) {
+          const speed = 100;
+          player.setVelocity(0);
+
+          if (cursors.left.isDown || scene.input.keyboard.keys[65].isDown) {
+            player.setVelocityX(-speed);
+          }
+          else if (cursors.right.isDown || scene.input.keyboard.keys[68].isDown) {
+            player.setVelocityX(speed);
+          }
+
+          if (cursors.up.isDown || scene.input.keyboard.keys[87].isDown) {
+            player.setVelocityY(-speed);
+          }
+          else if (cursors.down.isDown || scene.input.keyboard.keys[83].isDown) {
+            player.setVelocityY(speed);
+          }
+
+          // Dash
+          if (scene.input.keyboard.keys[16].isDown) { // Shift key
+            player.setVelocityX(player.body.velocity.x * 2);
+            player.setVelocityY(player.body.velocity.y * 2);
+            ep -= 10;
+            updateHUD();
+          }
+
+          // Check for battle trigger
+          // Example: random chance to enter battle
+          if (Phaser.Math.Between(1, 1000) < 5) { // 0.5% chance per update
+            enterBattle(scene);
+          }
+        }
+
+        // Generate Maze using Recursive Division
+        function generateMaze(width, height) {
+          let maze = [];
+          for (let y = 0; y < height; y++) {
+            maze[y] = [];
+            for (let x = 0; x < width; x++) {
+              maze[y][x] = 1; // Initialize all walls
+            }
+          }
+
+          // Recursive division algorithm
+          function divide(x, y, w, h, orientation) {
+            if (w < 2 || h < 2) return;
+
+            let horizontal = orientation === 'H';
+            let wx = x + (horizontal ? 0 : Phaser.Math.Between(0, w - 2));
+            let wy = y + (horizontal ? Phaser.Math.Between(0, h - 2) : 0);
+            let px = wx + (horizontal ? Phaser.Math.Between(0, w - 1) : 0);
+            let py = wy + (horizontal ? 0 : Phaser.Math.Between(0, h - 1));
+            let dx = horizontal ? 1 : 0;
+            let dy = horizontal ? 0 : 1;
+            let length = horizontal ? w : h;
+            let dir = Phaser.Math.Between(0,1) === 0 ? 'H' : 'V';
+
+            for (let i = 0; i < length; i++) {
+              if (wx !== px || wy !== py) {
+                maze[wy][wx] = 1;
+              }
+              wx += dx;
+              wy += dy;
+            }
+
+            let nx = x;
+            let ny = y;
+            let nw = horizontal ? w : wx - x;
+            let nh = horizontal ? wy - y : h;
+            divide(nx, ny, nw, nh, dir);
+
+            nx = horizontal ? x : wx + 1;
+            ny = horizontal ? wy + 1 : y;
+            nw = horizontal ? w : x + w - wx -1;
+            nh = horizontal ? y + h - wy -1 : h;
+            divide(nx, ny, nw, nh, dir);
+          }
+
+          divide(0, 0, width, height, 'H');
+
+          // Create paths
+          for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+              if (maze[y][x] === 1) {
+                // Ensure boundaries
+                if (x === 0 || y === 0 || x === width -1 || y === height -1) {
+                  maze[y][x] = 1;
+                } else {
+                  maze[y][x] = Phaser.Math.Between(0,1);
+                }
+              }
+            }
+          }
+
+          return maze;
+        }
+
+        // Generate Initial Deck
+        function generateInitialDeck() {
+          deck.push({
+            type: 'Attack',
+            name: 'Basic Strike',
+            cost: 5,
+            effect: (enemy) => {
+              enemy.health -= 10;
+              console.log('Attack dealt 10 damage');
+            },
+            image: 'card_attack'
+          });
+          deck.push({
+            type: 'Defense',
+            name: 'Shield Block',
+            cost: 3,
+            effect: () => {
+              player.health += 5;
+              console.log('Defense increased health by 5');
+            },
+            image: 'card_defense'
+          });
+          // Add more initial cards
+        }
+
+        // Enter Battle
+        function enterBattle(scene) {
+          isInBattle = true;
+          switchScreen('game'); // Switch to game screen if not already
+          // Initialize battle UI and logic
+          // Example: create an enemy
+          let enemy = {
+            name: 'Corrupted Guardian',
+            health: 50,
+            attack: 10
+          };
+          startCardBattle(scene, enemy);
+        }
+
+        // Start Card Battle
+        function startCardBattle(scene, enemy) {
+          // Display battle HUD
+          hud.health.innerText = `Health: ${health}`;
+          hud.ep.innerText = `EP: ${ep}/${maxEp}`;
+          hud.artifacts.innerText = `Artifacts: ${artifactsEquipped.length}`;
+          // Display enemy info
+          let enemyInfo = scene.add.text(400, 50, `${enemy.name} - Health: ${enemy.health}`, { fontSize: '20px', fill: '#ffffff' }).setOrigin(0.5);
+          
+          // Draw hand
+          drawHand(scene);
+
+          // Handle card selection
+          scene.input.keyboard.on('keydown-ONE', () => playCard(0, enemy, scene));
+          scene.input.keyboard.on('keydown-TWO', () => playCard(1, enemy, scene));
+          scene.input.keyboard.on('keydown-THREE', () => playCard(2, enemy, scene));
+          scene.input.keyboard.on('keydown-FOUR', () => playCard(3, enemy, scene));
+          scene.input.keyboard.on('keydown-FIVE', () => playCard(4, enemy, scene));
+
+          // Player turn
+          // After player turn, enemy turn
+        }
+
+        // Draw Hand
+        function drawHand(scene) {
+          hand = Phaser.Utils.Array.Shuffle(deck).slice(0,5);
+          // Clear previous hand display
+          scene.children.list.forEach(child => {
+            if (child.name === 'player-card') {
+              child.destroy();
+            }
+          });
+          // Display cards
+          hand.forEach((card, index) => {
+            let cardImage = scene.add.image(100 + index * 150, scene.sys.game.config.height - 100, card.image).setScale(0.5).setInteractive().setName('player-card');
+            cardImage.on('pointerdown', () => {
+              playCard(index, null, scene); // Enemy is handled differently
+            });
+          });
+        }
+
+        // Play Card
+        function playCard(index, enemy, scene) {
+          if (index >= hand.length) return;
+          let card = hand[index];
+          if (ep < card.cost) {
+            // Not enough EP
+            console.log('Not enough EP to play this card.');
+            return;
+          }
+          ep -= card.cost;
+          updateHUD();
+          // Execute card effect
+          card.effect(enemy);
+          // Remove card from hand
+          hand.splice(index,1);
+          // Update display
+          scene.children.list.forEach(child => {
+            if (child.name === 'player-card') {
+              child.destroy();
+            }
+          });
+          // Draw new hand
+          drawHand(scene);
+          // Check if enemy is defeated
+          if (enemy && enemy.health <= 0) {
+            console.log('Enemy defeated!');
+            isInBattle = false;
+            switchScreen('game');
+            // Reward player
+            rewardPlayer(scene);
+          } else if (enemy) {
+            // Enemy turn
+            enemyAction(enemy, scene);
+          }
+        }
+
+        // Enemy Action
+        function enemyAction(enemy, scene) {
+          // Simple enemy attack
+          health -= enemy.attack;
+          updateHUD();
+          console.log(`Enemy attacks! Player health: ${health}`);
+          if (health <= 0) {
+            endGame(scene);
+          }
+        }
+
+        // Reward Player
+        function rewardPlayer(scene) {
+          // Example: add a new card
+          deck.push({
+            type: 'Attack',
+            name: 'Aether Bolt',
+            cost: 7,
+            effect: (enemy) => {
+              enemy.health -= 20;
+              console.log('Aether Bolt dealt 20 damage');
+            },
+            image: 'card_attack'
+          });
+          console.log('New card added to deck!');
+        }
+
+        // End Game
+        function endGame(scene) {
+          isInBattle = false;
+          switchScreen('game-over');
+        }
+
+        // Update HUD
+        function updateHUD() {
+          hud.health.innerText = `Health: ${health}`;
+          hud.ep.innerText = `EP: ${ep}/${maxEp}`;
+          hud.artifacts.innerText = `Artifacts: ${artifactsEquipped.length}`;
+        }
+
+        // Start Game Function
+        function startGame() {
+          switchScreen('game');
+          // Initialize or restart game scenes
+          game.scene.restart();
+        }
+
+        // Additional Game Logic Functions
+        // For procedural generation, inventory management, deck building, etc.
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  suno-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.suno
+    ports:
+      - "3000:3000"

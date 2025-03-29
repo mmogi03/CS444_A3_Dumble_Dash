@@ -76,7 +76,6 @@ class Cs444GenaiClass():
             memory = True, # I think this still needs memory, no ? - vv 
         )
 
-
     @task
     def search_trending_concepts(self) -> Task:
         return Task(
@@ -97,34 +96,35 @@ class Cs444GenaiClass():
             config=self.tasks_config['generate_unique_game_idea'],
             agent=self.create_innovative_game_concpet()
         )
-
-    @task 
-    def make_art(self) -> Task: 
-        return Task(
-            config = self.tasks_config['make_art'],
-            agent = self.visual_concept_agent()
-        )
     
-    @task 
-    def make_music(self) -> Task: 
-        return Task(
-            config = self.tasks_config['make_music'],
-            agent = self.audio_director()
-        )
+    # @task
+    # def design_story(self) -> Task:
+    #     return Task(
+    #         config = self.tasks_config['design_story'],
+    #         agent = self.story_designer()
+    #     )
 
-    @task
-    def design_story(self) -> Task:
-        return Task(
-            config = self.tasks_config['design_story'],
-            agent = self.story_designer()
-        )
+    # @task 
+    # def write_dialogue(self) -> Task:
+    #     return Task(
+    #         config = self.tasks_config['write_dialogue'],
+    #         agent = self.dialogue_writer()
+    #     )
 
-    @task 
-    def write_dialogue(self) -> Task:
-            return Task(
-            config = self.tasks_config['write_dialogue'],
-            agent = self.dialogue_writer()
-        )
+    # @task 
+    # def make_art(self) -> Task: 
+    #     return Task(
+    #         config = self.tasks_config['make_art'],
+    #         agent = self.visual_concept_agent()
+    #     )
+    
+    # @task 
+    # def make_music(self) -> Task: 
+    #     return Task(
+    #         config = self.tasks_config['make_music'],
+    #         agent = self.audio_director()
+    #     )
+
 
     @crew
     def crew(self) -> Crew:

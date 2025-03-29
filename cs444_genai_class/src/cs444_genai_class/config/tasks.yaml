@@ -15,7 +15,11 @@ scrape_card_battler_ideas:
 
 generate_unique_game_idea:
   description: >
-    Based on the search and scraping results, synthesize a new game concept.
+    Based on the results from: 
+    - Trends: {search_trending_concepts} 
+    - Real-world references: {scrape_card_battler_ideas}
+    
+    synthesize a new game concept.
     It should be a 2D turn-based, card-select battle roguelike with level crawling elements.
     The game idea must be creative, fun, and technically feasible.
   expected_output: >
@@ -26,3 +30,13 @@ generate_unique_game_idea:
     - Art and music direction
     - Replayability features
     - A sample starting level and enemy
+
+make_art:
+  description: >
+    Based on the results from: 
+      - Unique idea: {generate_unique_game_idea}
+      - 
+    
+    Synthesize a suite of images that fit into the unqiue idea generated. 
+    The 
+    

@@ -104,18 +104,27 @@ class Cs444GenaiClass():
             config = self.tasks_config['make_art'],
             agent = self.visual_concept_agent()
         )
+    
+    @task 
+    def make_music(self) -> Task: 
+        return Task(
+            config = self.tasks_config['make_music'],
+            agent = self.audio_director()
+        )
 
     @task
-    def expand_concept(self) -> Task:
-        pass
-
-    @task
-    def story_designer(self) -> Task:
-        pass
+    def design_story(self) -> Task:
+        return Task(
+            config = self.tasks_config['design_story'],
+            agent = self.story_designer()
+        )
 
     @task 
     def write_dialogue(self) -> Task:
-        pass
+            return Task(
+            config = self.tasks_config['write_dialogue'],
+            agent = self.dialogue_writer()
+        )
 
     @crew
     def crew(self) -> Crew:

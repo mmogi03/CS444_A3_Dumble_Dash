@@ -21,30 +21,6 @@ class Cs444GenaiClass():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def find_game_concpet(self) -> Agent:
-        return Agent(
-            config=self.agents_config['find_game_concpet'],
-            tools=[SerperDevTool()],
-            verbose=True
-        )
-
-    @agent
-    def scrap_game_concpet(self) -> Agent:
-        return Agent(
-            config=self.agents_config['scrap_game_concpet'],
-            tools=[ScrapeWebsiteTool()],
-            verbose=True
-        )
-
-    @agent
-    def create_innovative_game_concpet(self) -> Agent:
-        return Agent(
-            config=self.agents_config['create_innovative_game_concpet'],
-            verbose=True,
-            memory=True
-        )
-    
-    @agent
     def visual_concept_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['visual_concept_agent'], 
@@ -74,27 +50,6 @@ class Cs444GenaiClass():
             config = self.agents_config['dialogue_writer'], 
             verbose = True, 
             memory = True, # I think this still needs memory, no ? - vv 
-        )
-
-    @task
-    def search_trending_concepts(self) -> Task:
-        return Task(
-            config=self.tasks_config['search_trending_concepts'],
-            agent=self.find_game_concpet()
-        )
-
-    @task
-    def scrape_card_battler_ideas(self) -> Task:
-        return Task(
-            config=self.tasks_config['scrape_card_battler_ideas'],
-            agent=self.scrap_game_concpet()
-        )
-
-    @task
-    def generate_unique_game_idea(self) -> Task:
-        return Task(
-            config=self.tasks_config['generate_unique_game_idea'],
-            agent=self.create_innovative_game_concpet()
         )
     
     # @task

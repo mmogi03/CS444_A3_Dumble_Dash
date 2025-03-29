@@ -43,6 +43,39 @@ class Cs444GenaiClass():
             verbose=True,
             memory=True
         )
+    
+    @agent
+    def visual_concept_agent(self) -> Agent:
+        return Agent(
+            config = self.agents_config['visual_concept_agent'], 
+            verbose = True, 
+            memory = True, 
+        )
+    
+    @agent
+    def audio_director(self) -> Agent:
+        return Agent(
+            config = self.agents_config['audio_director'], 
+            verbose = True, 
+            memory = True, 
+        )
+
+    @agent
+    def story_designer(self) -> Agent:
+        return Agent(
+            config = self.agents_config['story_designer'], 
+            verbose = True, 
+            memory = True, # I think this still needs memory, no ? - vv 
+        )
+
+    @agent 
+    def dialogue_writer(self) -> Agent:
+        return Agent(
+            config = self.agents_config['dialogue_writer'], 
+            verbose = True, 
+            memory = True, # I think this still needs memory, no ? - vv 
+        )
+
 
     @task
     def search_trending_concepts(self) -> Task:
@@ -65,7 +98,17 @@ class Cs444GenaiClass():
             agent=self.create_innovative_game_concpet()
         )
 
+    @task
+    def expand_concept(self) -> Task:
+        pass
 
+    @task
+    def story_designer(self) -> Task:
+        pass
+
+    @task 
+    def write_dialogue(self) -> Task:
+        pass
 
     @crew
     def crew(self) -> Crew:

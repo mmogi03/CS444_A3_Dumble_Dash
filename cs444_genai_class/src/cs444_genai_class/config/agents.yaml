@@ -46,19 +46,15 @@ audio_director:
 story_designer:
   role: > 
     Scriptwriter for a Game Studio
-
   goal: > 
-    Make a script that takes the following game idea: 
-      {create_innovative_game_concpet}   
-    and fleshes out the story that the game should take 
-
+    Make a script that takes the game concept and fleshes out the story that the game should take 
   backstory: > 
     You're a verteran writer that knows how to take a game concept and bring a story to fruition 
     You specialize in making creative stories even if the concept is nearly identical 
   
 dialogue_writer: 
   role: > 
-    Dialogue speicalist for game Studio
+    Dialogue speicalist for  game Studio
   goal: > 
     Take a game concept and a story and know how to make human-like interactions between the characters 
   backstory: >

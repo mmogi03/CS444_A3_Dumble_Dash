@@ -1,72 +1,26 @@
-search_trending_concepts:
+search_trending_concepts_a:
   description: >
     Use online resources to discover trending concepts in card-based games.
-    Focus on genres like turn-based tactics, deckbuilders, and roguelike dungeon crawlers.
+    Focus on genres like turn-based tactics, deckbuilders, and roguelike level crawlers.
     Your goal is to find patterns or emerging subgenres in the space.
   expected_output: >
     A list of 10 bullet points summarizing the most important or recurring themes in turn-based card roguelike games.
 
-scrape_card_battler_ideas:
+scrape_card_battler_ideas_a:
   description: >
-    Scrape game-related content from sites like Reddit, Steam discussions, and Indie game blogs.
-    Look for popular or well-received turn-based or card-battler game ideas, mechanics, or aesthetics.
+    Scrape the website for the latest news and information.
   expected_output: >
-    A summary of at least 5 unique card-based gameplay features or design styles extracted from real-world game discussions.
+    Fully scraped websites with all the important information from the website related to popular or well-received turn-based or card-battler game ideas, mechanics, or aesthetics.
 
-generate_unique_game_idea:
+generate_unique_game_idea_a:
   description: >
-    Based on the results from: 
-    - Trends: {search_trending_concepts} 
-    - Real-world references: {scrape_card_battler_ideas}
-    
-    synthesize a new game concept.
+    Based on the results from, synthesize a new game concept.
     It should be a 2D turn-based, card-select battle roguelike with level crawling elements.
     The game idea must be creative, fun, and technically feasible.
   expected_output: >
     A game concept document that includes:
     - Game title
-    - Short pitch
     - Core mechanics (card, turn, roguelike)
-    - Art and music direction
     - Replayability features
     - A sample starting level and enemy
-
-design_story: 
-  description: > 
-    Based on the results from: 
-      - Unique game idea: {generate_unique_game_idea}
-    
-    Design an overarching story line that the game concept could take 
-    The story should be filled with twists and turns
-    The story should be creative, fun, and technically feasible 
-  expected_output: > 
-    A story document that includes:
-     - The Game Title
-     - Make the protagonist name 
-     - Write out the detailed story line the game should be taking
-     - Show the starting cutscene and what art and music need to be created for that
-
-write_dialogue: 
-  description: > 
-    Based on the results from: 
-      - Unique game idea: {generate_unique_game_idea}
-      - Story document from: {design_story}
-    
-  expected_output: > 
-    Update the story document that includes:
-      - follow a traditional script structure:
-      <progonist_name>: <sample_dialogue>
-      <other_character_name>: <sample_dialogue>
-      .
-      .
-      .
-      - Where music should be playing and what the type of music it should be 
-      - Where the cutscenes and what the art style should look like 
-
-
-make_music:
-  description: > 
-  expected_output: > 
-
-make_art:
-  description: >
+  context: [search_trending_concepts, scrape_card_battler_ideas]

@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from crew import Cs444GenaiClass
+from cs444_genai_class.crew import Cs444GenaiClass
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -17,10 +17,12 @@ def run():
     """
     Run the crew.
     """
+
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+      #  'topic': 'AI LLMs',
+      #  'current_year': str(datetime.now().year)
     }
+
     
     try:
         Cs444GenaiClass().crew().kickoff(inputs=inputs)

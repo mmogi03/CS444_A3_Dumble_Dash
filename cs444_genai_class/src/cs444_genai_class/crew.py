@@ -49,7 +49,7 @@ class Cs444GenaiClass():
         return Agent(
             config = self.agents_config['visual_concept_agent'], 
             verbose = True, 
-            memory = True, 
+            memory = True,  # I think this still needs memory, no ? - vv 
         )
     
     @agent
@@ -57,7 +57,7 @@ class Cs444GenaiClass():
         return Agent(
             config = self.agents_config['audio_director'], 
             verbose = True, 
-            memory = True, 
+            memory = True,  # I think this still needs memory, no ? - vv 
         )
 
     @agent
@@ -96,6 +96,13 @@ class Cs444GenaiClass():
         return Task(
             config=self.tasks_config['generate_unique_game_idea'],
             agent=self.create_innovative_game_concpet()
+        )
+
+    @task 
+    def make_art(self) -> Task: 
+        return Task(
+            config = self.tasks_config['make_art'],
+            agent = self.visual_concept_agent()
         )
 
     @task

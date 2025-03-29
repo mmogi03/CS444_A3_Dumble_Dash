@@ -31,12 +31,42 @@ generate_unique_game_idea:
     - Replayability features
     - A sample starting level and enemy
 
+design_story: 
+  description: > 
+    Based on the results from: 
+      - Unique game idea: {generate_unique_game_idea}
+    
+    Design an overarching story line that the game concept could take 
+    The story should be filled with twists and turns
+    The story should be creative, fun, and technically feasible 
+  expected_output: > 
+    A story document that includes:
+     - The Game Title
+     - Make the protagonist name 
+     - Write out the detailed story line the game should be taking
+     - Show the starting cutscene and what art and music need to be created for that
+
+write_dialogue: 
+  description: > 
+    Based on the results from: 
+      - Unique game idea: {generate_unique_game_idea}
+      - Story document from: {design_story}
+    
+  expected_output: > 
+    Update the story document that includes:
+      - follow a traditional script structure:
+      <progonist_name>: <sample_dialogue>
+      <other_character_name>: <sample_dialogue>
+      .
+      .
+      .
+      - Where music should be playing and what the type of music it should be 
+      - Where the cutscenes and what the art style should look like 
+
+
+make_music:
+  description: > 
+  expected_output: > 
+
 make_art:
   description: >
-    Based on the results from: 
-      - Unique idea: {generate_unique_game_idea}
-      - 
-    
-    Synthesize a suite of images that fit into the unqiue idea generated. 
-    The 
-    

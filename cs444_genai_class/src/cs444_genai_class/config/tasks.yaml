@@ -1,0 +1,28 @@
+search_trending_concepts:
+  description: >
+    Use online resources to discover trending concepts in card-based games.
+    Focus on genres like turn-based tactics, deckbuilders, and roguelike dungeon crawlers.
+    Your goal is to find patterns or emerging subgenres in the space.
+  expected_output: >
+    A list of 10 bullet points summarizing the most important or recurring themes in turn-based card roguelike games.
+
+scrape_card_battler_ideas:
+  description: >
+    Scrape game-related content from sites like Reddit, Steam discussions, and Indie game blogs.
+    Look for popular or well-received turn-based or card-battler game ideas, mechanics, or aesthetics.
+  expected_output: >
+    A summary of at least 5 unique card-based gameplay features or design styles extracted from real-world game discussions.
+
+generate_unique_game_idea:
+  description: >
+    Based on the search and scraping results, synthesize a new game concept.
+    It should be a 2D turn-based, card-select battle roguelike with level crawling elements.
+    The game idea must be creative, fun, and technically feasible.
+  expected_output: >
+    A game concept document that includes:
+    - Game title
+    - Short pitch
+    - Core mechanics (card, turn, roguelike)
+    - Art and music direction
+    - Replayability features
+    - A sample starting level and enemy

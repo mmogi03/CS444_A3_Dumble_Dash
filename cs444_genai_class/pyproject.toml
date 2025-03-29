@@ -1,0 +1,23 @@
+[project]
+name = "cs444_genai_class"
+version = "0.1.0"
+description = "cs444_genai_class using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.108.0,<1.0.0"
+]
+
+[project.scripts]
+cs444_genai_class = "cs444_genai_class.main:run"
+run_crew = "cs444_genai_class.main:run"
+train = "cs444_genai_class.main:train"
+replay = "cs444_genai_class.main:replay"
+test = "cs444_genai_class.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

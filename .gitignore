@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.vscode/
+.idea/
+dumble_dash/
+sample_project/
+test_audio/
+
 # C extensions
 *.so
 

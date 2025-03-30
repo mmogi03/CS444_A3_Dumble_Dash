@@ -1,49 +1,106 @@
 #!/usr/bin/env python
 import warnings
 from datetime import datetime
+import sys
+from pathlib import Path
+import litellm
 
-from crews.crew1.crew import Crew1
-from crews.crew2.crew import Crew2
+# Add the root of the project to the sys.path so imports resolve correctly
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from cs444_genai_class_flow.crews.crew1.crew import Crew1
+from cs444_genai_class_flow.crews.crew2.crew import Crew2
+# from .crews.crew3.src.crew3.crew import Crew3
+from crewai.flow import Flow, start, listen
+from pydantic import BaseModel
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
+class BaseState(BaseModel):
+    crew1_output: str = ""
+    crew2_output: str = ""
+    crew3_output: str = ""
 
-def run():
-    """
-    Orchestrate Crew1 and Crew2 in a sequential flow:
-    - Crew1 generates the game concept
-    - Crew2 creates the story, dialogue, art, and music based on Crew1 output
-    """
+class CrewsFlow(Flow[BaseState]):
+    def __init__(self):
+        super().__init__()
+        print("CrewsFlow initialized")
 
-    print("🚀 Starting Crew1: Game Concept Generation...\n")
-    crew1_result = Crew1().crew().kickoff(inputs={
-        "topic": "Turn-based roguelike card games",
-        "current_year": str(datetime.now().year)
-    })
+    @start()
+    def run_crew1(self):
+        print("Running crew 1")
+        crew1 = Crew1().crew()
 
-    print("\n✅ Crew1 Completed:")
-    print(crew1_result)
+        # Debug: show which tasks are loaded
+        print("Tasks loaded into Crew1:")
+        for task in crew1.tasks:
+            print(f"- {task.description}")
 
-    # Extract output from Crew1 to be passed into Crew2
-    game_idea = crew1_result.get("generate_unique_game_idea", "")
-    if not game_idea:
-        print("⚠️ Warning: Crew1 did not return a 'generate_unique_game_idea'. Using placeholder.")
-        game_idea = "Placeholder game concept in case Crew1 failed to generate one."
+        # Run the crew
+        result = crew1.kickoff()
 
-    # Prepare input for Crew2
-    crew2_inputs = {
-        "generate_unique_game_idea": game_idea,
-        "topic": "Turn-based roguelike card games",
-        "current_year": str(datetime.now().year)
-    }
+        # Debug: raw result and type
+        print("Crew 1 raw result:", result)
+        print("Crew 1 result type:", type(result))
 
-    print("\n🎮 Starting Crew2: Story, Dialogue, Art, and Audio...\n")
-    crew2_result = Crew2().crew().kickoff(inputs=crew2_inputs)
+        # Handle various possible result formats
+        if result:
+            if isinstance(result, list):
+                print("Result is a list of task outputs:")
+                for i, r in enumerate(result):
+                    print(f"  Task {i+1} output:", r)
+                self.state.crew1_output = "\n".join(map(str, result))
 
-    print("\n✅ Crew2 Completed:")
-    print(crew2_result)
+            elif isinstance(result, dict):
+                print("Result is a dict of task outputs:")
+                for k, v in result.items():
+                    print(f"  {k}: {v}")
+                self.state.crew1_output = "\n".join(f"{k}: {v}" for k, v in result.items())
+
+            else:
+                print("Result is a single object:", result)
+                self.state.crew1_output = str(result)
+        else:
+            print("Crew 1 returned nothing")
 
 
-# This allows you to run with `crewai run` or `python main.py`
+    @listen(run_crew1)
+    def run_crew2(self):
+        print("Running crew 2")
+        crew2 = Crew2().crew()
+        result = crew2.kickoff(inputs = {"crew1_output": self.state.crew1_output})
+        print("Crew 2 raw result:", result)
+        print("Crew 2 result type:", type(result))
+
+        if result:
+            if isinstance(result, list):
+                self.state.crew2_output = "\n".join(map(str, result))
+            elif isinstance(result, dict):
+                self.state.crew2_output = "\n".join(f"{k}: {v}" for k, v in result.items())
+            else:
+                self.state.crew2_output = str(result)
+        else:
+            print("Crew 2 returned nothing")
+
+    # @listen(run_crew2)
+    # def run_crew3(self):
+    #     print("Running crew 3")
+    #     result = (
+    #         Crew3().crew().kickoff()
+    #     )
+    #     print("Crew 3 done", result.raw)
+    #     self.state.crew3_output = result.raw   
+
+def kickoff():
+    print("Starting kickoff()")
+    crews_flow = CrewsFlow()
+    crews_flow.kickoff()
+    print("Crew1 output:", crews_flow.state.crew1_output)
+    print("Crew2 output:", crews_flow.state.crew2_output)
+
+def plot():
+    crews_flow = CrewsFlow()
+    crews_flow.plot()
+
 if __name__ == "__main__":
-    run()
+    kickoff()

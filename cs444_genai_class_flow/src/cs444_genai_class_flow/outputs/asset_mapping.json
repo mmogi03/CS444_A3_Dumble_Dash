@@ -1,0 +1,14 @@
+{
+  "main_character_icon": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-fgRtmdBRnwSZC4eYfWTBNXle.png?st=2025-03-30T18%3A40%3A02Z&se=2025-03-30T20%3A40%3A02Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T00%3A32%3A17Z&ske=2025-03-31T00%3A32%3A17Z&sks=b&skv=2024-08-04&sig=lipX/R3ga9uN2FkPXO7%2BwZd7E7Cv7CqOnL9QyAqAUJo%3D",
+  "enemy_icons": [
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-VhQo2sJfagHqzuWjZi6FxYy3.png?st=2025-03-30T18%3A40%3A23Z&se=2025-03-30T20%3A40%3A23Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T10%3A43%3A25Z&ske=2025-03-31T10%3A43%3A25Z&sks=b&skv=2024-08-04&sig=50TjqkfED/6iSko2Mcs1IgOTXaOEw/zRFFqq/ekr9Ds%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-eFdI16CcuAc521jeXi0vdqxE.png?st=2025-03-30T18%3A40%3A38Z&se=2025-03-30T20%3A40%3A38Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T05%3A23%3A06Z&ske=2025-03-31T05%3A23%3A06Z&sks=b&skv=2024-08-04&sig=7GvxUY3qrGe78eUEUJesnE9alP/C0zpTRexOWjemg4I%3D"
+  ],
+  "environment_background": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-LUWU02nS9Ujb4HTlbIndhYcv.png?st=2025-03-30T18%3A40%3A52Z&se=2025-03-30T20%3A40%3A52Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T09%3A22%3A36Z&ske=2025-03-31T09%3A22%3A36Z&sks=b&skv=2024-08-04&sig=OwhJlAf0xgIl6U0VOaojYIvRLr%2BKnzdsQQS8zqX4XzM%3D",
+  "trap_effect": "",
+  "menu_music": "calm exploration menu music",
+  "background_music": "exploration ambient loop music",
+  "victory_music": "orchestral triumphant victory music",
+  "defeat_music": "sad emotional defeat music",
+  "game_icon": ""
+}

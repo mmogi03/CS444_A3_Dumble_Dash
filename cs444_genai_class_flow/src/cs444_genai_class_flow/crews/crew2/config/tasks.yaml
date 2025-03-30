@@ -1,0 +1,256 @@
+design_story:
+  description: >
+    Based on the following game concept from Crew1:
+
+    {crew1_output}
+
+    Design an overarching storyline for this game. It should be rich, full of twists, and consistent with the gameplay mechanics. Define the protagonist and how they progress through the game's levels.
+
+  expected_output: >
+    A story document that includes:
+     - Game Title
+     - Protagonist's name and background
+     - A detailed storyline (intro, journey, climax)
+     - The first cutscene
+     - Suggestions for visuals and music needed in that cutscene
+  return_output: true
+
+write_dialogue:
+  description: >
+    Based on the following game concept and story output:
+
+    Game Concept:
+    {crew1_output}
+
+    Write in-game character dialogues that feel natural and connected to the story. Identify where music should play and what kind of visual should be shown in each scene.
+
+  expected_output: >
+    - Dialogue samples in script format:
+      <character_name>: <dialogue>
+    - Specify:
+      - Where background music should play and describe its mood
+      - Where cutscenes happen and what art style fits
+
+  context: [design_story]
+  return_output: true
+
+generate_main_menu_music:
+  description: >
+    Generate a short tag-style prompt (max 5 generic words) for the **main menu music**.
+
+    {crew1_output}
+
+    🎯 This prompt will be passed to `generate_game_audio("...")`.
+
+    ✅ Output must follow:
+      - Must include the word **"music"**
+      - Max 5 words total (e.g., "relaxing ambient menu music")
+      - Use **searchable, generic tags** — avoid abstract/fantasy words like "arcane"
+      - Tool call format: `generate_game_audio("relaxing ambient menu music")`
+
+  expected_output: >
+    - The exact prompt (max 5 words, including "music")
+    - The tool call in the required format
+    - A 1-line rationale for your chosen tags
+
+  context: [design_story]
+  return_output: true
+
+generate_background_loop:
+  description: >
+    Create a generic tag-style prompt (max 5 words) for **background loop music** during gameplay.
+
+    {crew1_output}
+
+    🛠 This prompt will be passed to `generate_game_audio("...")`.
+
+    ✅ Guidelines:
+      - Must include the word **"music"**
+      - Up to 5 generic, searchable tags (e.g., "ambient dungeon loop music")
+      - Avoid fantasy-specific words or full phrases
+      - Tool call format: `generate_game_audio("ambient dungeon loop music")`
+
+  expected_output: >
+    - The prompt string (max 5 words, must include "music")
+    - The tool call line
+    - A short explanation of your tag choice
+
+  context: [design_story]
+  return_output: true
+
+generate_victory_music:
+  description: >
+    Compose a tag-style prompt (max 5 words) for **victory music**.
+
+    {crew1_output}
+
+    🏆 This will be passed to `generate_game_audio("...")` and should sound rewarding or triumphant.
+
+    ✅ Rules:
+      - Must include the word **"music"**
+      - Up to 5 generic, searchable tags (e.g., "orchestral celebration win music")
+      - Avoid fantasy terms like "heroic" or "arcane"
+      - Use format: `generate_game_audio("orchestral celebration win music")`
+
+  expected_output: >
+    - The 5-word max prompt (including "music")
+    - The tool call
+    - A 1-liner rationale for your tags
+
+  context: [design_story]
+  return_output: true
+
+generate_defeat_music:
+  description: >
+    Compose a generic, tag-style prompt (max 5 words) for **defeat music** that reflects sadness or failure.
+
+    {crew1_output}
+
+    🎭 The output will be used with `generate_game_audio("...")`.
+
+    ✅ Format:
+      - Must include the word **"music"**
+      - Max 5 generic tags (e.g., "sad ambient piano music", "slow emotional game music")
+      - Avoid specific or lore-based terms
+      - Tool call: `generate_game_audio("sad ambient piano music")`
+
+  expected_output: >
+    - Your 5-word prompt (must include "music")
+    - The exact tool call
+    - A brief rationale for why it fits
+
+  context: [design_story]
+  return_output: true
+
+generate_main_character_icon:
+  description: >
+    Based on the game concept and storyline:
+
+    {crew1_output}
+
+    Create a **descriptive visual prompt** for the main character icon.
+
+    🎨 The description should include:
+      - Key visual traits (appearance, attire, expression, pose)
+      - A consistent "cartoon-ish" game style
+      - Inspiration from the story and protagonist design
+
+    ⚠️ You must:
+      - Return a plain string description (NOT a dictionary or object)
+      - Call the tool like: dalle_tool("your generated prompt here")
+
+  expected_output: >
+    - A visual prompt string for the main character
+    - The DALL·E tool call in this format: dalle_tool("...")
+    - A 1-line explanation of the design choice
+
+  context: [design_story]
+  return_output: true
+
+generate_enemy_icons:
+  description: >
+    Based on the game concept and storyline:
+
+    {crew1_output}
+
+    Generate two **distinct visual prompts** for different enemies in the game.
+
+    Each enemy should have:
+      - A unique visual identity
+      - Descriptive features (form, color, aura, expression)
+      - Fit the tone of the story and setting
+
+    ⚠️ Output Requirements:
+      - Each prompt must be a plain string
+      - Tool call format: dalle_tool("...") only — no dicts
+
+  expected_output: >
+    - Two visual prompt strings
+    - Two DALL·E tool call lines
+    - 1-sentence rationale for each
+
+  context: [design_story]
+  return_output: true
+
+generate_environment_visuals:
+  description: >
+    Based on the story and concept:
+
+    {crew1_output}
+
+    Generate two DALL·E prompts:
+      1. A background for a dungeon area
+      2. A spell or trap visual (e.g., glyphs, fireballs, runes)
+
+    Style must be consistent with a cartoon fantasy theme.
+
+    ⚠️ Format Requirements:
+      - Prompts must be plain strings
+      - Tool call format: dalle_tool("your description here")
+      - No dictionaries or structured inputs
+
+  expected_output: >
+    - Two prompt strings (background + effect)
+    - Tool call lines for each
+    - Brief rationales
+
+  context: [design_story]
+  return_output: true
+
+generate_game_icon:
+  description: >
+    Generate a DALL·E prompt for a mobile game **app icon** for "Arcane Depths".
+
+    It should reflect:
+      - Fantasy / arcane theme
+      - Something simple and iconic (e.g., glowing sigil, dungeon gate, floating card)
+      - Style: cartoon, clear contrast, mobile-friendly
+
+    ⚠️ Tool Call Format:
+      - Output a plain string prompt
+      - Use: dalle_tool("your generated description here")
+      - Do NOT wrap it in a dictionary or object
+
+  expected_output: >
+    - One generated prompt string
+    - Tool call line
+    - 1-line rationale
+
+  context: [design_story]
+  return_output: true
+
+map_assets:
+  description: >
+    Using the outputs from all image and audio generation tasks, create a structured mapping of asset file paths to their intended use in the game.
+
+    📂 This includes:
+    - Character and enemy icons
+    - Environmental backgrounds and visual effects
+    - Menu, background, victory, and defeat music
+
+    🧠 Use the output strings to find:
+    - File names
+    - Prompt used (if available)
+    - What part of the game the asset is tied to
+
+    🎯 Output format: JSON-like mapping of asset roles to file paths, such as:
+    {{
+      "main_character_icon": "outputs/dalle_image_xyz.png",
+      "enemy_icons": ["outputs/dalle_image_abc.png", "outputs/dalle_image_def.png"],
+      "environment_background": "outputs/dalle_image_ghi.png",
+      "trap_effect": "outputs/dalle_image_jkl.png",
+      "menu_music": "outputs/menu_track_123.mp3",
+      "background_music": "outputs/bg_loop_456.mp3",
+      "victory_music": "outputs/win_theme_789.mp3",
+      "defeat_music": "outputs/loss_theme_000.mp3",
+      "game_icon": "outputs/game_icon_xyz.png"
+    }}
+
+  expected_output: >
+    A structured JSON object with all relevant file paths and asset types needed by the dev team to build the game.
+    Follow the Outut format example in the description and do NOT include any markdown characters such as '```'.
+
+  output_file: outputs/asset_mapping.json
+
+  context: [generate_main_character_icon, generate_enemy_icons, generate_environment_visuals, generate_game_icon, generate_main_menu_music, generate_background_loop, generate_victory_music, generate_defeat_music]
+  return_output: true

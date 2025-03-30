@@ -1,0 +1,7 @@
+crewai[tools]>=0.108.0,<1.0.0
+beautifulsoup4
+requests
+json5
+openai
+retrying
+git+https://github.com/MTG/freesound-python

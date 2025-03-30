@@ -1,0 +1,98 @@
+build_ui:
+  description: >
+    Based on the game concept and scenes provided:
+
+    {crew1_output}
+
+    Build the entire game user interface using web technologies. This includes menus, buttons, HUDs, and in-game overlays. Focus on usability, aesthetic consistency, and layout responsiveness.
+
+  expected_output: >
+    - JavaScript and HTML code for UI components
+    - Clearly labeled functions or modules
+    - Include brief comments explaining layout and interaction logic
+
+develop_gameplay_logic:
+  description: >
+    Develop the gameplay logic based on the mechanics described in the following game concept:
+
+    {crew1_output}
+
+    Implement the turn-based card combat, energy system, progression, and level-specific interactions. Ensure modularity and clarity in how the game loop and player choices are handled.
+
+  expected_output: >
+    - JavaScript functions/classes for card usage, turns, and enemy actions
+    - Modular structure that supports additional cards and abilities
+    - One short example simulating a full combat round
+
+add_audio:
+  description: >
+    Integrate the following audio tracks into the game:
+
+    {crew2_output}
+
+    Assign each track to a relevant scene or moment in the gameplay. Include code for volume control, loop handling, and playback triggers within scenes.
+
+  expected_output: >
+    - JavaScript code for loading and playing audio assets
+    - Commented triggers that explain which track plays when
+    - Support for background loops and event-based audio
+
+construct_scenes:
+  description: >
+    Construct full game scenes using elements from the Game Concept Document:
+
+    {crew1_output}
+
+    Scenes should include layout logic, environment features (e.g., traps, hazards), and scene transitions. Incorporate previous UI and gameplay logic as needed.
+
+  expected_output: >
+    - Scene layout and rendering logic in JavaScript
+    - Integration points for gameplay and UI modules
+    - Clear visual transitions or trigger markers in code
+
+  context: [build_ui, develop_gameplay_logic, add_audio]
+
+export_game_code:
+  description: >
+    Finalize and export the complete game into a ready-to-run JavaScript bundle.
+
+    Ensure all components (UI, logic, scenes, audio) are properly connected and can run as a standalone game.
+
+  expected_output: >
+    - A single deployable JavaScript bundle
+    - Directory structure showing assets and modules
+    - Confirmation that game runs independently in a browser
+
+  context: [build_ui, develop_gameplay_logic, add_audio, construct_scenes]
+
+generate_index_html:
+  description: >
+    Write the `index.html` file that will serve as the game’s entry point. It should load `main.js` and apply styles from `style.css`.
+
+  expected_output: >
+    A valid, responsive HTML file linked to the appropriate game files and ready for deployment.
+
+generate_style_css:
+  description: >
+    Create the base `style.css` file that defines layout and visual styling for the game’s menus and screens.
+
+  expected_output: >
+    A full `style.css` file with layout, font, and color definitions for the game’s user interface.
+
+generate_game_entry_point:
+  description: >
+    Create a `main.js` file that imports and initializes all game modules (UI, logic, audio, scenes).
+
+  expected_output: >
+    A valid `main.js` file that bootstraps the game from the browser.
+
+  context: [build_ui, develop_gameplay_logic, add_audio, construct_scenes]
+
+bundle_and_export_game:
+  description: >
+    Package all game files (HTML, CSS, JS, assets) using a tool like Webpack or Parcel. Output a bundled directory with everything in place and ready to be zipped.
+
+  expected_output: >
+    A structured, complete directory ready to be deployed in the browser. Should include `index.html`, `style.css`, `bundle.js`, and an `assets/` folder.
+
+  context: [generate_game_entry_point, generate_index_html, generate_style_css]

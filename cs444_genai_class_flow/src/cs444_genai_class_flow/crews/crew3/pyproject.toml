@@ -1,0 +1,31 @@
+[project]
+name = "crew3"
+version = "0.1.0"
+description = "crew3 using CrewAI to generate story, dialogue, and game audio"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+
+dependencies = [
+    "crewai[tools]>=0.108.0,<1.0.0",
+    "beautifulsoup4",
+    "requests",
+    "json5",
+    "openai",
+    "retrying",
+    "python-dotenv"
+]
+
+[project.scripts]
+crew3 = "crew3.main:run"
+run_crew = "crew3.main:run"
+train = "crew3.main:train"
+replay = "crew3.main:replay"
+test = "crew3.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+requirements = "requirements.txt"

@@ -34,81 +34,212 @@ write_dialogue:
 
 generate_main_menu_music:
   description: >
-    Generate a **very short and generic** two-word prompt that describes the vibe of the **main menu** screen for the following game concept:
+    Generate a short tag-style prompt (max 5 generic words) for the **main menu music**.
 
     {crew1_output}
 
-    🎯 This prompt will be passed into the `generate_game_audio("...")` tool call.
+    🎯 This prompt will be passed to `generate_game_audio("...")`.
 
-    ✅ Only return:
-      - A 2-word phrase (e.g., "mystical calm", "space tension", "cheerful welcome")
-      - Do **not** explain or describe it
-      - Make it generic enough to work with FreeSound
-      - Call the tool like: `generate_game_audio("mystical calm")`
+    ✅ Output must follow:
+      - Must include the word **"music"**
+      - Max 5 words total (e.g., "relaxing ambient menu music")
+      - Use **searchable, generic tags** — avoid abstract/fantasy words like "arcane"
+      - Tool call format: `generate_game_audio("relaxing ambient menu music")`
 
   expected_output: >
-    - The exact 2-word prompt used
-    - The tool call in the format above
-    - A very short rationale (1-2 lines max)
+    - The exact prompt (max 5 words, including "music")
+    - The tool call in the required format
+    - A 1-line rationale for your chosen tags
 
   context: [design_story]
 
 generate_background_loop:
   description: >
-    Generate a **two-word scene prompt** for ambient in-game **background music** that fits this game concept:
+    Create a generic tag-style prompt (max 5 words) for **background loop music** during gameplay.
 
     {crew1_output}
 
-    🛠 This is the input for `generate_game_audio("...")`. Be highly concise.
+    🛠 This prompt will be passed to `generate_game_audio("...")`.
 
     ✅ Guidelines:
-      - Keep it to 2 words only
-      - Avoid full sentences or emotional explanations
-      - Use scene-style keywords (e.g., "forest echo", "dungeon crawl", "battle zone")
-      - Call the tool as: `generate_game_audio("forest echo")`
+      - Must include the word **"music"**
+      - Up to 5 generic, searchable tags (e.g., "ambient dungeon loop music")
+      - Avoid fantasy-specific words or full phrases
+      - Tool call format: `generate_game_audio("ambient dungeon loop music")`
 
   expected_output: >
-    - The 2-word prompt
+    - The prompt string (max 5 words, must include "music")
     - The tool call line
-    - A 1-liner explanation of why it fits
+    - A short explanation of your tag choice
 
   context: [design_story]
 
 generate_victory_music:
   description: >
-    Compose a 2-word audio prompt for **victory music** based on the game concept below:
+    Compose a tag-style prompt (max 5 words) for **victory music**.
 
     {crew1_output}
 
-    🏆 Prompt will be passed to `generate_game_audio("...")`. Focus on success, triumph, or reward.
+    🏆 This will be passed to `generate_game_audio("...")` and should sound rewarding or triumphant.
 
-    ✅ Format rules:
-      - Exactly 2 generic words (e.g., "epic win", "heroic rise")
-      - Do not write full phrases or extra description
-      - Tool call should be: `generate_game_audio("epic win")`
+    ✅ Rules:
+      - Must include the word **"music"**
+      - Up to 5 generic, searchable tags (e.g., "orchestral celebration win music")
+      - Avoid fantasy terms like "heroic" or "arcane"
+      - Use format: `generate_game_audio("orchestral celebration win music")`
 
   expected_output: >
-    - The exact prompt
-    - Tool call line
-    - 1-sentence rationale
+    - The 5-word max prompt (including "music")
+    - The tool call
+    - A 1-liner rationale for your tags
 
   context: [design_story]
 
 generate_defeat_music:
   description: >
-    Compose a **2-word** scene-style prompt for **defeat music** that fits the tone of this game:
+    Compose a generic, tag-style prompt (max 5 words) for **defeat music** that reflects sadness or failure.
 
     {crew1_output}
 
-    🎭 This will be passed into `generate_game_audio("...")`. Keep it short and evocative of failure or sadness.
+    🎭 The output will be used with `generate_game_audio("...")`.
 
-    ✅ Only return:
-      - 2 generic words (e.g., "lost hope", "dark fall", "quiet sorrow")
-      - Tool call like: `generate_game_audio("lost hope")`
+    ✅ Format:
+      - Must include the word **"music"**
+      - Max 5 generic tags (e.g., "sad ambient piano music", "slow emotional game music")
+      - Avoid specific or lore-based terms
+      - Tool call: `generate_game_audio("sad ambient piano music")`
 
   expected_output: >
-    - The prompt
-    - Tool call
-    - 1-line reason
+    - Your 5-word prompt (must include "music")
+    - The exact tool call
+    - A brief rationale for why it fits
 
   context: [design_story]
+
+generate_main_character_icon:
+  description: >
+    Based on the game concept and storyline:
+
+    {crew1_output}
+
+    Create a **descriptive visual prompt** for the main character icon.
+
+    🎨 The description should include:
+      - Key visual traits (appearance, attire, expression, pose)
+      - A consistent "cartoon-ish" game style
+      - Inspiration from the story and protagonist design
+
+    ⚠️ You must:
+      - Return a plain string description (NOT a dictionary or object)
+      - Call the tool like: dalle_tool("your generated prompt here")
+
+  expected_output: >
+    - A visual prompt string for the main character
+    - The DALL·E tool call in this format: dalle_tool("...")
+    - A 1-line explanation of the design choice
+
+  context: [design_story]
+
+generate_enemy_icons:
+  description: >
+    Based on the game concept and storyline:
+
+    {crew1_output}
+
+    Generate two **distinct visual prompts** for different enemies in the game.
+
+    Each enemy should have:
+      - A unique visual identity
+      - Descriptive features (form, color, aura, expression)
+      - Fit the tone of the story and setting
+
+    ⚠️ Output Requirements:
+      - Each prompt must be a plain string
+      - Tool call format: dalle_tool("...") only — no dicts
+
+  expected_output: >
+    - Two visual prompt strings
+    - Two DALL·E tool call lines
+    - 1-sentence rationale for each
+
+  context: [design_story]
+
+generate_environment_visuals:
+  description: >
+    Based on the story and concept:
+
+    {crew1_output}
+
+    Generate two DALL·E prompts:
+      1. A background for a dungeon area
+      2. A spell or trap visual (e.g., glyphs, fireballs, runes)
+
+    Style must be consistent with a cartoon fantasy theme.
+
+    ⚠️ Format Requirements:
+      - Prompts must be plain strings
+      - Tool call format: dalle_tool("your description here")
+      - No dictionaries or structured inputs
+
+  expected_output: >
+    - Two prompt strings (background + effect)
+    - Tool call lines for each
+    - Brief rationales
+
+  context: [design_story]
+
+generate_game_icon:
+  description: >
+    Generate a DALL·E prompt for a mobile game **app icon** for "Arcane Depths".
+
+    It should reflect:
+      - Fantasy / arcane theme
+      - Something simple and iconic (e.g., glowing sigil, dungeon gate, floating card)
+      - Style: cartoon, clear contrast, mobile-friendly
+
+    ⚠️ Tool Call Format:
+      - Output a plain string prompt
+      - Use: dalle_tool("your generated description here")
+      - Do NOT wrap it in a dictionary or object
+
+  expected_output: >
+    - One generated prompt string
+    - Tool call line
+    - 1-line rationale
+
+  context: [design_story]
+
+map_assets:
+  description: >
+    Using the outputs from all image and audio generation tasks, create a structured mapping of asset file paths to their intended use in the game.
+
+    📂 This includes:
+    - Character and enemy icons
+    - Environmental backgrounds and visual effects
+    - Menu, background, victory, and defeat music
+
+    🧠 Use the output strings to find:
+    - File names
+    - Prompt used (if available)
+    - What part of the game the asset is tied to
+
+    🎯 Output format: JSON-like mapping of asset roles to file paths, such as:
+    {{
+      "main_character_icon": "outputs/dalle_image_xyz.png",
+      "enemy_icons": ["outputs/dalle_image_abc.png", "outputs/dalle_image_def.png"],
+      "environment_background": "outputs/dalle_image_ghi.png",
+      "trap_effect": "outputs/dalle_image_jkl.png",
+      "menu_music": "outputs/menu_track_123.mp3",
+      "background_music": "outputs/bg_loop_456.mp3",
+      "victory_music": "outputs/win_theme_789.mp3",
+      "defeat_music": "outputs/loss_theme_000.mp3",
+      "game_icon": "outputs/game_icon_xyz.png"
+    }}
+
+  expected_output: >
+    A structured JSON object with all relevant file paths and asset types needed by the dev team to build the game.
+    Follow the Outut format example in the description and do NOT include any markdown characters such as '```'.
+
+  output_file: outputs/asset_mapping.json
+
+  context: [generate_main_character_icon, generate_enemy_icons, generate_environment_visuals, generate_game_icon, generate_main_menu_music, generate_background_loop, generate_victory_music, generate_defeat_music]

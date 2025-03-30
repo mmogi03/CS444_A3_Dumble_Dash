@@ -14,26 +14,21 @@ def generate_game_audio(prompt: str) -> str:
     Returns the path to the generated MP3 file.
     """
     try:
-        print("FreeSound tool called")
-        print("A")
-        searcher = SoundSearcher()
-        print("B")
-        filename = f"{prompt[:30].strip().replace(' ', '_')}_{uuid.uuid4().hex[:6]}.mp3"
-        print("C")
-        output_path = os.path.join("outputs", filename)
-        print("D")
+        print("🎧 FreeSound tool called with prompt:", prompt)
 
-        # Ensure the output directory exists
+        searcher = SoundSearcher()
+        filename = f"{prompt[:30].strip().replace(' ', '_')}_{uuid.uuid4().hex[:6]}.mp3"
+        output_path = os.path.join("outputs", filename)
+
         os.makedirs("outputs", exist_ok=True)
-        print("E")
-        
-        print("=-=-=-=-= OUTPUT PATH: ", output_path)
-        print("=-=-=-=-= PROMPT: ", prompt)
+        print("🔊 Output path:", output_path)
 
         searcher.pipeline_self_reflection(prompt, output_path)
-        print("F")
-        return f"✅ Audio generated at: {output_path} for prompt: '{prompt}'"
+        print(f"✅ Audio saved to: {output_path}")
+
+        # ✅ Return only the path string (used in map_assets)
+        return output_path
 
     except Exception as e:
-        print("H")
-        return f"❌ Failed to generate audio: {e}"
+        print(f"❌ Failed to generate audio: {e}")
+        return ""

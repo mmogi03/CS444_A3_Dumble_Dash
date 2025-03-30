@@ -89,99 +89,99 @@ class Crew3():
     def build_ui(self) -> Task:
         return Task(config=self.tasks_config['build_ui'], 
                     agent=self.ui_developer(), 
-                    output_file="output/ui.js")
+                    output_file="outputs/ui.js")
     
     @task
     def dg_build_ui(self) -> Task:
         return Task(config=self.tasks_config['dg_build_ui'], 
                     agent=self.js_debugger(), 
-                    output_file="output/ui.js")
+                    output_file="outputs/ui.js")
 
     @task
     def develop_gameplay_logic(self) -> Task:
         return Task(config=self.tasks_config['develop_gameplay_logic'], 
                     agent=self.gameplay_logic_developer(), 
-                    output_file="output/gameplay_logic.js")
+                    output_file="outputs/gameplay_logic.js")
     
     @task
     def dg_develop_gameplay_logic(self) -> Task:
         return Task(config=self.tasks_config['dg_develop_gameplay_logic'], 
                     agent=self.js_debugger(), 
-                    output_file="output/gameplay_logic.js")
+                    output_file="outputs/gameplay_logic.js")
 
     @task
     def add_audio(self) -> Task:
         return Task(config=self.tasks_config['add_audio'], 
                     agent=self.audio_integrator(), 
-                    output_file="output/audio.js")
+                    output_file="outputs/audio.js")
     
     @task
     def dg_add_audio(self) -> Task:
         return Task(config=self.tasks_config['dg_add_audio'], 
                     agent=self.js_debugger(), 
-                    output_file="output/audio.js")
+                    output_file="outputs/audio.js")
 
     @task
     def construct_scenes(self) -> Task:
         return Task(config=self.tasks_config['construct_scenes'], 
                     agent=self.scene_builder(), 
-                    output_file="output/scenes.js")
+                    output_file="outputs/scenes.js")
     
     @task
     def dg_construct_scenes(self) -> Task:
         return Task(config=self.tasks_config['dg_construct_scenes'], 
                     agent=self.scene_builder(), 
-                    output_file="output/scenes.js")
+                    output_file="outputs/scenes.js")
 
     @task
     def generate_index_html(self) -> Task:
         return Task(config=self.tasks_config['generate_index_html'], 
                     agent=self.html_css_specialist(), 
-                    output_file="output/index.html")
+                    output_file="outputs/index.html")
     
     @task
     def dg_generate_index_html(self) -> Task:
         return Task(
             config = self.tasks_config['dg_generate_index_html'],
             agent = self.html_debugger(),
-            output_file = "output/index.html"
+            output_file = "outputs/index.html"
         )
 
     @task
     def generate_style_css(self) -> Task:
         return Task(config=self.tasks_config['generate_style_css'], 
                     agent=self.html_css_specialist(), 
-                    output_file="output/style.css")
+                    output_file="outputs/style.css")
     
     @task
     def dg_generate_style_css(self) -> Task:
         return Task(config=self.tasks_config['dg_generate_style_css'], 
                     agent=self.css_debugger(), 
-                    output_file="output/style.css")
+                    output_file="outputs/style.css")
 
     @task
     def generate_game_entry_point(self) -> Task:
         return Task(config=self.tasks_config['generate_game_entry_point'], 
                     agent=self.build_system_engineer(), 
-                    output_file="output/main.js")
+                    output_file="outputs/main.js")
     
     @task
     def dg_generate_game_entry_point(self) -> Task:
         return Task(config=self.tasks_config['dg_generate_game_entry_point'], 
                     agent=self.js_debugger(), 
-                    output_file="output/main.js")
+                    output_file="outputs/main.js")
 
     @task
     def bundle_and_export_game(self) -> Task:
         return Task(config=self.tasks_config['bundle_and_export_game'],
                     agent=self.build_system_engineer(), 
-                    output_file="output/BUILD_INSTRUCTIONS.txt")
+                    output_file="outputs/BUILD_INSTRUCTIONS.txt")
 
     @task
     def export_game_code(self) -> Task:
         return Task(config=self.tasks_config['export_game_code'], 
                     agent=self.game_exporter(), 
-                    output_file="output/final_bundle.js")
+                    output_file="outputs/final_bundle.js")
     
     @task
     def check_integrated_code(self) -> Task:

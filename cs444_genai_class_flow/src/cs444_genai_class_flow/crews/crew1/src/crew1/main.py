@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 import sys
 import warnings
+import litellm
+litellm._turn_on_debug()
 
 from datetime import datetime
 
-from cs444_genai_class.crew import Cs444GenaiClass
+from crew1.crew import Crew1
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -19,13 +21,13 @@ def run():
     """
 
     inputs = {
-      #  'topic': 'AI LLMs',
-      #  'current_year': str(datetime.now().year)
+       'topic': 'AI LLMs',
+       'current_year': str(datetime.now().year)
     }
 
     
     try:
-        Cs444GenaiClass().crew().kickoff(inputs=inputs)
+        Crew1().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 

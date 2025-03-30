@@ -1,11 +1,18 @@
 [project]
 name = "crew2"
 version = "0.1.0"
-description = "crew2 using crewAI"
+description = "crew2 using CrewAI to generate story, dialogue, and game audio"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<3.13"
+
 dependencies = [
-    "crewai[tools]>=0.108.0,<1.0.0"
+    "crewai[tools]>=0.108.0,<1.0.0",
+    "beautifulsoup4",
+    "requests",
+    "json5",
+    "openai",
+    "retrying",
+    "python-dotenv"
 ]
 
 [project.scripts]
@@ -21,3 +28,4 @@ build-backend = "hatchling.build"
 
 [tool.crewai]
 type = "crew"
+requirements = "requirements.txt"

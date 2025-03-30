@@ -9,8 +9,8 @@ from crewai_tools import SerperDevTool, ScrapeWebsiteTool
 
 
 @CrewBase
-class Cs444GenaiClass():
-    """Cs444GenaiClass crew"""
+class Crew1():
+    """Crew1 crew"""
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended

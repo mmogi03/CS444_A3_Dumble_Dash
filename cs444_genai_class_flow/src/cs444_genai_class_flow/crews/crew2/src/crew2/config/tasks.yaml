@@ -1,39 +1,114 @@
-design_story: 
-  description: > 
-    Based on the results from: 
-      - Unique game idea: {generate_unique_game_idea}
-    
-    Design an overarching story line that the game concept could take 
-    The story should be filled with twists and turns
-    The story should be creative, fun, and technically feasible 
-  expected_output: > 
-    A story document that includes:
-     - The Game Title
-     - Make the protagonist name 
-     - Write out the detailed story line the game should be taking
-     - Show the starting cutscene and what art and music need to be created for that
-
-write_dialogue: 
-  description: > 
-    Based on the results from: 
-      - Unique game idea: {generate_unique_game_idea}
-      - Story document from: {design_story}
-    
-  expected_output: > 
-    Update the story document that includes:
-      - follow a traditional script structure:
-      <progonist_name>: <sample_dialogue>
-      <other_character_name>: <sample_dialogue>
-      .
-      .
-      .
-      - Where music should be playing and what the type of music it should be 
-      - Where the cutscenes and what the art style should look like 
-
-
-make_music:
-  description: > 
-  expected_output: > 
-
-make_art:
+design_story:
   description: >
+    Based on the following game concept from Crew1:
+
+    {crew1_output}
+
+    Design an overarching storyline for this game. It should be rich, full of twists, and consistent with the gameplay mechanics. Define the protagonist and how they progress through the game's levels.
+
+  expected_output: >
+    A story document that includes:
+     - Game Title
+     - Protagonist's name and background
+     - A detailed storyline (intro, journey, climax)
+     - The first cutscene
+     - Suggestions for visuals and music needed in that cutscene
+
+write_dialogue:
+  description: >
+    Based on the following game concept and story output:
+
+    Game Concept:
+    {crew1_output}
+
+    Write in-game character dialogues that feel natural and connected to the story. Identify where music should play and what kind of visual should be shown in each scene.
+
+  expected_output: >
+    - Dialogue samples in script format:
+      <character_name>: <dialogue>
+    - Specify:
+      - Where background music should play and describe its mood
+      - Where cutscenes happen and what art style fits
+
+  context: [design_story]
+
+generate_main_menu_music:
+  description: >
+    Generate a **very short and generic** two-word prompt that describes the vibe of the **main menu** screen for the following game concept:
+
+    {crew1_output}
+
+    🎯 This prompt will be passed into the `generate_game_audio("...")` tool call.
+
+    ✅ Only return:
+      - A 2-word phrase (e.g., "mystical calm", "space tension", "cheerful welcome")
+      - Do **not** explain or describe it
+      - Make it generic enough to work with FreeSound
+      - Call the tool like: `generate_game_audio("mystical calm")`
+
+  expected_output: >
+    - The exact 2-word prompt used
+    - The tool call in the format above
+    - A very short rationale (1-2 lines max)
+
+  context: [design_story]
+
+generate_background_loop:
+  description: >
+    Generate a **two-word scene prompt** for ambient in-game **background music** that fits this game concept:
+
+    {crew1_output}
+
+    🛠 This is the input for `generate_game_audio("...")`. Be highly concise.
+
+    ✅ Guidelines:
+      - Keep it to 2 words only
+      - Avoid full sentences or emotional explanations
+      - Use scene-style keywords (e.g., "forest echo", "dungeon crawl", "battle zone")
+      - Call the tool as: `generate_game_audio("forest echo")`
+
+  expected_output: >
+    - The 2-word prompt
+    - The tool call line
+    - A 1-liner explanation of why it fits
+
+  context: [design_story]
+
+generate_victory_music:
+  description: >
+    Compose a 2-word audio prompt for **victory music** based on the game concept below:
+
+    {crew1_output}
+
+    🏆 Prompt will be passed to `generate_game_audio("...")`. Focus on success, triumph, or reward.
+
+    ✅ Format rules:
+      - Exactly 2 generic words (e.g., "epic win", "heroic rise")
+      - Do not write full phrases or extra description
+      - Tool call should be: `generate_game_audio("epic win")`
+
+  expected_output: >
+    - The exact prompt
+    - Tool call line
+    - 1-sentence rationale
+
+  context: [design_story]
+
+generate_defeat_music:
+  description: >
+    Compose a **2-word** scene-style prompt for **defeat music** that fits the tone of this game:
+
+    {crew1_output}
+
+    🎭 This will be passed into `generate_game_audio("...")`. Keep it short and evocative of failure or sadness.
+
+    ✅ Only return:
+      - 2 generic words (e.g., "lost hope", "dark fall", "quiet sorrow")
+      - Tool call like: `generate_game_audio("lost hope")`
+
+  expected_output: >
+    - The prompt
+    - Tool call
+    - 1-line reason
+
+  context: [design_story]

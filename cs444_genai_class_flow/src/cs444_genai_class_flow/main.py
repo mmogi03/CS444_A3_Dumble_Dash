@@ -1,53 +1,49 @@
 #!/usr/bin/env python
-from random import randint
+import warnings
+from datetime import datetime
 
-from pydantic import BaseModel
+from crews.crew1.crew import Crew1
+from crews.crew2.crew import Crew2
 
-from crewai.flow import Flow, listen, start
-
-from cs444_genai_class_flow.crews.poem_crew.poem_crew import PoemCrew
-
-
-class PoemState(BaseModel):
-    sentence_count: int = 1
-    poem: str = ""
+warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 
-class PoemFlow(Flow[PoemState]):
+def run():
+    """
+    Orchestrate Crew1 and Crew2 in a sequential flow:
+    - Crew1 generates the game concept
+    - Crew2 creates the story, dialogue, art, and music based on Crew1 output
+    """
 
-    @start()
-    def generate_sentence_count(self):
-        print("Generating sentence count")
-        self.state.sentence_count = randint(1, 5)
+    print("🚀 Starting Crew1: Game Concept Generation...\n")
+    crew1_result = Crew1().crew().kickoff(inputs={
+        "topic": "Turn-based roguelike card games",
+        "current_year": str(datetime.now().year)
+    })
 
-    @listen(generate_sentence_count)
-    def generate_poem(self):
-        print("Generating poem")
-        result = (
-            PoemCrew()
-            .crew()
-            .kickoff(inputs={"sentence_count": self.state.sentence_count})
-        )
+    print("\n✅ Crew1 Completed:")
+    print(crew1_result)
 
-        print("Poem generated", result.raw)
-        self.state.poem = result.raw
+    # Extract output from Crew1 to be passed into Crew2
+    game_idea = crew1_result.get("generate_unique_game_idea", "")
+    if not game_idea:
+        print("⚠️ Warning: Crew1 did not return a 'generate_unique_game_idea'. Using placeholder.")
+        game_idea = "Placeholder game concept in case Crew1 failed to generate one."
 
-    @listen(generate_poem)
-    def save_poem(self):
-        print("Saving poem")
-        with open("poem.txt", "w") as f:
-            f.write(self.state.poem)
+    # Prepare input for Crew2
+    crew2_inputs = {
+        "generate_unique_game_idea": game_idea,
+        "topic": "Turn-based roguelike card games",
+        "current_year": str(datetime.now().year)
+    }
 
+    print("\n🎮 Starting Crew2: Story, Dialogue, Art, and Audio...\n")
+    crew2_result = Crew2().crew().kickoff(inputs=crew2_inputs)
 
-def kickoff():
-    poem_flow = PoemFlow()
-    poem_flow.kickoff()
-
-
-def plot():
-    poem_flow = PoemFlow()
-    poem_flow.plot()
+    print("\n✅ Crew2 Completed:")
+    print(crew2_result)
 
 
+# This allows you to run with `crewai run` or `python main.py`
 if __name__ == "__main__":
-    kickoff()
+    run()

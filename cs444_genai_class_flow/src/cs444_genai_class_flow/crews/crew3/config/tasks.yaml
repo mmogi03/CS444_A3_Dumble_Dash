@@ -4,6 +4,10 @@ build_ui:
 
     {crew1_output}
 
+    and Based on the template coming from:
+
+    {template}
+
     Build the entire game user interface using web technologies. This includes menus, buttons, HUDs, and in-game overlays. Focus on usability, aesthetic consistency, and layout responsiveness.
 
   expected_output: >
@@ -16,6 +20,10 @@ develop_gameplay_logic:
     Develop the gameplay logic based on the mechanics described in the following game concept:
 
     {crew1_output}
+
+    and Based on the coming from:
+
+    {template}
 
     Implement the turn-based card combat, energy system, progression, and level-specific interactions. Ensure modularity and clarity in how the game loop and player choices are handled.
 
@@ -30,6 +38,10 @@ add_audio:
 
     {crew2_output}
 
+    and Based on the template coming from:
+
+    {template}
+
     Assign each track to a relevant scene or moment in the gameplay. Include code for volume control, loop handling, and playback triggers within scenes.
 
   expected_output: >
@@ -42,6 +54,10 @@ construct_scenes:
     Construct full game scenes using elements from the Game Concept Document:
 
     {crew1_output}
+
+    and Based on the template coming from:
+
+    {template}
 
     Scenes should include layout logic, environment features (e.g., traps, hazards), and scene transitions. Incorporate previous UI and gameplay logic as needed.
 
@@ -56,6 +72,9 @@ export_game_code:
   description: >
     Finalize and export the complete game into a ready-to-run JavaScript bundle.
 
+    Based on the template coming from:
+      {template}
+
     Ensure all components (UI, logic, scenes, audio) are properly connected and can run as a standalone game.
 
   expected_output: >
@@ -67,6 +86,9 @@ export_game_code:
 
 generate_index_html:
   description: >
+    Based on the template coming from:
+      {template}
+
     Write the `index.html` file that will serve as the game’s entry point. It should load `main.js` and apply styles from `style.css`.
 
   expected_output: >
@@ -74,6 +96,10 @@ generate_index_html:
 
 generate_style_css:
   description: >
+    Based on the template coming from:
+
+    {template}
+
     Create the base `style.css` file that defines layout and visual styling for the game’s menus and screens.
 
   expected_output: >
@@ -81,6 +107,9 @@ generate_style_css:
 
 generate_game_entry_point:
   description: >
+   Based on the template coming from:
+
+    {template}
     Create a `main.js` file that imports and initializes all game modules (UI, logic, audio, scenes).
 
   expected_output: >
@@ -90,9 +119,117 @@ generate_game_entry_point:
 
 bundle_and_export_game:
   description: >
+    Based on the template coming from:
+
+    {template}
+
     Package all game files (HTML, CSS, JS, assets) using a tool like Webpack or Parcel. Output a bundled directory with everything in place and ready to be zipped.
 
   expected_output: >
     A structured, complete directory ready to be deployed in the browser. Should include `index.html`, `style.css`, `bundle.js`, and an `assets/` folder.
 
   context: [generate_game_entry_point, generate_index_html, generate_style_css]
+
+check_integrated_code:
+  description: >
+    Review the entire game codebase including the UI, logic, scenes, and audio systems.
+
+    Confirm that all modules connect and operate correctly when run in a browser environment. Check for DOM issues, missing assets, broken styles, or runtime JavaScript errors.
+
+  expected_output: >
+    - A fully working integration of HTML, CSS, and JavaScript
+    - Bug-free interactions between components
+    - Final confirmation of correct scene transitions and game loop operation
+
+  context: [build_ui, develop_gameplay_logic, add_audio, construct_scenes, generate_game_entry_point]
+
+dg_generate_game_entry_point:
+  description: >
+    Perform a code-level review of the generated `main.js` entry point.
+
+    Ensure that module imports are valid, initialization order is correct, and the game can start from this file in a browser.
+
+  expected_output: >
+    - Correct import paths and usage for all modules
+    - Verified bootstrap logic and DOM hooks
+    - No JavaScript runtime errors
+
+  context: [generate_game_entry_point]
+
+dg_generate_style_css:
+  description: >
+    Review the generated `style.css` file.
+
+    Validate layout structure, color and typography rules, responsiveness, and visual consistency across game states.
+
+  expected_output: >
+    - Verified CSS class usage and selectors
+    - Consistent, responsive design
+    - No invalid or redundant style declarations
+
+  context: [generate_style_css]
+
+dg_generate_index_html:
+  description: >
+    Review the generated `index.html` file.
+
+    Confirm correct structure, valid HTML syntax, and proper linking to JavaScript and CSS resources.
+
+  expected_output: >
+    - Valid and semantic HTML
+    - Confirmed `main.js` and `style.css` integration
+    - Proper structure for game container and canvas/display area
+
+  context: [generate_index_html]
+
+dg_construct_scenes:
+  description: >
+    Review JavaScript code responsible for scene construction and transitions.
+
+    Validate rendering logic, scene-switching mechanics, and layout integration with UI and gameplay components.
+
+  expected_output: >
+    - Verified scene layout logic
+    - Functional transitions between scenes
+    - Integration with gameplay and UI modules
+
+  context: [construct_scenes]
+
+dg_add_audio:
+  description: >
+    Review the integrated audio logic.
+
+    Ensure all tracks load correctly, playback triggers match gameplay events, and audio behaves as expected across scenes.
+
+  expected_output: >
+    - Working background loops and sound effects
+    - Verified playback triggers and volume control
+    - No missing or broken audio references
+
+  context: [add_audio]
+
+dg_develop_gameplay_logic:
+  description: >
+    Review the gameplay logic system.
+
+    Ensure that turn-based mechanics, card effects, and energy systems work as intended and that the logic is modular and extensible.
+
+  expected_output: >
+    - Verified turn order and player actions
+    - Working card behavior and enemy logic
+    - No logic bugs or flow issues in combat loops
+
+  context: [develop_gameplay_logic]
+
+dg_build_ui:
+  description: >
+    Review the game’s UI implementation.
+
+    Validate interactivity, layout behavior, button states, and visual responsiveness. Check that all UI elements are functional and connected to game logic.
+
+  expected_output: >
+    - Verified UI components in HTML/JavaScript
+    - Responsive layout and working inputs
+    - Functional integration with gameplay and scenes
+
+  context: [build_ui]

@@ -19,8 +19,7 @@ import requests
 from bs4 import BeautifulSoup
 from retrying import retry
 import re
-
-from prompts import PROMPTS
+from .prompts import PROMPTS
 
 class SoundSearcher:
     client = None

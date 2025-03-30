@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 from retrying import retry
 import re
 
-from .prompts import PROMPTS
+from prompts import PROMPTS
 
 class SoundSearcher:
     client = None
@@ -36,7 +36,7 @@ class SoundSearcher:
         if self.verbose:
             print(message)
 
-    @retry(wait_fixed=2000, stop_max_attempt_number=50)
+    @retry(wait_fixed=2000, stop_max_attempt_number=10)
     def create_query(self, description: str) -> str:
         """
         Create a query from a description.
@@ -55,7 +55,11 @@ class SoundSearcher:
         response = chat_with_gpt(sys_prompt, user_input)
 
         # extract the content from triple ticks
-        response = re.findall(r'```([^`]*)```', response)[0].strip("\n ")
+        matches = re.findall(r'```([^`]*)```', response)
+        if matches:
+            response = matches[0].strip("\n ")
+        else:
+            response = response.strip()
 
         return response
 
@@ -173,7 +177,8 @@ class SoundSearcher:
         response_json = chat_with_gpt(sys_prompt, user_input)
         json_string = extract_json_from_quotes(response_json)
         json_dict = json5.loads(json_string)
-        assert  "best_index" in json_dict and "query" in json_dict
+        json_dict["best_index"] = int(json_dict["best_index"])  # Convert to int
+        assert "best_index" in json_dict and "query" in json_dict
         assert isinstance(json_dict["best_index"], int)
         return json_dict
         

@@ -32,11 +32,11 @@ You should shorten the query down to one or two tags.
 
 # Response format
 
-You should only respond in JSON like this:
+You should only respond in JSON like this, where "best_index" is an integer that represents the index of the best result:
 ```json
 {
-    "best_index": "the index of the best result",
-    "query": "refined query",
+    "best_index": 2,
+    "query": "refined query"
 }
 ```
 {system_prompt_end}

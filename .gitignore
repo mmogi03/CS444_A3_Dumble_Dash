@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+.vscode/
+dumble_dash/
+sample_project/
+suno_test/
+test_audio/
+.idea

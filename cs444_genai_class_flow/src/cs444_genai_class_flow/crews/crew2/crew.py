@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Task, Process, LLM
 from crewai.project import CrewBase, agent, crew, task
 #from crew2.tools.freesound_audio_tool import generate_game_audio
-from ...tools.freesound_audio_tool import generate_game_audio
+from ...tools.freesound_audio_tool import FreeSoundAudioTool
 
 from ...tools.dalle_callback import dalle_image_callback
 from crewai_tools import DallETool
@@ -13,12 +13,13 @@ class AssetMap(BaseModel):
     main_character_icon: str
     enemy_icons: List[str]
     environment_background: str
-    trap_effect: str
+    card_image: str
     menu_music: str
     background_music: str
     victory_music: str
     defeat_music: str
     game_icon: str
+    floor_texture: str
 
 @CrewBase
 class Crew2():
@@ -32,8 +33,7 @@ class Crew2():
     dalle_tool = DallETool(model="dall-e-2",
                         size="256x256",
                         quality="standard",
-                        n=1,
-                        result_as_answer=True)
+                        n=1)
 
     # === AGENTS ===
     
@@ -51,7 +51,7 @@ class Crew2():
     def main_menu_composer(self) -> Agent:
         return Agent(
             config=self.agents_config['main_menu_composer'],
-            tools=[generate_game_audio],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
             memory=True
@@ -61,7 +61,7 @@ class Crew2():
     def background_loop_composer(self) -> Agent:
         return Agent(
             config=self.agents_config['background_loop_composer'],
-            tools=[generate_game_audio],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
             memory=True
@@ -71,7 +71,7 @@ class Crew2():
     def victory_theme_composer(self) -> Agent:
         return Agent(
             config=self.agents_config['victory_theme_composer'],
-            tools=[generate_game_audio],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
             memory=True
@@ -81,7 +81,7 @@ class Crew2():
     def defeat_theme_composer(self) -> Agent:
         return Agent(
             config=self.agents_config['defeat_theme_composer'],
-            tools=[generate_game_audio],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
             memory=True
@@ -198,6 +198,24 @@ class Crew2():
             # async_execution=True
         )
         
+    @task
+    def generate_card_image(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_card_image'],
+            agent=self.visual_concept_agent(),
+            callback=dalle_image_callback,
+            # async_execution=True
+        )
+        
+    @task
+    def generate_floor_texture(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_floor_texture'],
+            agent=self.visual_concept_agent(),
+            callback=dalle_image_callback,
+            # async_execution=True
+        )
+
     @task
     def map_assets(self) -> Task:
         return Task(

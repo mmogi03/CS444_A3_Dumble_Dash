@@ -135,14 +135,16 @@ generate_main_character_icon:
       - A consistent "cartoon-ish" game style
       - Inspiration from the story and protagonist design
 
-    ⚠️ You must:
-      - Return a plain string description (NOT a dictionary or object)
-      - Call the tool like: dalle_tool("your generated prompt here")
-
   expected_output: >
-    - A visual prompt string for the main character
-    - The DALL·E tool call in this format: dalle_tool("...")
-    - A 1-line explanation of the design choice
+    Output a JSON string like this:
+    {{
+      "name": "main_character",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ "name" must be a short snake_case tag (e.g., "main_character")
+    ✅ "image_url" must be the image URL returned by dalle_tool("...")
 
   context: [design_story]
   return_output: true
@@ -153,21 +155,22 @@ generate_enemy_icons:
 
     {crew1_output}
 
-    Generate two **distinct visual prompts** for different enemies in the game.
+    Generate one distinct visual prompt for a key enemy in the game.
 
-    Each enemy should have:
+    The enemy should have:
       - A unique visual identity
       - Descriptive features (form, color, aura, expression)
       - Fit the tone of the story and setting
 
-    ⚠️ Output Requirements:
-      - Each prompt must be a plain string
-      - Tool call format: dalle_tool("...") only — no dicts
-
   expected_output: >
-    - Two visual prompt strings
-    - Two DALL·E tool call lines
-    - 1-sentence rationale for each
+    Output a JSON string like this:
+    {{
+      "name": "enemy_icon",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ Use "enemy_icon" or a short descriptive name for "name"
 
   context: [design_story]
   return_output: true
@@ -178,21 +181,22 @@ generate_environment_visuals:
 
     {crew1_output}
 
-    Generate two DALL·E prompts:
-      1. A background for a dungeon area
-      2. A spell or trap visual (e.g., glyphs, fireballs, runes)
+    Generate a DALL·E prompt for a **seamless, repeatable background texture** for a dungeon wall or floor.
 
-    Style must be consistent with a cartoon fantasy theme.
-
-    ⚠️ Format Requirements:
-      - Prompts must be plain strings
-      - Tool call format: dalle_tool("your description here")
-      - No dictionaries or structured inputs
+    ⚠️ Style Must Be:
+      - Seamless/tileable
+      - Cartoon fantasy
+      - Neutral enough for multiple rooms or levels
 
   expected_output: >
-    - Two prompt strings (background + effect)
-    - Tool call lines for each
-    - Brief rationales
+    Output a JSON string like this:
+    {{
+      "name": "environment_background",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ "name" must be "environment_background"
 
   context: [design_story]
   return_output: true
@@ -206,51 +210,121 @@ generate_game_icon:
       - Something simple and iconic (e.g., glowing sigil, dungeon gate, floating card)
       - Style: cartoon, clear contrast, mobile-friendly
 
-    ⚠️ Tool Call Format:
-      - Output a plain string prompt
-      - Use: dalle_tool("your generated description here")
-      - Do NOT wrap it in a dictionary or object
+  expected_output: >
+    Output a JSON string like this:
+    {{
+      "name": "game_icon",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ "name" must be "game_icon"
+
+  context: [design_story]
+  return_output: true
+
+generate_card_image:
+  description: >
+    Based on the game concept and story:
+
+    {crew1_output}
+
+    🎴 Design a DALL·E prompt to illustrate a **key card** in the game.
+
+    You may choose:
+      - A spell card
+      - A trap card
+      - A character card
+
+    The output image should:
+      - Fit the story's style and setting
+      - Use the cartoonish style requested
+      - Be visually bold and recognizable at small sizes
 
   expected_output: >
-    - One generated prompt string
-    - Tool call line
-    - 1-line rationale
+    Output a JSON string like this:
+    {{
+      "name": "card_fire_trap",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ "name" must be snake_case (e.g., "card_fire_trap")
+    ✅ "image_url" must be the DALL·E image URL
+
+  context: [design_story]
+  return_output: true
+
+generate_floor_texture:
+  description: >
+    Based on the game concept and story:
+
+    {crew1_output}
+
+    Generate a DALL·E prompt for a **seamless, tileable floor texture**.
+
+    Style Guide:
+    - Cartoon fantasy
+    - Neutral but interesting
+    - Should clearly contrast with wall textures
+    - Should tile seamlessly across rooms or corridors
+
+  expected_output: >
+    Output a JSON string like this:
+    {{
+      "name": "floor_texture",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ "name" must be "floor_texture"
 
   context: [design_story]
   return_output: true
 
 map_assets:
   description: >
-    Using the outputs from all image and audio generation tasks, create a structured mapping of asset file paths to their intended use in the game.
+    Using the outputs from all image and audio generation tasks, create a structured mapping of asset file paths to their intended purpose in the game.
 
-    📂 This includes:
-    - Character and enemy icons
-    - Environmental backgrounds and visual effects
-    - Menu, background, victory, and defeat music
+    🧠 Each task returns the final **file path** of the generated asset (e.g., "outputs/main_character.png", "outputs/menu_music.mp3").
 
-    🧠 Use the output strings to find:
-    - File names
-    - Prompt used (if available)
-    - What part of the game the asset is tied to
+    📂 Your job:
+    - Collect all task outputs from the context list
+    - Use the file name (or the prompt name, if provided in prior output JSON) to determine what asset it is (e.g., "main_character", "enemy_icon", etc.)
+    - Build a clean JSON-style dictionary of asset type ➜ path
 
-    🎯 Output format: JSON-like mapping of asset roles to file paths, such as:
+    🎯 Format your final answer like this (no markdown):
     {{
-      "main_character_icon": "outputs/dalle_image_xyz.png",
-      "enemy_icons": ["outputs/dalle_image_abc.png", "outputs/dalle_image_def.png"],
-      "environment_background": "outputs/dalle_image_ghi.png",
-      "trap_effect": "outputs/dalle_image_jkl.png",
-      "menu_music": "outputs/menu_track_123.mp3",
-      "background_music": "outputs/bg_loop_456.mp3",
-      "victory_music": "outputs/win_theme_789.mp3",
-      "defeat_music": "outputs/loss_theme_000.mp3",
-      "game_icon": "outputs/game_icon_xyz.png"
+      "main_character_icon": "outputs/main_character.png"
+      "enemy_icons": ["outputs/enemy_icon.png"]
+      "environment_background": "outputs/environment_background.png"
+      "card_image": "outputs/card_fire_trap.png"
+      "menu_music": "outputs/menu_music.mp3"
+      "background_music": "outputs/background_music.mp3"
+      "victory_music": "outputs/victory_music.mp3"
+      "defeat_music": "outputs/defeat_music.mp3"
+      "game_icon": "outputs/game_icon.png"
+      "floor_texture": "outputs/floor_texture.png"
     }}
 
   expected_output: >
-    A structured JSON object with all relevant file paths and asset types needed by the dev team to build the game.
-    Follow the Outut format example in the description and do NOT include any markdown characters such as '```'.
+    Return a valid JSON object with:
+    - Keys as asset types
+    - Values as file paths (strings or string arrays)
+    - DO NOT include any markdown characters (like ``` or extra formatting)
 
   output_file: outputs/asset_mapping.json
 
-  context: [generate_main_character_icon, generate_enemy_icons, generate_environment_visuals, generate_game_icon, generate_main_menu_music, generate_background_loop, generate_victory_music, generate_defeat_music]
+  context: [
+    generate_main_character_icon,
+    generate_enemy_icons,
+    generate_environment_visuals,
+    generate_game_icon,
+    generate_main_menu_music,
+    generate_background_loop,
+    generate_victory_music,
+    generate_defeat_music,
+    generate_card_image,
+    generate_floor_texture
+  ]
   return_output: true

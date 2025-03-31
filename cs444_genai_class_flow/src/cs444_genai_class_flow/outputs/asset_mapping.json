@@ -1,0 +1,14 @@
+{
+  "main_character_icon": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-nXA7HlrFkXxM9FrOKVQ6ivNc.png?st=2025-03-31T00%3A01%3A51Z&se=2025-03-31T02%3A01%3A51Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T10%3A01%3A20Z&ske=2025-03-31T10%3A01%3A20Z&sks=b&skv=2024-08-04&sig=RcZNbi2upIhp8E/FD5T4a3w8THxg8VK9SAoHPts6cbE%3D",
+  "enemy_icons": [
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-p7BsZmusk8T8U9ThjGQq9xQV.png?st=2025-03-31T00%3A02%3A12Z&se=2025-03-31T02%3A02%3A12Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T21%3A15%3A22Z&ske=2025-03-31T21%3A15%3A22Z&sks=b&skv=2024-08-04&sig=OEZhAOxaM4%2BF7pF3nssQb2uUmW58YkKxgymxgqAjLZ8%3D",
+    "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-gS37P8rThiDf87rCm01YW1jW.png?st=2025-03-31T00%3A02%3A25Z&se=2025-03-31T02%3A02%3A25Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T17%3A04%3A55Z&ske=2025-03-31T17%3A04%3A55Z&sks=b&skv=2024-08-04&sig=21HHthLPF%2Bc42ufOqw9NwpssYM1oj5mMcnRomxU/hOs%3D"
+  ],
+  "environment_background": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-zRnFDntgOnJPYVro37o5gMh9/user-pEYP2L8LqmpvpKJGhUkD5exP/img-Jk7lLEjlyUPL1PqhghqYBvGp.png?st=2025-03-31T00%3A02%3A38Z&se=2025-03-31T02%3A02%3A38Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-03-30T14%3A57%3A03Z&ske=2025-03-31T14%3A57%3A03Z&sks=b&skv=2024-08-04&sig=v17%2BjMhV1fPegS9NSXqlOJOk6ch/5igLo/ed4xrTKSE%3D",
+  "trap_effect": "",
+  "menu_music": "calm mystical menu music",
+  "background_music": "mystical exploration loop music",
+  "victory_music": "orchestral triumphant victory music",
+  "defeat_music": "melancholic orchestral defeat music",
+  "game_icon": ""
+}

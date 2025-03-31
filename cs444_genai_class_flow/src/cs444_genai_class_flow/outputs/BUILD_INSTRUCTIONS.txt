@@ -1,0 +1,18 @@
+The game project has been successfully packaged using Webpack. The directory structure is as follows:
+
+```
+.
+├── dist
+│   ├── assets
+│   ├── bundle.js
+│   └── index.html
+├── src
+│   ├── assets
+│   ├── index.html
+│   ├── main.js
+│   └── style.css
+├── package.json
+└── webpack.config.js
+```
+
+To build the project, run `npm install` to install dependencies and then `npm run build` to generate the `dist` directory with all bundled files ready for deployment. The `dist` directory contains `index.html`, `bundle.js`, and an `assets/` folder, making it ready to be deployed in the browser.

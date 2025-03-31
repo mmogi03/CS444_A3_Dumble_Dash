@@ -1,14 +1,14 @@
 {
   "main_character_icon": "outputs/main_character.png",
   "enemy_icons": [
-    "outputs/mystic_fae_icon.png"
+    "outputs/enemy_icon.png"
   ],
   "environment_background": "outputs/environment_background.png",
-  "card_image": "",
-  "menu_music": "outputs/mystical_ambient_menu_music_4f1977.mp3",
-  "background_music": "outputs/mystical_strategy_loop_music_d5cfc3.mp3",
-  "victory_music": "outputs/orchestral_triumphant_victory_4901bb.mp3",
-  "defeat_music": "outputs/melancholic_orchestral_defeat_7e39b2.mp3",
+  "card_image": "outputs/card_fire_trap.png",
+  "menu_music": "outputs/calm_mystical_menu_music_50b7f6.mp3",
+  "background_music": "outputs/ambient_exploration_loop_music_a23f04.mp3",
+  "victory_music": "outputs/orchestral_triumphant_victory_c8cb0b.mp3",
+  "defeat_music": "outputs/melancholic_defeat_piano_music_b280f5.mp3",
   "game_icon": "outputs/game_icon.png",
-  "floor_texture": ""
+  "floor_texture": "outputs/floor_texture.png"
 }

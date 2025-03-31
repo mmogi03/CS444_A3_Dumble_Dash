@@ -3,6 +3,7 @@ import warnings
 from datetime import datetime
 import sys
 from pathlib import Path
+import json
 
 # Add the root of the project to the sys.path so imports resolve correctly
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -85,6 +86,14 @@ class CrewsFlow(Flow[BaseState]):
     @listen(run_crew2)
     def run_crew3(self):
         print("Running crew 3")
+        
+        asset_map_path = "outputs/asset_mapping.json"
+        print("Loading asset_map from Crew2...")
+        with open(asset_map_path, "r") as f:
+            asset_map = json.load(f)
+            
+        print("asset_map loaded from Crew2: ", asset_map)
+        
         result = (
             Crew3().crew().kickoff(inputs = {"crew1_output": self.state.crew1_output , "crew2_output": self.state.crew2_output, 
                                    "template": '''
@@ -453,7 +462,7 @@ class CrewsFlow(Flow[BaseState]):
                                     });
                                     </script>
                                 </body>
-                                </html> ''' }))
+                                </html> ''' , "asset_map": asset_map}))
         print("Crew 3 done", result.raw)
         self.state.crew3_output = result.raw   
 

@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,7 +144,7 @@
     <div id="start-menu-screen" class="active screen">
         <div class="container">
             <h1 id="game-title">Shadowreapers: The Eclipse Chronicles</h1>
-            <img src="outputs/game_icon.png" alt="Game Icon" width="100">
+            <img src="game_icon.png" alt="Game Icon" width="100">
             <button id="play-button">Play</button>
             <button id="settings-button">Settings</button>
             <button id="instructions-button">Instructions</button>
@@ -155,6 +154,7 @@
     <div id="settings-screen" class="screen">
         <div class="container">
             <h2>Settings</h2>
+            <!-- Add settings options here -->
             <button id="settings-back-button">Back</button>
         </div>
     </div>
@@ -178,7 +178,8 @@
 
     <div id="game-screen" class="screen">
         <div id="game-container">
-            <img src="outputs/environment_background.png" alt="Environment Background" width="100%">
+            <!-- Game visuals and mechanics here -->
+            <img src="environment_background.png" alt="Environment Background" width="100%">
         </div>
     </div>
 
@@ -190,64 +191,15 @@
         </div>
     </div>
 
+    <audio autoplay="" id="background-music" loop="">
+        <source src="dark_ambient_loop_music_cad249.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="start-game-sound">
+        <source src="calm_mysterious_menu_music_901e47.mp3" type="audio/mpeg" />
+    </audio>
+
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const menuGainNode = audioContext.createGain();
-            const backgroundGainNode = audioContext.createGain();
-            const victoryGainNode = audioContext.createGain();
-            const defeatGainNode = audioContext.createGain();
-
-            menuGainNode.connect(audioContext.destination);
-            backgroundGainNode.connect(audioContext.destination);
-            victoryGainNode.connect(audioContext.destination);
-            defeatGainNode.connect(audioContext.destination);
-
-            menuGainNode.gain.value = 0.5;
-            backgroundGainNode.gain.value = 0.5;
-            victoryGainNode.gain.value = 0.7;
-            defeatGainNode.gain.value = 0.7;
-
-            async function loadAudio(url) {
-                const response = await fetch(url);
-                const arrayBuffer = await response.arrayBuffer();
-                return await audioContext.decodeAudioData(arrayBuffer);
-            }
-
-            function playAudio(buffer, loop = false, gainNode) {
-                const source = audioContext.createBufferSource();
-                source.buffer = buffer;
-                source.loop = loop;
-                source.connect(gainNode);
-                source.start();
-                return source;
-            }
-
-            async function setupGameAudio() {
-                const menuMusicBuffer = await loadAudio('outputs/calm_mysterious_menu_music_901e47.mp3');
-                const backgroundMusicBuffer = await loadAudio('outputs/dark_ambient_loop_music_cad249.mp3');
-                const victoryMusicBuffer = await loadAudio('outputs/orchestral_triumphant_victory_620bcd.mp3');
-                const defeatMusicBuffer = await loadAudio('outputs/melancholic_defeat_piano_music_bc17e6.mp3');
-
-                let menuMusicSource = playAudio(menuMusicBuffer, true, menuGainNode);
-
-                document.getElementById('play-button').addEventListener('click', () => {
-                    menuMusicSource.stop();
-                    playAudio(backgroundMusicBuffer, true, backgroundGainNode);
-                });
-
-                document.getElementById('play-again-button').addEventListener('click', () => {
-                    playAudio(victoryMusicBuffer, false, victoryGainNode);
-                });
-
-                document.getElementById('game-restart-button').addEventListener('click', () => {
-                    playAudio(defeatMusicBuffer, false, defeatGainNode);
-                });
-            }
-
-            await setupGameAudio();
-
+        document.addEventListener('DOMContentLoaded', () => {
             class GameUI {
                 constructor() {
                     this.startMenuScreen = document.getElementById('start-menu-screen');
@@ -257,7 +209,7 @@
                     this.gameOverScreen = document.getElementById('game-over-screen');
                     this.gameControls = document.getElementById('game-controls');
                     this.hud = document.getElementById('hud');
-                }
+                };
 
                 swapToScreen(screen) {
                     this.startMenuScreen.classList.remove('active');
@@ -274,14 +226,18 @@
                         this.hud.style.display = 'none';
                         this.gameControls.style.display = 'none';
                     }
-                }
+                };
 
                 startGame() {
+                    const startGameSound = document.getElementById('start-game-sound');
                     this.swapToScreen(this.gameContainer);
+                    startGameSound.play();
                 }
 
                 endGame() {
+                    const endGameSound = document.getElementById('end-game-sound');
                     this.swapToScreen(this.gameOverScreen);
+                    endGameSound && endGameSound.play();
                 }
 
                 mainMenu() {
@@ -301,12 +257,70 @@
                 }
             }
 
+            class GameLogic {
+                constructor() {
+                    // Add game logic here
+                }
+            }
+
             class Game {
                 constructor() {
                     this.ui = new GameUI();
+                    this.logic = new GameLogic();
+                    this.lastFrameTime = 0;
+                    this.updateInterval = 1000 / 60;
+                    this.done = false;
+                    this.isPaused = false;
+                    this.animationFrameId = null;
+                    this.prepareGame();
                 }
 
                 prepareGame() {
+                    // Prepare the game setup including event listeners for buttons
+                    this.assignButtons();
+                }
+
+                startGame() {
+                    this.ui.startGame();
+                    if(this.animationFrameId) {
+                        cancelAnimationFrame(this.animationFrameId);
+                    }
+                    this.animationFrameId = requestAnimationFrame(this.gameLoop.bind(this));
+                }
+
+                updateGame() {
+                    // Update game logic here;
+                }
+
+                resetGame() {
+                    this.isPaused = false;
+                    cancelAnimationFrame(this.animationFrameId);
+                }
+
+                pause() {
+                    this.isPaused = true;
+                    cancelAnimationFrame(this.animationFrameId);
+                }
+
+                resume() {
+                    this.isPaused = false;
+                    this.gameLoop();
+                }
+
+                gameLoop(timestamp) {
+                    if (this.done) return;
+                    const deltaTime = timestamp - this.lastFrameTime;
+                    if (deltaTime > this.updateInterval) {
+                        this.updateGame();
+                        this.lastFrameTime = timestamp;
+                    }
+                    if(this.animationFrameId) {
+                        cancelAnimationFrame(this.animationFrameId);
+                    }
+                    this.animationFrameId = requestAnimationFrame(this.gameLoop.bind(this));
+                }
+
+                assignButtons() {
                     const playButton = document.getElementById('play-button');
                     const settingsButton = document.getElementById('settings-button');
                     const instructionsButton = document.getElementById('instructions-button');
@@ -316,25 +330,38 @@
                     const instructionsBackButton = document.getElementById('instructions-back-button');
                     const gameMenuButton = document.getElementById('game-menu-button');
                     const gameRestartButton = document.getElementById('game-restart-button');
+                    const gameInstructionsButton = document.getElementById('game-instructions-button');
 
-                    playButton.addEventListener('click', this.ui.startGame.bind(this.ui));
+                    playButton.addEventListener('click', this.startGame.bind(this));
                     settingsButton.addEventListener('click', this.ui.settings.bind(this.ui));
                     instructionsButton.addEventListener('click', this.ui.instructions.bind(this.ui));
-                    playAgainButton.addEventListener('click', this.ui.playAgain.bind(this.ui));
-                    mainMenuButton.addEventListener('click', this.ui.mainMenu.bind(this.ui));
-                    settingsBackButton.addEventListener('click', this.ui.mainMenu.bind(this.ui));
-                    instructionsBackButton.addEventListener('click', this.ui.mainMenu.bind(this.ui));
-                    gameMenuButton.addEventListener('click', this.ui.mainMenu.bind(this.ui));
-                    gameRestartButton.addEventListener('click', this.ui.startGame.bind(this.ui));
+                    playAgainButton.addEventListener('click', this.startGame.bind(this));
+                    mainMenuButton.addEventListener('click', () => {
+                        this.ui.mainMenu();
+                    });
+                    settingsBackButton.addEventListener('click', () => {
+                        this.ui.mainMenu();
+                    });
+                    instructionsBackButton.addEventListener('click', () => {
+                        this.ui.mainMenu();
+                    });
+                    gameMenuButton.addEventListener('click', () => {
+                        this.ui.mainMenu();
+                    });
+                    gameRestartButton.addEventListener('click', this.startGame.bind(this));
+                    gameInstructionsButton.addEventListener('click', () => {
+                        this.pause();
+                        this.ui.swapToScreen(this.ui.instructionsScreen);
+                        instructionsBackButton.addEventListener('click', () => {
+                            this.ui.swapToScreen(this.ui.gameContainer);
+                            this.resume();
+                        }, { once: true });
+                    });
                 }
             }
 
             const game = new Game();
-            game.prepareGame();
         });
     </script>
 </body>
 </html>
-```
-
-This HTML and JavaScript code integrates all required audio tracks, with detailed handling for volume control, event triggers, and loop configurations. It uses modern JavaScript features to manage audio contexts and gain nodes for dynamic sound mixing, ensuring a responsive and immersive user experience.

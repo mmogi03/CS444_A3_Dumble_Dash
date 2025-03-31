@@ -1,0 +1,164 @@
+```css
+/* Base Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+body {
+    background-image: url('environment_background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Common Screen Styles */
+.screen {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Active Screen */
+.screen.active {
+    display: flex;
+}
+
+/* Title Style */
+.title {
+    font-size: 3em;
+    color: #ff4081;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+/* Button Styles */
+.button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.2em;
+    color: #f0f0f0;
+    background-color: #6200ea;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #3700b3;
+}
+
+/* Start Menu Screen */
+#start-menu-screen {
+    background: url('game_icon.png') no-repeat center top;
+    background-size: 150px 150px;
+    padding-top: 200px;
+}
+
+/* Settings Screen */
+#settings-screen {
+    flex-direction: column;
+    align-items: center;
+}
+
+#settings-screen .slider {
+    width: 80%;
+    margin: 10px 0;
+}
+
+/* Instructions Screen */
+#instructions-screen {
+    width: 80%;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+}
+
+/* Game Screen */
+#game-screen {
+    position: relative;
+    overflow: hidden;
+}
+
+#hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+#game-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+/* HUD Elements */
+#hud .health, #hud .score {
+    font-size: 1.2em;
+    background-color: rgba(50, 50, 50, 0.7);
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+/* Game Over Screen */
+#game-over-screen {
+    flex-direction: column;
+}
+
+#game-over-screen .score-detail {
+    font-size: 1.5em;
+    margin: 15px 0;
+}
+
+/* Responsive Fonts */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5em;
+    }
+    .button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+    #hud .health, #hud .score {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2em;
+    }
+    .button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+    #hud {
+        flex-direction: column;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+```
+This `style.css` file provides a comprehensive style for the game's UI, integrating the given assets where necessary and ensuring a cohesive visual experience across different devices.

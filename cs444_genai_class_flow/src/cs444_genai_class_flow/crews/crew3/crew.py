@@ -15,73 +15,74 @@ class Crew3():
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
-    llm = LLM(model="openai/gpt-4o", temperature=0)
+    openai_o1_mini_llm = LLM(model="openai/o1-mini")
+    openai_gpt_4o_llm = LLM(model="openai/gpt-4o")
 
     # === AGENTS ===
 
     @agent
     def project_manager(self) -> Agent:
         return Agent(config=self.agents_config['project_manager'], 
-                     verbose=True, llm=self.llm,
+                     verbose=True, llm=self.openai_gpt_4o_llm,
                      allow_code_execution = True, 
                      language = "JavaScript")
 
     @agent
     def ui_developer(self) -> Agent:
         return Agent(config=self.agents_config['ui_developer'], 
-                     verbose=True, llm=self.llm)
+                     verbose=True, llm=self.openai_o1_mini_llm)
 
     @agent
     def gameplay_logic_developer(self) -> Agent:
         return Agent(config=self.agents_config['gameplay_logic_developer'], 
-                     verbose=True, llm=self.llm)
+                     verbose=True, llm=self.openai_o1_mini_llm)
 
     @agent
     def audio_integrator(self) -> Agent:
         return Agent(config=self.agents_config['audio_integrator'], 
-                     tools=[integrate_audio_assets], verbose=True, 
-                     llm=self.llm)
+                     verbose=True, 
+                     llm=self.openai_gpt_4o_llm)
 
     @agent
     def scene_builder(self) -> Agent:
         return Agent(config=self.agents_config['scene_builder'], 
-                     verbose=True, llm=self.llm)
+                     verbose=True, llm=self.openai_o1_mini_llm)
 
     @agent
     def game_exporter(self) -> Agent:
         return Agent(config=self.agents_config['game_exporter'], 
-                     verbose=True, llm=self.llm)
+                     verbose=True, llm=self.openai_o1_mini_llm)
 
     @agent
     def html_css_specialist(self) -> Agent:
         return Agent(config=self.agents_config['html_css_specialist'], 
-                     verbose=True, llm=self.llm)
+                     verbose=True, llm=self.openai_o1_mini_llm)
 
     @agent
     def build_system_engineer(self) -> Agent:
         return Agent(config=self.agents_config['build_system_engineer'], 
-                     verbose=True, llm=self.llm)
+                     verbose=True, llm=self.openai_o1_mini_llm)
     
     @agent 
     def js_debugger(self) -> Agent:
         return Agent(config = self.agents_config['js_debugger'], 
-                     verboes = True, llm = self.llm, allow_code_execution = True, 
+                     verbose = True, llm = self.openai_o1_mini_llm, allow_code_execution = True, 
                      language = "JavaScript")
     
     @agent
     def html_debugger(self) -> Agent:
         return Agent(config = self.agents_config['html_debugger'], 
-                     verboes = True, llm = self.llm)
+                     verbose = True, llm = self.openai_o1_mini_llm)
     
     @agent
     def css_debugger(self) -> Agent:
         return Agent(config = self.agents_config['css_debugger'], 
-                     verboes = True, llm = self.llm)
+                     verbose = True, llm = self.openai_o1_mini_llm)
     
     @agent
     def qc_engineer(self) -> Agent:
         return Agent(config = self.agents_config['qc_engineer'], 
-                     verboes = True, llm = self.llm)
+                     verbose = True, llm = self.openai_o1_mini_llm)
 
     # === TASKS ===
 
@@ -95,7 +96,7 @@ class Crew3():
     def dg_build_ui(self) -> Task:
         return Task(config=self.tasks_config['dg_build_ui'], 
                     agent=self.js_debugger(), 
-                    output_file="outputs/ui.js")
+                    output_file="outputs/ui_dg.js")
 
     @task
     def develop_gameplay_logic(self) -> Task:
@@ -107,7 +108,7 @@ class Crew3():
     def dg_develop_gameplay_logic(self) -> Task:
         return Task(config=self.tasks_config['dg_develop_gameplay_logic'], 
                     agent=self.js_debugger(), 
-                    output_file="outputs/gameplay_logic.js")
+                    output_file="outputs/gameplay_logic_dg.js")
 
     @task
     def add_audio(self) -> Task:
@@ -119,7 +120,7 @@ class Crew3():
     def dg_add_audio(self) -> Task:
         return Task(config=self.tasks_config['dg_add_audio'], 
                     agent=self.js_debugger(), 
-                    output_file="outputs/audio.js")
+                    output_file="outputs/audio_dg.js")
 
     @task
     def construct_scenes(self) -> Task:
@@ -131,7 +132,7 @@ class Crew3():
     def dg_construct_scenes(self) -> Task:
         return Task(config=self.tasks_config['dg_construct_scenes'], 
                     agent=self.scene_builder(), 
-                    output_file="outputs/scenes.js")
+                    output_file="outputs/scenes_dg.js")
 
     @task
     def generate_index_html(self) -> Task:
@@ -144,7 +145,7 @@ class Crew3():
         return Task(
             config = self.tasks_config['dg_generate_index_html'],
             agent = self.html_debugger(),
-            output_file = "outputs/index.html"
+            output_file = "outputs/index_dg.html"
         )
 
     @task
@@ -157,7 +158,7 @@ class Crew3():
     def dg_generate_style_css(self) -> Task:
         return Task(config=self.tasks_config['dg_generate_style_css'], 
                     agent=self.css_debugger(), 
-                    output_file="outputs/style.css")
+                    output_file="outputs/style_dg.css")
 
     @task
     def generate_game_entry_point(self) -> Task:
@@ -169,7 +170,7 @@ class Crew3():
     def dg_generate_game_entry_point(self) -> Task:
         return Task(config=self.tasks_config['dg_generate_game_entry_point'], 
                     agent=self.js_debugger(), 
-                    output_file="outputs/main.js")
+                    output_file="outputs/main_dg.js")
 
     @task
     def bundle_and_export_game(self) -> Task:

@@ -4,11 +4,11 @@
     "outputs/enemy_icon.png"
   ],
   "environment_background": "outputs/environment_background.png",
-  "card_image": "outputs/card_fire_trap.png",
-  "menu_music": "outputs/calm_mystical_menu_music_50b7f6.mp3",
-  "background_music": "outputs/ambient_exploration_loop_music_a23f04.mp3",
-  "victory_music": "outputs/orchestral_triumphant_victory_c8cb0b.mp3",
-  "defeat_music": "outputs/melancholic_defeat_piano_music_b280f5.mp3",
+  "card_image": "outputs/card_spell_vortex.png",
+  "menu_music": "outputs/calm_mysterious_menu_music_901e47.mp3",
+  "background_music": "outputs/dark_ambient_loop_music_cad249.mp3",
+  "victory_music": "outputs/orchestral_triumphant_victory_620bcd.mp3",
+  "defeat_music": "outputs/melancholic_defeat_piano_music_bc17e6.mp3",
   "game_icon": "outputs/game_icon.png",
   "floor_texture": "outputs/floor_texture.png"
 }

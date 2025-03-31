@@ -8,6 +8,10 @@ build_ui:
 
     {template}
 
+    Use these game assets for images, icons, or references:
+
+    {asset_map}
+
     Build the entire game user interface using web technologies. This includes menus, buttons, HUDs, and in-game overlays. Focus on usability, aesthetic consistency, and layout responsiveness.
 
   expected_output: >
@@ -24,6 +28,10 @@ develop_gameplay_logic:
     and Based on the coming from:
 
     {template}
+
+    Here are the game assets (images/audio) to use during gameplay:
+
+    {asset_map}
 
     Implement the turn-based card combat, energy system, progression, and level-specific interactions. Ensure modularity and clarity in how the game loop and player choices are handled.
 
@@ -42,6 +50,10 @@ add_audio:
 
     {template}
 
+    Use these file paths to access the correct music files:
+
+    {asset_map}
+
     Assign each track to a relevant scene or moment in the gameplay. Include code for volume control, loop handling, and playback triggers within scenes.
 
   expected_output: >
@@ -59,6 +71,10 @@ construct_scenes:
 
     {template}
 
+    Use the following visual and audio assets during scene construction:
+
+    {asset_map}
+
     Scenes should include layout logic, environment features (e.g., traps, hazards), and scene transitions. Incorporate previous UI and gameplay logic as needed.
 
   expected_output: >
@@ -74,6 +90,10 @@ export_game_code:
 
     Based on the template coming from:
       {template}
+      
+    These assets should be embedded properly:
+
+    {asset_map}
 
     Ensure all components (UI, logic, scenes, audio) are properly connected and can run as a standalone game.
 
@@ -89,6 +109,10 @@ generate_index_html:
     Based on the template coming from:
       {template}
 
+    These asset paths can be used for audio/image tags:
+
+    {asset_map}
+
     Write the `index.html` file that will serve as the game’s entry point. It should load `main.js` and apply styles from `style.css`.
 
   expected_output: >
@@ -100,6 +124,10 @@ generate_style_css:
 
     {template}
 
+    These visual assets (e.g. background texture) should be referenced where appropriate:
+
+    {asset_map}
+
     Create the base `style.css` file that defines layout and visual styling for the game’s menus and screens.
 
   expected_output: >
@@ -110,6 +138,11 @@ generate_game_entry_point:
    Based on the template coming from:
 
     {template}
+
+    Use this asset mapping to load and initialize visuals/audio:
+
+    {asset_map}
+
     Create a `main.js` file that imports and initializes all game modules (UI, logic, audio, scenes).
 
   expected_output: >
@@ -123,6 +156,10 @@ bundle_and_export_game:
 
     {template}
 
+    Use this list of asset files for packaging:
+
+    {asset_map}
+
     Package all game files (HTML, CSS, JS, assets) using a tool like Webpack or Parcel. Output a bundled directory with everything in place and ready to be zipped.
 
   expected_output: >
@@ -133,6 +170,10 @@ bundle_and_export_game:
 check_integrated_code:
   description: >
     Review the entire game codebase including the UI, logic, scenes, and audio systems.
+
+    Confirm all assets load correctly based on this mapping:
+
+    {asset_map}
 
     Confirm that all modules connect and operate correctly when run in a browser environment. Check for DOM issues, missing assets, broken styles, or runtime JavaScript errors.
 
@@ -149,6 +190,10 @@ dg_generate_game_entry_point:
 
     Ensure that module imports are valid, initialization order is correct, and the game can start from this file in a browser.
 
+     Here is the asset mapping to verify file paths:
+
+     {asset_map}
+
   expected_output: >
     - Correct import paths and usage for all modules
     - Verified bootstrap logic and DOM hooks
@@ -161,6 +206,10 @@ dg_generate_style_css:
     Review the generated `style.css` file.
 
     Validate layout structure, color and typography rules, responsiveness, and visual consistency across game states.
+
+    Visual references (e.g. background textures) are in:
+
+    {asset_map}
 
   expected_output: >
     - Verified CSS class usage and selectors
@@ -175,6 +224,10 @@ dg_generate_index_html:
 
     Confirm correct structure, valid HTML syntax, and proper linking to JavaScript and CSS resources.
 
+    Make sure all images and audio tags link to files from:
+
+    {asset_map}
+
   expected_output: >
     - Valid and semantic HTML
     - Confirmed `main.js` and `style.css` integration
@@ -187,6 +240,10 @@ dg_construct_scenes:
     Review JavaScript code responsible for scene construction and transitions.
 
     Validate rendering logic, scene-switching mechanics, and layout integration with UI and gameplay components.
+
+    All referenced assets should align with:
+
+    {asset_map}
 
   expected_output: >
     - Verified scene layout logic
@@ -201,6 +258,10 @@ dg_add_audio:
 
     Ensure all tracks load correctly, playback triggers match gameplay events, and audio behaves as expected across scenes.
 
+    Confirm file paths and asset usage from:
+
+    {asset_map}
+
   expected_output: >
     - Working background loops and sound effects
     - Verified playback triggers and volume control
@@ -214,6 +275,10 @@ dg_develop_gameplay_logic:
 
     Ensure that turn-based mechanics, card effects, and energy systems work as intended and that the logic is modular and extensible.
 
+    Asset files (e.g. card visuals or sounds) used in gameplay are listed in:
+
+    {asset_map}
+
   expected_output: >
     - Verified turn order and player actions
     - Working card behavior and enemy logic
@@ -226,6 +291,10 @@ dg_build_ui:
     Review the game’s UI implementation.
 
     Validate interactivity, layout behavior, button states, and visual responsiveness. Check that all UI elements are functional and connected to game logic.
+
+    Confirm that icons, textures, and images align with this asset map:
+
+    {asset_map}
 
   expected_output: >
     - Verified UI components in HTML/JavaScript

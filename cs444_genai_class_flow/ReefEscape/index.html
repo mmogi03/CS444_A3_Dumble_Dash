@@ -176,7 +176,8 @@
       }
       #battle-ui .card-container img {
         width: 100px;
-        height: auto;
+        height: 100px;
+        object-fit: contain;
         margin: 0 10px;
       }
       #start-menu-screen {
@@ -191,10 +192,9 @@
         height: 100%;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        background: url("assets/textures/losing_screen.png") center center / contain no-repeat;
         z-index: 999999;
         text-align: center;
-        background: url("assets/textures/losing_screen.png") center center / contain no-repeat;
       }
       #game-over-screen.active {
         display: flex;
@@ -269,6 +269,7 @@
           <h3>Controls:</h3>
           <ul>
             <li>WASD to swim around (top-down view).</li>
+            <li>SHIFT to swim faster.</li>
             <li>Click on the attacks when in battle to cast them, or skip your turn.</li>
           </ul>
         </div>
@@ -293,9 +294,9 @@
       <div id="enemy-health-bar"><div id="enemy-health-fill"></div></div>
       <div id="battle-ui">
         <div class="card-container">
-          <img id="fireball-card" src="assets/textures/tail_whip.png" />
-          <img id="mudwall-card" src="assets/textures/tidal_splash.png" />
-          <img id="heal-card" src="assets/textures/coral_heal.png" />
+          <img id="fireball-card" src="assets/textures/tail_whip.png" alt="Tail Whip" />
+          <img id="mudwall-card" src="assets/textures/tidal_splash.png" alt="Tidal Splash" />
+          <img id="heal-card" src="assets/textures/coral_heal.png" alt="Coral Heal" />
         </div>
         <button id="skip-turn-button">Skip Turn</button>
       </div>
@@ -327,13 +328,21 @@
     <audio id="audio-tail-whip">
       <source src="assets/audio/tail_whip.wav" type="audio/wav" />
     </audio>
-
     <audio id="audio-tidal-splash">
       <source src="assets/audio/tidal_splash.wav" type="audio/wav" />
     </audio>
-
     <audio id="audio-coral-heal">
       <source src="assets/audio/coral_heal.wav" type="audio/wav" />
+    </audio>
+
+    <!-- enemy attack SFX -->
+    <audio id="audio-enemy-attack">
+      <source src="assets/audio/enemy_attack_1.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- level victory music -->
+    <audio id="audio-level-victory">
+      <source src="assets/music/level_victory.wav" type="audio/wav" />
     </audio>
 
     <script type="module" src="main.js"></script>

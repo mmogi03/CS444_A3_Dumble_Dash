@@ -66,14 +66,12 @@ export function castSpell(spellName) {
         if (scene.currentEnemy) scene.currentEnemy.clearTint();
         endBattle(scene, true);
       });
-      return;
     } else {
       scene.time.delayedCall(1000, () => {
         if (scene.currentEnemy) scene.currentEnemy.clearTint();
         window.currentTurn = "enemy";
         doEnemyTurn();
       });
-      return;
     }
   } else if (spellName === "mudWall") {
     scene.currentEnemy.setTint(0xffaaaa);
@@ -84,14 +82,12 @@ export function castSpell(spellName) {
         if (scene.currentEnemy) scene.currentEnemy.clearTint();
         endBattle(scene, true);
       });
-      return;
     } else {
       scene.time.delayedCall(1000, () => {
         if (scene.currentEnemy) scene.currentEnemy.clearTint();
         window.currentTurn = "enemy";
         doEnemyTurn();
       });
-      return;
     }
   } else if (spellName === "astralHeal") {
     scene.playerHealth = Math.min(
@@ -110,8 +106,19 @@ export function doEnemyTurn() {
   const scene = getCurrentScene();
   if (!scene) return;
 
+  // Hide battle UI while enemy "thinks"
   document.getElementById("battle-ui").style.display = "none";
+
   scene.time.delayedCall(500, () => {
+    // Play enemy attack SFX
+    const sfx = document.getElementById("audio-enemy-attack");
+    if (sfx) {
+      sfx.volume = 0.5;      // set volume at 50%
+      sfx.currentTime = 0;
+      sfx.play();
+    }
+
+    // Show damage overlay
     const gameContainer = document.getElementById("game-container");
     if (gameContainer) {
       const overlay = document.createElement("div");
@@ -126,6 +133,8 @@ export function doEnemyTurn() {
       gameContainer.appendChild(overlay);
       setTimeout(() => overlay.remove(), 1000);
     }
+
+    // Actually apply damage
     scene.time.delayedCall(1000, () => {
       scene.playerHealth -= 1;
       if (scene.playerHealth <= 0) {

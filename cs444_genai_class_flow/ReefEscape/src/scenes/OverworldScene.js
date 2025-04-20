@@ -17,6 +17,10 @@ export default class OverworldScene extends Phaser.Scene {
   }
 
   create() {
+    // hide lingering battle UI & enemy bar
+    document.getElementById("battle-ui").style.display = "none";
+    document.getElementById("enemy-health-bar").style.display = "none";
+
     if (!window.currentLevel) window.currentLevel = 1;
     this.levelCompleted = false;
 
@@ -38,7 +42,6 @@ export default class OverworldScene extends Phaser.Scene {
       for (let x = 0; x < columns; x++) {
         const worldX = x * tileSize;
         const worldY = y * tileSize;
-
         const groundTile = this.groundGroup.create(
           worldX + tileSize / 2,
           worldY + tileSize / 2,
@@ -46,7 +49,6 @@ export default class OverworldScene extends Phaser.Scene {
         );
         groundTile.setDisplaySize(tileSize, tileSize);
         groundTile.setPipeline("Light2D");
-
         if (maze[y][x] === 1) {
           const wallTile = this.wallsGroup.create(
             worldX + tileSize / 2,
@@ -86,7 +88,6 @@ export default class OverworldScene extends Phaser.Scene {
       if (enemyCells.length === 0) break;
       const enemyCell = Phaser.Utils.Array.GetRandom(enemyCells);
       Phaser.Utils.Array.Remove(enemyCells, enemyCell);
-
       const enemy = this.physics.add.sprite(
         enemyCell.x * tileSize + tileSize / 2,
         enemyCell.y * tileSize + tileSize / 2,
@@ -129,25 +130,18 @@ export default class OverworldScene extends Phaser.Scene {
     document.getElementById("hud").style.display = "block";
     document.getElementById("game-controls").style.display = "block";
 
-    // AUDIO HANDLING
     const startGameMusic = document.getElementById("start-game-sound");
     const bgMusic = document.getElementById("background-music");
-    const volumeSlider = document.getElementById("volume-slider");
-    const targetVol = parseFloat(volumeSlider.value);
 
     fadeAudio(startGameMusic, 0, 1000, () => {
       startGameMusic.pause();
       startGameMusic.currentTime = 0;
 
+      const slider = document.getElementById("volume-slider");
+      const targetVol = slider ? parseFloat(slider.value) : 1;
+
       bgMusic.volume = 0;
-      bgMusic.play().catch(() => {});
-
-      bgMusic.addEventListener("timeupdate", () => {
-        if (bgMusic.currentTime >= bgMusic.duration - 2) {
-          bgMusic.currentTime = 0;
-        }
-      });
-
+      bgMusic.play();
       fadeAudio(bgMusic, targetVol, 1000);
     });
 
@@ -206,8 +200,7 @@ export default class OverworldScene extends Phaser.Scene {
       return;
     }
     const speed = this.keys.SHIFT.isDown ? 200 : 120;
-    let vx = 0,
-      vy = 0;
+    let vx = 0, vy = 0;
     if (this.keys.W.isDown) vy = -speed;
     else if (this.keys.S.isDown) vy = speed;
     if (this.keys.A.isDown) vx = -speed;
@@ -219,20 +212,40 @@ export default class OverworldScene extends Phaser.Scene {
     window.inBattle = true;
     window.currentTurn = "player";
     this.currentEnemy = enemySprite;
-    this.enemyMaxHealth = 5;
-    this.enemyHealth = 5;
+
+    let diff = window.currentDifficulty || "easy";
+    if (diff === "easy") {
+      this.enemyMaxHealth = 5;
+    } else if (diff === "medium") {
+      this.enemyMaxHealth = 10;
+    } else if (diff === "hard") {
+      this.enemyMaxHealth = 20;
+    } else {
+      this.enemyMaxHealth = 5;
+    }
+    this.enemyHealth = this.enemyMaxHealth;
+
     showBattleUI(true);
     document.getElementById("enemy-health-bar").style.display = "block";
     updateEnemyHealthBar(this.enemyHealth, this.enemyMaxHealth);
   }
 
   nextLevel() {
+    // play level victory music
+    const victory = document.getElementById("audio-level-victory");
+    if (victory) {
+      victory.currentTime = 0;
+      victory.play();
+    }
+
+    // bump level, reset health/mana/score UI, then restart
     window.currentLevel++;
     this.playerHealth = this.playerMaxHealth;
     this.playerMana = this.playerMaxMana;
     updateHealthBar(this.playerHealth, this.playerMaxHealth);
     updateManaBar(this.playerMana, this.playerMaxMana);
     updateLevelText();
+
     this.time.delayedCall(1000, () => {
       this.scene.restart();
     });

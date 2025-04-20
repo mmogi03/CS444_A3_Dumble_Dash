@@ -232,8 +232,8 @@ generate_card_image:
     🎴 Design a DALL·E prompt to illustrate a **key card** in the game.
 
     You may choose:
-      - A spell card
-      - A trap card
+      - A attack card
+      - A heal card
       - A character card
 
     The output image should:
@@ -293,18 +293,18 @@ map_assets:
     - Use the file name (or the prompt name, if provided in prior output JSON) to determine what asset it is (e.g., "main_character", "enemy_icon", etc.)
     - Build a clean JSON-style dictionary of asset type ➜ path
 
-    🎯 Format your final answer like this (no markdown):
+    🎯 Format your final answer similar to this (file naming doesn't have to be exact & no markdown):
     {{
       "main_character_icon": "outputs/main_character.png"
       "enemy_icons": ["outputs/enemy_icon.png"]
       "environment_background": "outputs/environment_background.png"
-      "card_image": "outputs/card_fire_trap.png"
-      "menu_music": "outputs/menu_music.mp3"
-      "background_music": "outputs/background_music.mp3"
-      "victory_music": "outputs/victory_music.mp3"
-      "defeat_music": "outputs/defeat_music.mp3"
+      "card_image": "outputs/card.png"
+      "menu_music": "outputs/menu_music.wav"
+      "background_music": "outputs/background_music.wav"
+      "victory_music": "outputs/victory_music.wav"
+      "defeat_music": "outputs/defeat_music.wav"
       "game_icon": "outputs/game_icon.png"
-      "floor_texture": "outputs/floor_texture.png"
+      "floor_texture": "outputs/floor_texture.wav"
     }}
 
   expected_output: >

@@ -65,12 +65,54 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       }
       #game-title {
-        font-size: 2.5em;
-        margin-bottom: 30px;
-        text-transform: uppercase;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        color: #e94560;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      color: #0cc7be;
+      /* gray border + neon glow */
+      text-shadow:
+        /* gray outline */
+        -1px -1px 0 #d0cfcf,
+        1px -1px 0 #d0cfcf,
+        -1px  1px 0 #d0cfcf,
+        1px  1px 0 #d0cfcf,
+        /* glow layers */
+        0 0 8px  #0cc7be,
+        0 0 16px #0cc7be,
+        0 0 24px #0cc7be,
+        0 0 32px #0cc7be;
+      /* animate between two glow intensities */
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow:
+          /* gray outline */
+          -1px -1px 0 #d0cfcf,
+          1px -1px 0 #d0cfcf,
+          -1px  1px 0 #d0cfcf,
+          1px  1px 0 #d0cfcf,
+          /* softer glow */
+          0 0 8px  #0cc7be,
+          0 0 16px #0cc7be,
+          0 0 24px #0cc7be,
+          0 0 32px #0cc7be;
       }
+      to {
+        text-shadow:
+          /* gray outline */
+          -1px -1px 0 #d0cfcf,
+          1px -1px 0 #d0cfcf,
+          -1px  1px 0 #d0cfcf,
+          1px  1px 0 #d0cfcf,
+          /* brighter glow */
+          0 0 12px #14f9d8,
+          0 0 24px #14f9d8,
+          0 0 36px #14f9d8,
+          0 0 48px #14f9d8;
+      }
+    }
       #game-screen {
         position: absolute;
         top: 0;
@@ -200,17 +242,53 @@
         display: flex;
       }
       #game-over-message {
-        font-size: 72px;
-        font-weight: bold;
-        color: #ff4d4d;
-        margin-bottom: 20px;
-        letter-spacing: 3px;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      color: #ff4d4d;
+      /* black letter outline + red glow */
+      text-shadow:
+        /* black outline */
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px  1px 0 #000,
+        1px  1px 0 #000,
+        /* glow layers */
+        0 0 8px  #ff4d4d,
+        0 0 16px #ff4d4d,
+        0 0 24px #ff4d4d,
+        0 0 32px #ff4d4d;
+      animation: gameover-glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes gameover-glow {
+      from {
         text-shadow:
-          -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000,
-          -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000,
-          0 0 15px rgba(255, 77, 77, 0.8),
-          0 0 30px rgba(255, 0, 0, 0.6);
+          /* black outline */
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px  1px 0 #000,
+          1px  1px 0 #000,
+          /* softer glow */
+          0 0 8px  #ff4d4d,
+          0 0 16px #ff4d4d,
+          0 0 24px #ff4d4d,
+          0 0 32px #ff4d4d;
       }
+      to {
+        text-shadow:
+          /* black outline */
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px  1px 0 #000,
+          1px  1px 0 #000,
+          /* brighter glow */
+          0 0 12px #ff8080,
+          0 0 24px #ff8080,
+          0 0 36px #ff8080,
+          0 0 48px #ff8080;
+      }
+    }
       #level-score {
         margin-top: 10px;
         font-size: 20px;
@@ -303,7 +381,7 @@
     </div>
     <div id="game-over-screen" class="screen">
       <div class="container">
-        <div id="game-over-message">You Died!</div>
+        <div id="game-over-message">You Lost!</div>
         <button id="play-again-button">Play Again</button>
         <button id="main-menu-button">Main Menu</button>
       </div>

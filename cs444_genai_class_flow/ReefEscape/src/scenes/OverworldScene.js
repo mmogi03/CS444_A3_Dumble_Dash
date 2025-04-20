@@ -200,12 +200,21 @@ export default class OverworldScene extends Phaser.Scene {
       return;
     }
     const speed = this.keys.SHIFT.isDown ? 200 : 120;
-    let vx = 0, vy = 0;
+    let vx = 0,
+      vy = 0;
     if (this.keys.W.isDown) vy = -speed;
     else if (this.keys.S.isDown) vy = speed;
     if (this.keys.A.isDown) vx = -speed;
     else if (this.keys.D.isDown) vx = speed;
+
     this.player.setVelocity(vx, vy);
+
+    // flip sprite depending on horizontal direction
+    if (vx < 0) {
+      this.player.setFlipX(true);
+    } else if (vx > 0) {
+      this.player.setFlipX(false);
+    }
   }
 
   startBattle(enemySprite) {
@@ -238,7 +247,7 @@ export default class OverworldScene extends Phaser.Scene {
       victory.play();
     }
 
-    // bump level, reset health/mana/score UI, then restart
+    // bump level, reset health/mana UI, then restart
     window.currentLevel++;
     this.playerHealth = this.playerMaxHealth;
     this.playerMana = this.playerMaxMana;

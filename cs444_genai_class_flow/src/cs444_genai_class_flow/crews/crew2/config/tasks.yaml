@@ -45,7 +45,7 @@ generate_main_menu_music:
     ✅ Output must follow:
       - Must include the word **"music"**
       - Max 5 words total (e.g., "relaxing ambient menu music")
-      - Use **searchable, generic tags** — avoid abstract/fantasy words like "arcane"
+      - Use **searchable, generic tags** — avoid abstract/fantasy words 
       - Tool call format: `generate_game_audio("relaxing ambient menu music")`
 
   expected_output: >
@@ -66,9 +66,9 @@ generate_background_loop:
 
     ✅ Guidelines:
       - Must include the word **"music"**
-      - Up to 5 generic, searchable tags (e.g., "ambient dungeon loop music")
+      - Up to 5 generic, searchable tags (e.g., "ambient game loop music")
       - Avoid fantasy-specific words or full phrases
-      - Tool call format: `generate_game_audio("ambient dungeon loop music")`
+      - Tool call format: `generate_game_audio("ambient game loop music")`
 
   expected_output: >
     - The prompt string (max 5 words, must include "music")
@@ -89,7 +89,7 @@ generate_victory_music:
     ✅ Rules:
       - Must include the word **"music"**
       - Up to 5 generic, searchable tags (e.g., "orchestral celebration win music")
-      - Avoid fantasy terms like "heroic" or "arcane"
+      - Avoid fantasy terms like "heroic"
       - Use format: `generate_game_audio("orchestral celebration win music")`
 
   expected_output: >
@@ -181,7 +181,7 @@ generate_environment_visuals:
 
     {crew1_output}
 
-    Generate a DALL·E prompt for a **seamless, repeatable background texture** for a dungeon wall or floor.
+    Generate a DALL·E prompt for a **seamless, repeatable background texture** for the game wall or floor.
 
     ⚠️ Style Must Be:
       - Seamless/tileable
@@ -203,11 +203,11 @@ generate_environment_visuals:
 
 generate_game_icon:
   description: >
-    Generate a DALL·E prompt for a mobile game **app icon** for "Arcane Depths".
+    Generate a DALL·E prompt for a mobile game **app icon** for "Reef Escape".
 
     It should reflect:
-      - Fantasy / arcane theme
-      - Something simple and iconic (e.g., glowing sigil, dungeon gate, floating card)
+      - Fantasy theme
+      - Something simple and iconic (e.g., glowing sigil, deep gate, floating card)
       - Style: cartoon, clear contrast, mobile-friendly
 
   expected_output: >
@@ -244,7 +244,7 @@ generate_card_image:
   expected_output: >
     Output a JSON string like this:
     {{
-      "name": "card_fire_trap",
+      "name": "card_attack",
       "image_url": "<returned dalle image url>"
     }}
 
@@ -298,7 +298,7 @@ map_assets:
       "main_character_icon": "outputs/main_character.png"
       "enemy_icons": ["outputs/enemy_icon.png"]
       "environment_background": "outputs/environment_background.png"
-      "card_image": "outputs/card.png"
+      "card_image": "outputs/card_attack.png"
       "menu_music": "outputs/menu_music.wav"
       "background_music": "outputs/background_music.wav"
       "victory_music": "outputs/victory_music.wav"

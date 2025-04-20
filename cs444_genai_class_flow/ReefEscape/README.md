@@ -119,4 +119,32 @@ ReefEscape/
 
 ---
 
+## 🔊 Audio Credits
+
+All sounds used in **Reef Escape** were sourced from [Freesound.org](https://freesound.org/) and are licensed under various Creative Commons licenses:
+
+### 🔹 Creative Commons Attribution 4.0 (CC BY 4.0)
+These sounds require attribution. You are free to use, remix, and share them with proper credit.
+
+- **"LittleMermaidsTune.wav"** by [eardeer](https://freesound.org/people/eardeer/) — https://freesound.org/s/387233/
+- **"Game Menu/Death Music"** by [ItsRexxys](https://freesound.org/people/ItsRexxys/) — https://freesound.org/s/738242/
+- **"ambienta-soundtrack_metaphisical-death.wav"** by [suonho](https://freesound.org/people/suonho/) — https://freesound.org/s/54921/
+- **"Monster Roar_10"** by [mitchanary](https://freesound.org/people/mitchanary/) — https://freesound.org/s/505121/
+- **"Victory Percussion Music Cue"** by [joshuaempyre](https://freesound.org/people/joshuaempyre/) — https://freesound.org/s/404024/
+
+### 🔹 Creative Commons Attribution 3.0 (CC BY 3.0)
+This sound also requires attribution under an earlier version of the license.
+
+- **"Water Splash.wav"** by [Yin_Yang_Jake007](https://freesound.org/people/Yin_Yang_Jake007/) — https://freesound.org/s/406087/
+
+### 🔹 Creative Commons 0 (CC0)
+These sounds are in the public domain — no attribution required, but we still gratefully acknowledge the authors:
+
+- **"Sea warriors.wav"** by [szegvari](https://freesound.org/people/szegvari/) — https://freesound.org/s/569367/
+- **"Whip02.wav"** by [kingsrow](https://freesound.org/people/kingsrow/) — https://freesound.org/s/348090/
+- **"Heal - Rpg"** by [colorsCrimsonTears](https://freesound.org/people/colorsCrimsonTears/) — https://freesound.org/s/562292/
+- **"Look out sea - atmo orchestral - sad mood.wav"** by [szegvari](https://freesound.org/people/szegvari/) — https://freesound.org/s/591012/
+
+---
+
 Enjoy the game! 🧜‍♀️💙

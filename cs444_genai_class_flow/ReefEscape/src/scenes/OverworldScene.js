@@ -21,6 +21,24 @@ export default class OverworldScene extends Phaser.Scene {
     document.getElementById("battle-ui").style.display = "none";
     document.getElementById("enemy-health-bar").style.display = "none";
 
+    // --- MOBILE D-PAD SETUP ---
+    this.mobileMove = { up: false, down: false, left: false, right: false };
+    const bindMobile = (id, dir) => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      // start moving on touch/press
+      btn.addEventListener('pointerdown', () => { this.mobileMove[dir] = true; });
+      // stop moving on release or cancel
+      ['pointerup','pointerout','pointercancel'].forEach(evt =>
+        btn.addEventListener(evt, () => { this.mobileMove[dir] = false; })
+      );
+    };
+    bindMobile('up-btn', 'up');
+    bindMobile('down-btn', 'down');
+    bindMobile('left-btn', 'left');
+    bindMobile('right-btn', 'right');
+    // --- END MOBILE SETUP ---
+
     if (!window.currentLevel) window.currentLevel = 1;
     this.levelCompleted = false;
 
@@ -200,12 +218,18 @@ export default class OverworldScene extends Phaser.Scene {
       return;
     }
     const speed = this.keys.SHIFT.isDown ? 200 : 120;
-    let vx = 0,
-      vy = 0;
+    let vx = 0, vy = 0;
+    // keyboard input
     if (this.keys.W.isDown) vy = -speed;
     else if (this.keys.S.isDown) vy = speed;
     if (this.keys.A.isDown) vx = -speed;
     else if (this.keys.D.isDown) vx = speed;
+
+    // mobile D-pad input
+    if (this.mobileMove.left)  vx = -speed;
+    if (this.mobileMove.right) vx = speed;
+    if (this.mobileMove.up)    vy = -speed;
+    if (this.mobileMove.down)  vy = speed;
 
     this.player.setVelocity(vx, vy);
 
@@ -223,15 +247,10 @@ export default class OverworldScene extends Phaser.Scene {
     this.currentEnemy = enemySprite;
 
     let diff = window.currentDifficulty || "easy";
-    if (diff === "easy") {
-      this.enemyMaxHealth = 5;
-    } else if (diff === "medium") {
-      this.enemyMaxHealth = 10;
-    } else if (diff === "hard") {
-      this.enemyMaxHealth = 20;
-    } else {
-      this.enemyMaxHealth = 5;
-    }
+    if (diff === "easy") { this.enemyMaxHealth = 5; }
+    else if (diff === "medium") { this.enemyMaxHealth = 10; }
+    else if (diff === "hard") { this.enemyMaxHealth = 20; }
+    else { this.enemyMaxHealth = 5; }
     this.enemyHealth = this.enemyMaxHealth;
 
     showBattleUI(true);
@@ -242,10 +261,7 @@ export default class OverworldScene extends Phaser.Scene {
   nextLevel() {
     // play level victory music
     const victory = document.getElementById("audio-level-victory");
-    if (victory) {
-      victory.currentTime = 0;
-      victory.play();
-    }
+    if (victory) { victory.currentTime = 0; victory.play(); }
 
     // bump level, reset health/mana UI, then restart
     window.currentLevel++;
@@ -255,8 +271,6 @@ export default class OverworldScene extends Phaser.Scene {
     updateManaBar(this.playerMana, this.playerMaxMana);
     updateLevelText();
 
-    this.time.delayedCall(1000, () => {
-      this.scene.restart();
-    });
+    this.time.delayedCall(1000, () => { this.scene.restart(); });
   }
 }

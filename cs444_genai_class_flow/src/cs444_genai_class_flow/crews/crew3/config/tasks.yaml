@@ -116,7 +116,7 @@ generate_index_html:
     Write the `index.html` file that will serve as the game’s entry point. It should load `main.js` and apply styles from `style.css`.
 
   expected_output: >
-    A valid, responsive HTML file linked to the appropriate game files and ready for deployment.
+    A valid, responsive HTML file linked to the appropriate game files (including the mobile D-pad markup) and ready for deployment.
 
 generate_style_css:
   description: >
@@ -131,7 +131,7 @@ generate_style_css:
     Create the base `style.css` file that defines layout and visual styling for the game’s menus and screens.
 
   expected_output: >
-    A full `style.css` file with layout, font, and color definitions for the game’s user interface.
+    A full `style.css` file with layout, font, and color definitions for the game’s user interface, including media-queries and grid/CSS-flex rules for the diamond-shaped on-screen D-pad.
 
 generate_game_entry_point:
   description: >
@@ -299,6 +299,7 @@ dg_build_ui:
   expected_output: >
     - Verified UI components in HTML/JavaScript
     - Responsive layout and working inputs
+    - Include responsive on-screen D-pad controls for small/mobile viewports
     - Functional integration with gameplay and scenes
 
   context: [build_ui]

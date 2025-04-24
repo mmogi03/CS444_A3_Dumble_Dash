@@ -1,70 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Reef Escape</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <link rel="icon" href="assets/textures/main_menu_background.png" />
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        font-family: 'Orbitron', sans-serif;
-        background-color: #1a1a2e;
-        color: #ffffff;
-        overflow: hidden;
-      }
-      .screen {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        z-index: 999999;
-        text-align: center;
-      }
-      .screen.active {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .container {
-        text-align: center;
-        max-width: 600px;
-        width: 90%;
-        margin: 0 auto;
-      }
-      button {
-        background: linear-gradient(135deg, #283c86 0%, #45a247 100%);
-        border: 2px solid #fff;
-        border-radius: 8px;
-        color: #fff;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 18px;
-        text-transform: uppercase;
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        padding: 12px 30px;
-        margin: 20px auto 0;
-        display: block;
-        width: 215px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      button:hover {
-        background: linear-gradient(135deg, #45a247 0%, #283c86 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      }
-      #game-title {
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Reef Escape</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <link rel="icon" href="assets/textures/main_menu_background.png" />
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #1a1a2e;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      z-index: 999999;
+      text-align: center;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    button {
+      background: linear-gradient(135deg, #283c86 0%, #45a247 100%);
+      border: 2px solid #fff;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      padding: 12px 30px;
+      margin: 20px auto 0;
+      display: block;
+      width: 215px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #45a247 0%, #283c86 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    #game-title {
       font-size: 2.5em;
       margin-bottom: 30px;
       text-transform: uppercase;
@@ -74,10 +82,10 @@
         /* gray outline */
         -1px -1px 0 #d0cfcf,
         1px -1px 0 #d0cfcf,
-        -1px  1px 0 #d0cfcf,
-        1px  1px 0 #d0cfcf,
+        -1px 1px 0 #d0cfcf,
+        1px 1px 0 #d0cfcf,
         /* glow layers */
-        0 0 8px  #0cc7be,
+        0 0 8px #0cc7be,
         0 0 16px #0cc7be,
         0 0 24px #0cc7be,
         0 0 32px #0cc7be;
@@ -91,21 +99,22 @@
           /* gray outline */
           -1px -1px 0 #d0cfcf,
           1px -1px 0 #d0cfcf,
-          -1px  1px 0 #d0cfcf,
-          1px  1px 0 #d0cfcf,
+          -1px 1px 0 #d0cfcf,
+          1px 1px 0 #d0cfcf,
           /* softer glow */
-          0 0 8px  #0cc7be,
+          0 0 8px #0cc7be,
           0 0 16px #0cc7be,
           0 0 24px #0cc7be,
           0 0 32px #0cc7be;
       }
+
       to {
         text-shadow:
           /* gray outline */
           -1px -1px 0 #d0cfcf,
           1px -1px 0 #d0cfcf,
-          -1px  1px 0 #d0cfcf,
-          1px  1px 0 #d0cfcf,
+          -1px 1px 0 #d0cfcf,
+          1px 1px 0 #d0cfcf,
           /* brighter glow */
           0 0 12px #14f9d8,
           0 0 24px #14f9d8,
@@ -113,135 +122,228 @@
           0 0 48px #14f9d8;
       }
     }
-      #game-screen {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: none;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+
+    #game-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+
+
+    /* MOBILE D-PAD DIAMOND LAYOUT */
+    #mobile-controls {
+      /* hidden by default, grid set in media query */
+      display: none;
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 160px;
+
+      /* grid for diamond shape */
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-areas:
+        ". up ."
+        "left . right"
+        ". down .";
+
+      gap: 10px;
+      z-index: 10000;
+      pointer-events: none;
+      user-select: none;
+      /* disable text selection */
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      /* disable callout (iOS) */
+    }
+
+    /* show on small devices */
+    @media (max-width: 600px) {
+      #mobile-controls {
+        display: grid;
+        pointer-events: all;
       }
-      #game-screen.active {
-        display: block;
-      }
-      #game-controls {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 60px;
-        background-color: rgba(26, 26, 46, 0.8);
-        padding: 10px 0;
-        z-index: 101;
-        text-align: center;
-      }
-      #game-controls button {
-        display: inline-block;
-        width: auto;
-        padding: 8px 15px;
-        margin: 0 5px;
-        font-size: 14px;
-      }
-      #game-container {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: calc(100% - 4px);
-        height: calc(100% - 220px - 4px);
-        border: 2px solid #e94560;
-        box-sizing: border-box;
-        overflow: hidden;
-        background-color: #0f3460;
-        box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
-      }
-      #hud {
-        position: absolute;
-        top: 70px;
-        left: 10px;
-        color: #fff;
-        z-index: 101;
-        font-family: 'Orbitron', sans-serif;
-      }
-      #health-bar, #mana-bar {
-        width: 300px;
-        height: 24px;
-        background-color: rgba(50, 50, 50, 0.8);
-        border: 2px solid #222;
-        border-radius: 12px;
-        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
-        margin: 10px 0;
-        overflow: hidden;
-      }
-      #health-fill, #mana-fill {
-        width: 100%;
-        height: 100%;
-        transition: width 0.5s ease;
-      }
-      #health-fill {
-        background: linear-gradient(to right, #4CAF50, #2E8B57);
-      }
-      #mana-fill {
-        background: linear-gradient(to right, #0000FF, #0000AA);
-      }
-      #enemy-health-bar {
-        position: fixed;
-        top: 70px;
-        right: 10px;
-        width: 300px;
-        height: 24px;
-        background-color: rgba(50,50,50,0.8);
-        border: 2px solid #222;
-        border-radius: 12px;
-        overflow: hidden;
-        display: none;
-      }
-      #enemy-health-fill {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to right, #FF0000, #AA0000);
-      }
-      #battle-ui {
-        position: absolute;
-        bottom: 20%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px;
-        height: 200px;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 9999999999;
-        display: none;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-      }
-      #battle-ui .card-container img {
-        width: 100px;
-        height: 100px;
-        object-fit: contain;
-        margin: 0 10px;
-      }
-      #start-menu-screen {
-        background: url("assets/textures/main_menu_background.png") center center / contain no-repeat;
-      }
-      #game-over-screen {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        background: url("assets/textures/losing_screen.png") center center / contain no-repeat;
-        z-index: 999999;
-        text-align: center;
-      }
-      #game-over-screen.active {
-        display: flex;
-      }
-      #game-over-message {
+    }
+
+    /* place arrows into the grid areas */
+    #up-btn {
+      grid-area: up;
+    }
+
+    #left-btn {
+      grid-area: left;
+    }
+
+    #right-btn {
+      grid-area: right;
+    }
+
+    #down-btn {
+      grid-area: down;
+    }
+
+    /* common button styling */
+    #mobile-controls button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      touch-action: none;
+      padding: 0;
+      line-height: 1;
+    }
+
+    #game-screen.active {
+      display: block;
+    }
+
+    #game-controls {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(26, 26, 46, 0.8);
+      padding: 10px 0;
+      z-index: 101;
+      text-align: center;
+    }
+
+    #game-controls button {
+      display: inline-block;
+      width: auto;
+      padding: 8px 15px;
+      margin: 0 5px;
+      font-size: 14px;
+    }
+
+    #game-container {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: calc(100% - 4px);
+      height: calc(100% - 220px - 4px);
+      border: 2px solid #e94560;
+      box-sizing: border-box;
+      overflow: hidden;
+      background-color: #0f3460;
+      box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+    }
+
+    #hud {
+      position: absolute;
+      top: 70px;
+      left: 10px;
+      color: #fff;
+      z-index: 101;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    #health-bar,
+    #mana-bar {
+      width: 300px;
+      height: 24px;
+      background-color: rgba(50, 50, 50, 0.8);
+      border: 2px solid #222;
+      border-radius: 12px;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+      margin: 10px 0;
+      overflow: hidden;
+    }
+
+    #health-fill,
+    #mana-fill {
+      width: 100%;
+      height: 100%;
+      transition: width 0.5s ease;
+    }
+
+    #health-fill {
+      background: linear-gradient(to right, #4CAF50, #2E8B57);
+    }
+
+    #mana-fill {
+      background: linear-gradient(to right, #0000FF, #0000AA);
+    }
+
+    #enemy-health-bar {
+      position: fixed;
+      top: 70px;
+      right: 10px;
+      width: 300px;
+      height: 24px;
+      background-color: rgba(50, 50, 50, 0.8);
+      border: 2px solid #222;
+      border-radius: 12px;
+      overflow: hidden;
+      display: none;
+    }
+
+    #enemy-health-fill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #FF0000, #AA0000);
+    }
+
+    #battle-ui {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 200px;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999999999;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
+
+    #battle-ui .card-container img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin: 0 10px;
+    }
+
+    #start-menu-screen {
+      background: url("assets/textures/main_menu_background.png") center center / contain no-repeat;
+    }
+
+    #game-over-screen {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      background: url("assets/textures/losing_screen.png") center center / contain no-repeat;
+      z-index: 999999;
+      text-align: center;
+    }
+
+    #game-over-screen.active {
+      display: flex;
+    }
+
+    #game-over-message {
       font-size: 2.5em;
       margin-bottom: 30px;
       text-transform: uppercase;
@@ -251,10 +353,10 @@
         /* black outline */
         -1px -1px 0 #000,
         1px -1px 0 #000,
-        -1px  1px 0 #000,
-        1px  1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
         /* glow layers */
-        0 0 8px  #ff4d4d,
+        0 0 8px #ff4d4d,
         0 0 16px #ff4d4d,
         0 0 24px #ff4d4d,
         0 0 32px #ff4d4d;
@@ -267,21 +369,22 @@
           /* black outline */
           -1px -1px 0 #000,
           1px -1px 0 #000,
-          -1px  1px 0 #000,
-          1px  1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000,
           /* softer glow */
-          0 0 8px  #ff4d4d,
+          0 0 8px #ff4d4d,
           0 0 16px #ff4d4d,
           0 0 24px #ff4d4d,
           0 0 32px #ff4d4d;
       }
+
       to {
         text-shadow:
           /* black outline */
           -1px -1px 0 #000,
           1px -1px 0 #000,
-          -1px  1px 0 #000,
-          1px  1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000,
           /* brighter glow */
           0 0 12px #ff8080,
           0 0 24px #ff8080,
@@ -289,140 +392,169 @@
           0 0 48px #ff8080;
       }
     }
-      #level-score {
-        margin-top: 10px;
-        font-size: 20px;
+
+    #level-score {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      #game-title {
+        font-size: 2em;
       }
-      @media (max-width: 600px) {
-        #game-title {
-          font-size: 2em;
-        }
-        button {
-          width: 80%;
-          font-size: 16px;
-        }
-        #game-controls button {
-          font-size: 12px;
-          padding: 6px 12px;
-        }
-        #health-bar, #mana-bar {
-          width: 80%;
-          max-width: 300px;
-        }
+
+      button {
+        width: 80%;
+        font-size: 16px;
       }
-    </style>
-  </head>
-  <body>
-    <div id="start-menu-screen" class="screen active">
-      <div class="container">
-        <h1 id="game-title">Reef Escape</h1>
-        <button id="play-button">Play</button>
-        <button id="settings-button">Settings</button>
-        <button id="instructions-button">Instructions</button>
-      </div>
+
+      #game-controls button {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      #health-bar,
+      #mana-bar {
+        width: 80%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="start-menu-screen" class="screen active">
+    <div class="container">
+      <h1 id="game-title">Reef Escape</h1>
+      <button id="play-button">Play</button>
+      <button id="settings-button">Settings</button>
+      <button id="instructions-button">Instructions</button>
     </div>
-    <div id="settings-screen" class="screen">
-      <div class="container">
-        <h2>Settings</h2>
-        <div id="difficulty-options">
-          <label><input type="radio" name="difficulty" value="easy" checked />Easy</label>
-          <label><input type="radio" name="difficulty" value="medium" />Medium</label>
-          <label><input type="radio" name="difficulty" value="hard" />Hard</label>
-        </div>
-        <label for="volume-slider">Game Volume</label>
-        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" />
-        <button id="settings-back-button">Back</button>
+  </div>
+  <div id="settings-screen" class="screen">
+    <div class="container">
+      <h2>Settings</h2>
+      <div id="difficulty-options">
+        <label><input type="radio" name="difficulty" value="easy" checked />Easy</label>
+        <label><input type="radio" name="difficulty" value="medium" />Medium</label>
+        <label><input type="radio" name="difficulty" value="hard" />Hard</label>
       </div>
+      <label for="volume-slider">Game Volume</label>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1" />
+      <button id="settings-back-button">Back</button>
     </div>
-    <div id="instructions-screen" class="screen">
-      <div class="container">
-        <div class="instructions-wrapper">
-          <h2>Instructions</h2>
-          <h3>How to Play:</h3>
-          <ul>
-            <li>You are a mermaid trapped in a dangerous reef!</li>
-            <li>Use your underwater spells to defeat reef-dwelling enemies and escape.</li>
-            <li>Tail Whip and Tidal Splash deal damage, while Coral Heal restores your health.</li>
-          </ul>
-          <h3>Controls:</h3>
-          <ul>
-            <li>WASD to swim around (top-down view).</li>
-            <li>SHIFT to swim faster.</li>
-            <li>Click on the attacks when in battle to cast them, or skip your turn.</li>
-          </ul>
-        </div>
-        <button id="instructions-back-button">Back</button>
+  </div>
+  <div id="instructions-screen" class="screen">
+    <div class="container">
+      <div class="instructions-wrapper">
+        <h2>Instructions</h2>
+        <h3>How to Play:</h3>
+        <ul>
+          <li>You are a mermaid trapped in a dangerous reef!</li>
+          <li>Use your underwater spells to defeat reef-dwelling enemies and escape.</li>
+          <li>Tail Whip and Tidal Splash deal damage, while Coral Heal restores your health.</li>
+        </ul>
+        <h3>Controls:</h3>
+        <ul>
+          <li>WASD to swim around (top-down view).</li>
+          <li>SHIFT to swim faster.</li>
+          <li>Click on the attacks when in battle to cast them, or skip your turn.</li>
+        </ul>
       </div>
+      <button id="instructions-back-button">Back</button>
     </div>
-    <div id="game-screen" class="screen">
-      <div id="game-controls">
-        <button id="game-menu-button">Menu</button>
-        <button id="game-restart-button">Restart</button>
-        <button id="game-instructions-button">Instructions</button>
-      </div>
-      <div id="game-container"></div>
-      <div id="hud">
-        <div id="health-bar"><div id="health-fill"></div></div>
-        <div id="mana-bar"><div id="mana-fill"></div></div>
-        <div id="level-score">
-          <div id="level-text">Level: 1</div>
-          <div id="score-text">Score: 0</div>
-        </div>
-      </div>
-      <div id="enemy-health-bar"><div id="enemy-health-fill"></div></div>
-      <div id="battle-ui">
-        <div class="card-container">
-          <img id="fireball-card" src="assets/textures/tail_whip.png" alt="Tail Whip" />
-          <img id="mudwall-card" src="assets/textures/tidal_splash.png" alt="Tidal Splash" />
-          <img id="heal-card" src="assets/textures/coral_heal.png" alt="Coral Heal" />
-        </div>
-        <button id="skip-turn-button">Skip Turn</button>
-      </div>
-    </div>
-    <div id="game-over-screen" class="screen">
-      <div class="container">
-        <div id="game-over-message">You Lost!</div>
-        <button id="play-again-button">Play Again</button>
-        <button id="main-menu-button">Main Menu</button>
-      </div>
+  </div>
+  <div id="game-screen" class="screen">
+    <!-- MOBILE D-PAD (only shown on small screens) -->
+    <div id="mobile-controls">
+      <button id="up-btn" oncontextmenu="return false;">↑</button>
+      <button id="left-btn" oncontextmenu="return false;">←</button>
+      <button id="down-btn" oncontextmenu="return false;">↓</button>
+      <button id="right-btn" oncontextmenu="return false;">→</button>
     </div>
 
-    <!-- main-menu music -->
-    <audio id="start-game-sound" autoplay loop>
-      <source src="assets/music/start_game_music.wav" type="audio/wav" />
-    </audio>
+    <div id="game-controls">
+      <button id="game-menu-button">Menu</button>
+      <button id="game-restart-button">Restart</button>
+      <button id="game-instructions-button">Instructions</button>
+    </div>
+    <div id="game-container"></div>
+    <div id="hud">
+      <div id="health-bar">
+        <div id="health-fill"></div>
+      </div>
+      <div id="mana-bar">
+        <div id="mana-fill"></div>
+      </div>
+      <div id="level-score">
+        <div id="level-text">Level: 1</div>
+        <div id="score-text">Score: 0</div>
+      </div>
+    </div>
+    <div id="enemy-health-bar">
+      <div id="enemy-health-fill"></div>
+    </div>
+    <div id="battle-ui">
+      <div class="card-container">
+        <img id="fireball-card" src="assets/textures/tail_whip.png" alt="Tail Whip" />
+        <img id="mudwall-card" src="assets/textures/tidal_splash.png" alt="Tidal Splash" />
+        <img id="heal-card" src="assets/textures/coral_heal.png" alt="Coral Heal" />
+      </div>
+      <button id="skip-turn-button">Skip Turn</button>
+    </div>
+  </div>
+  <div id="game-over-screen" class="screen">
+    <div class="container">
+      <div id="game-over-message">You Lost!</div>
+      <button id="play-again-button">Play Again</button>
+      <button id="main-menu-button">Main Menu</button>
+    </div>
+  </div>
 
-    <!-- in-game background music (JS‐controlled) -->
-    <audio id="background-music" loop>
-      <source src="assets/music/background_music_1.wav" type="audio/wav" />
-    </audio>
+  <!-- main-menu music -->
+  <audio id="start-game-sound" autoplay loop>
+    <source src="assets/music/start_game_music.wav" type="audio/wav" />
+  </audio>
 
-    <!-- end-game music -->
-    <audio id="end-game-music">
-      <source src="assets/music/end_game_music.wav" type="audio/mpeg" />
-    </audio>
+  <!-- in-game background music (JS‐controlled) -->
+  <audio id="background-music" loop>
+    <source src="assets/music/background_music_1.wav" type="audio/wav" />
+  </audio>
 
-    <!-- spell SFX -->
-    <audio id="audio-tail-whip">
-      <source src="assets/audio/tail_whip.wav" type="audio/wav" />
-    </audio>
-    <audio id="audio-tidal-splash">
-      <source src="assets/audio/tidal_splash.wav" type="audio/wav" />
-    </audio>
-    <audio id="audio-coral-heal">
-      <source src="assets/audio/coral_heal.wav" type="audio/wav" />
-    </audio>
+  <!-- end-game music -->
+  <audio id="end-game-music">
+    <source src="assets/music/end_game_music.wav" type="audio/mpeg" />
+  </audio>
 
-    <!-- enemy attack SFX -->
-    <audio id="audio-enemy-attack">
-      <source src="assets/audio/enemy_attack_1.mp3" type="audio/mpeg" />
-    </audio>
+  <!-- spell SFX -->
+  <audio id="audio-tail-whip">
+    <source src="assets/audio/tail_whip.wav" type="audio/wav" />
+  </audio>
+  <audio id="audio-tidal-splash">
+    <source src="assets/audio/tidal_splash.wav" type="audio/wav" />
+  </audio>
+  <audio id="audio-coral-heal">
+    <source src="assets/audio/coral_heal.wav" type="audio/wav" />
+  </audio>
 
-    <!-- level victory music -->
-    <audio id="audio-level-victory">
-      <source src="assets/music/level_victory.wav" type="audio/wav" />
-    </audio>
+  <!-- enemy attack SFX -->
+  <audio id="audio-enemy-attack">
+    <source src="assets/audio/enemy_attack_1.mp3" type="audio/mpeg" />
+  </audio>
 
-    <script type="module" src="main.js"></script>
-  </body>
+  <!-- level victory music -->
+  <audio id="audio-level-victory">
+    <source src="assets/music/level_victory.wav" type="audio/wav" />
+  </audio>
+
+  <script type="module" src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('#mobile-controls button').forEach(btn => {
+        btn.addEventListener('contextmenu', e => e.preventDefault());
+      });
+    });
+  </script>
+</body>
+
 </html>

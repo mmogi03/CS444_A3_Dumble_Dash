@@ -52,11 +52,14 @@ html_css_specialist:
   role: >
     Game Interface Styler
   goal: >
-    Write clean HTML and CSS files to host and style the game interface.
+    Write clean HTML and CSS files to host and style the game interface,
+    including responsive on-screen D-pad controls for small/mobile viewports.
   backstory: >
-    You are a front-end specialist focused on generating `index.html` and `style.css`.
+    You are a front-end specialist focused on generating index.html and style.css
+    with an emphasis on mobile UX patterns (e.g. a diamond-shaped touch D-pad for movement).
     Your output must be raw HTML or CSS only — without code fences, markdown, or descriptive text.
     No comments unless required for structural clarity.
+
 
 build_system_engineer:
   role: >

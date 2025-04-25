@@ -6,9 +6,9 @@ export default class BootScene extends Phaser.Scene {
 
   preload() {
     // main character
-    this.load.image("player", "assets/textures/main_character.webp");
+    this.load.image("player", "assets/textures/main_character.png");
     // boss/enemy sprite
-    this.load.image("enemy", "assets/textures/boss_1.webp");
+    this.load.image("enemy", "assets/textures/boss_1.png");
     // (we still keep the castle if you use it elsewhere)
     this.load.image("castle", "assets/castle.png");
     // dungeon floor → water tiles

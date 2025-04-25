@@ -2,6 +2,7 @@ import os
 import uuid
 import json
 import requests
+import subprocess
 from pydantic import PrivateAttr
 from crewai.tools import BaseTool
 from crewai_tools import DallETool
@@ -9,10 +10,9 @@ from crewai_tools import DallETool
 class DownloadingDalleTool(BaseTool):
     name: str = "Downloading DALL·E Tool"
     description: str = (
-        "Generates an image using DALL·E and returns the local file path after downloading it."
+        "Generates an image using DALL·E, downloads it, optimizes it using optipng -o7, and returns the local file path."
     )
 
-    # ✅ This lets us attach undeclared attributes like self._dalle
     _dalle: DallETool = PrivateAttr()
 
     def __init__(self, result_as_answer=True):
@@ -27,12 +27,10 @@ class DownloadingDalleTool(BaseTool):
     def _run(self, prompt: str) -> str:
         try:
             print(f"🎨 Generating image with DALL·E for prompt: {prompt}")
-            # Use the wrapped DallETool
             image_url = self._dalle(prompt)
 
             print(f"🌐 Image URL: {image_url}")
 
-            # Download image
             response = requests.get(image_url)
             if response.status_code != 200:
                 raise Exception(f"Failed to download image: {response.status_code}")
@@ -44,7 +42,13 @@ class DownloadingDalleTool(BaseTool):
             with open(path, "wb") as f:
                 f.write(response.content)
 
-            print(f"✅ Image saved to: {path}")
+            print(f"📦 Image downloaded to: {path}")
+
+            # Run optipng -o7 for lossless compression
+            print("🛠 Optimizing image with optipng -o7...")
+            subprocess.run(["optipng", "-o7", path], check=True)
+            print(f"✅ Image optimized and saved: {path}")
+
             return path
 
         except Exception as e:

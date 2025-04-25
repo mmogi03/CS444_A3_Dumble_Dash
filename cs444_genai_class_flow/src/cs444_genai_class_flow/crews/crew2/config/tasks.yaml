@@ -34,91 +34,99 @@ write_dialogue:
   context: [design_story]
   return_output: true
 
-generate_main_menu_music:
+generate_card_attack_sound_1:
   description: >
-    Generate a short tag-style prompt (max 5 generic words) for the **main menu music**.
-
+    Using the game concept:
     {crew1_output}
-
-    🎯 This prompt will be passed to `generate_game_audio("...")`.
-
-    ✅ Output must follow:
-      - Must include the word **"music"**
-      - Max 5 words total (e.g., "relaxing ambient menu music")
-      - Use **searchable, generic tags** — avoid abstract/fantasy words 
-      - Tool call format: `generate_game_audio("relaxing ambient menu music")`
-
+    Generate a tag-style prompt (max 5 words) for the main character's first **card attack** sound effect.
   expected_output: >
-    - The exact prompt (max 5 words, including "music")
-    - The tool call in the required format
-    - A 1-line rationale for your chosen tags
-
+    - The prompt string (max 5 words, must include "sound")
+    - The tool call in the format: generate_game_audio("...")
+    - A short rationale for the chosen tags
   context: [design_story]
   return_output: true
 
-generate_background_loop:
+generate_card_attack_sound_2:
   description: >
-    Create a generic tag-style prompt (max 5 words) for **background loop music** during gameplay.
-
+    Using the game concept:
     {crew1_output}
+    Generate a tag-style prompt (max 5 words) for the main character's second **card attack** sound effect.
+  expected_output: >
+    - The prompt string (max 5 words, must include "sound")
+    - The tool call in the format: generate_game_audio("...")
+    - A brief rationale for the tag choice
+  context: [design_story]
+  return_output: true
 
-    🛠 This prompt will be passed to `generate_game_audio("...")`.
+generate_heal_sound:
+  description: >
+    Based on the game concept:
+    {crew1_output}
+    Produce a tag-style prompt (max 5 words) for the main character's **heal card** sound effect.
+  expected_output: >
+    - The prompt string (max 5 words, must include "sound")
+    - The exact tool call in the format: generate_game_audio("...")
+    - A short explanation of your tag choice
+  context: [design_story]
+  return_output: true
 
-    ✅ Guidelines:
-      - Must include the word **"music"**
-      - Up to 5 generic, searchable tags (e.g., "ambient game loop music")
-      - Avoid fantasy-specific words or full phrases
-      - Tool call format: `generate_game_audio("ambient game loop music")`
+generate_enemy_attack:
+  description: >
+    Using the game concept:
+    {crew1_output}
+    Develop a tag-style prompt (max 5 words) for an enemy attack sound effect.
+  expected_output: >
+    - The prompt string (max 5 words, must include "sound")
+    - The tool call line in the required format: generate_game_audio("...")
+    - A brief explanation of your tags
+  context: [design_story]
+  return_output: true
 
+generate_background_music:
+  description: >
+    Based on the game concept:
+    {crew1_output}
+    Create a tag-style prompt (max 5 words) for immersive background music.
   expected_output: >
     - The prompt string (max 5 words, must include "music")
-    - The tool call line
-    - A short explanation of your tag choice
-
+    - The tool call in the format: generate_game_audio("...")
+    - A 1-line rationale for the chosen tags
   context: [design_story]
   return_output: true
 
-generate_victory_music:
+generate_endgame_music:
   description: >
-    Compose a tag-style prompt (max 5 words) for **victory music**.
-
+    Based on the game concept:
     {crew1_output}
-
-    🏆 This will be passed to `generate_game_audio("...")` and should sound rewarding or triumphant.
-
-    ✅ Rules:
-      - Must include the word **"music"**
-      - Up to 5 generic, searchable tags (e.g., "orchestral celebration win music")
-      - Avoid fantasy terms like "heroic"
-      - Use format: `generate_game_audio("orchestral celebration win music")`
-
+    Generate a tag-style prompt (max 5 words) for the end game music sound.
   expected_output: >
-    - The 5-word max prompt (including "music")
-    - The tool call
-    - A 1-liner rationale for your tags
-
+    - The prompt string (max 5 words, must include "music")
+    - The tool call in the format: generate_game_audio("...")
+    - A brief explanation of your chosen words
   context: [design_story]
   return_output: true
 
-generate_defeat_music:
+generate_level_victory:
   description: >
-    Compose a generic, tag-style prompt (max 5 words) for **defeat music** that reflects sadness or failure.
-
+    From the game concept:
     {crew1_output}
-
-    🎭 The output will be used with `generate_game_audio("...")`.
-
-    ✅ Format:
-      - Must include the word **"music"**
-      - Max 5 generic tags (e.g., "sad ambient piano music", "slow emotional game music")
-      - Avoid specific or lore-based terms
-      - Tool call: `generate_game_audio("sad ambient piano music")`
-
+    Generate a tag-style prompt (max 5 words) for a level victory sound effect.
   expected_output: >
-    - Your 5-word prompt (must include "music")
-    - The exact tool call
-    - A brief rationale for why it fits
+    - The prompt string (max 5 words, must include "sound")
+    - The tool call in the required format: generate_game_audio("...")
+    - A short rationale for your tag choice
+  context: [design_story]
+  return_output: true
 
+generate_start_game_sound:
+  description: >
+    Based on the game concept:
+    {crew1_output}
+    Produce a tag-style prompt (max 5 words) for the start game audio cue (main menu sound).
+  expected_output: >
+    - The prompt string (max 5 words, must include "sound")
+    - The exact tool call in the format: generate_game_audio("...")
+    - A brief explanation for your chosen tags
   context: [design_story]
   return_output: true
 
@@ -295,15 +303,19 @@ map_assets:
 
     🎯 Format your final answer similar to this (file naming doesn't have to be exact & no markdown):
     {{
-      "main_character_icon": "outputs/main_character.png"
-      "enemy_icons": ["outputs/enemy_icon.png"]
-      "environment_background": "outputs/environment_background.png"
-      "card_image": "outputs/card_attack.png"
-      "menu_music": "outputs/menu_music.ogg"
-      "background_music": "outputs/background_music.ogg"
-      "victory_music": "outputs/victory_music.ogg"
-      "defeat_music": "outputs/defeat_music.ogg"
-      "game_icon": "outputs/game_icon.png"
+      "main_character_icon": "outputs/main_character.png",
+      "enemy_icons": ["outputs/enemy_icon.png"],
+      "environment_background": "outputs/environment_background.png",
+      "card_image": "outputs/card_attack.png",
+      "card_attack_sound_1": "outputs/card_attack_sound_1.ogg",
+      "card_attack_sound_2": "outputs/card_attack_sound_2.ogg",
+      "heal_sound": "outputs/heal_sound.ogg",
+      "enemy_attack_sound": "outputs/enemy_attack_sound.ogg",
+      "background_music": "outputs/background_music.ogg",
+      "endgame_music": "outputs/endgame_music.ogg",
+      "level_victory_sound": "outputs/level_victory_sound.ogg",
+      "start_game_sound": "outputs/start_game_sound.ogg",
+      "game_icon": "outputs/game_icon.png",
       "floor_texture": "outputs/floor_texture.ogg"
     }}
 
@@ -320,11 +332,16 @@ map_assets:
     generate_enemy_icons,
     generate_environment_visuals,
     generate_game_icon,
-    generate_main_menu_music,
-    generate_background_loop,
-    generate_victory_music,
-    generate_defeat_music,
+    generate_card_attack_sound_1,
+    generate_card_attack_sound_2,
+    generate_heal_sound,
+    generate_enemy_attack,
+    generate_background_music,
+    generate_endgame_music,
+    generate_level_victory,
+    generate_start_game_sound,
     generate_card_image,
     generate_floor_texture
   ]
+
   return_output: true

@@ -14,10 +14,14 @@ class AssetMap(BaseModel):
     enemy_icons: List[str]
     environment_background: str
     card_image: str
-    menu_music: str
+    card_attack_sound_1: str
+    card_attack_sound_2: str
+    heal_sound: str
+    enemy_attack_sound: str
     background_music: str
-    victory_music: str
-    defeat_music: str
+    endgame_music: str
+    level_victory_sound: str
+    start_game_sound: str
     game_icon: str
     floor_texture: str
 
@@ -48,9 +52,9 @@ class Crew2():
         )
 
     @agent
-    def main_menu_composer(self) -> Agent:
+    def main_character_card_sound_composer(self) -> Agent:
         return Agent(
-            config=self.agents_config['main_menu_composer'],
+            config=self.agents_config['main_character_card_sound_composer'],
             tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
@@ -58,9 +62,9 @@ class Crew2():
         )
 
     @agent
-    def background_loop_composer(self) -> Agent:
+    def enemy_sound_composer(self) -> Agent:
         return Agent(
-            config=self.agents_config['background_loop_composer'],
+            config=self.agents_config['enemy_sound_composer'],
             tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
@@ -68,9 +72,9 @@ class Crew2():
         )
 
     @agent
-    def victory_theme_composer(self) -> Agent:
+    def background_music_composer(self) -> Agent:
         return Agent(
-            config=self.agents_config['victory_theme_composer'],
+            config=self.agents_config['background_music_composer'],
             tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
@@ -78,9 +82,29 @@ class Crew2():
         )
 
     @agent
-    def defeat_theme_composer(self) -> Agent:
+    def endgame_music_composer(self) -> Agent:
         return Agent(
-            config=self.agents_config['defeat_theme_composer'],
+            config=self.agents_config['endgame_music_composer'],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
+            verbose=True,
+            llm=self.llm,
+            memory=True
+        )
+
+    @agent
+    def victory_sound_composer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['victory_sound_composer'],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
+            verbose=True,
+            llm=self.llm,
+            memory=True
+        )
+
+    @agent
+    def start_game_sound_composer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['start_game_sound_composer'],
             tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
@@ -131,35 +155,59 @@ class Crew2():
         )
 
     @task
-    def generate_main_menu_music(self) -> Task:
+    def generate_card_attack_sound_1(self) -> Task:
         return Task(
-            config=self.tasks_config['generate_main_menu_music'],
-            agent=self.main_menu_composer(),
-            # async_execution=True
+            config=self.tasks_config['generate_card_attack_sound_1'],
+            agent=self.main_character_card_sound_composer(),
         )
 
     @task
-    def generate_background_loop(self) -> Task:
+    def generate_card_attack_sound_2(self) -> Task:
         return Task(
-            config=self.tasks_config['generate_background_loop'],
-            agent=self.background_loop_composer(),
-            # async_execution=True
+            config=self.tasks_config['generate_card_attack_sound_2'],
+            agent=self.main_character_card_sound_composer(),
         )
 
     @task
-    def generate_victory_music(self) -> Task:
+    def generate_heal_sound(self) -> Task:
         return Task(
-            config=self.tasks_config['generate_victory_music'],
-            agent=self.victory_theme_composer(),
-            # async_execution=True
+            config=self.tasks_config['generate_heal_sound'],
+            agent=self.main_character_card_sound_composer(),
         )
 
     @task
-    def generate_defeat_music(self) -> Task:
+    def generate_enemy_attack(self) -> Task:
         return Task(
-            config=self.tasks_config['generate_defeat_music'],
-            agent=self.defeat_theme_composer(),
-            # async_execution=True
+            config=self.tasks_config['generate_enemy_attack'],
+            agent=self.enemy_sound_composer(),
+        )
+
+    @task
+    def generate_background_music(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_background_music'],
+            agent=self.background_music_composer(),
+        )
+
+    @task
+    def generate_endgame_music(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_endgame_music'],
+            agent=self.endgame_music_composer(),
+        )
+
+    @task
+    def generate_level_victory(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_level_victory'],
+            agent=self.victory_sound_composer(),
+        )
+
+    @task
+    def generate_start_game_sound(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_start_game_sound'],
+            agent=self.start_game_sound_composer(),
         )
 
     @task

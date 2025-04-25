@@ -2,6 +2,7 @@ from crewai.tools import BaseTool
 from .sound_search import SoundSearcher
 import uuid
 import os
+import subprocess
 from dotenv import load_dotenv
 
 # Load environment variables from .env
@@ -33,16 +34,27 @@ class FreeSoundAudioTool(BaseTool):
             print("🎧 FreeSound tool called with prompt:", prompt)
 
             searcher = SoundSearcher()
-            filename = f"{prompt[:30].strip().replace(' ', '_')}_{uuid.uuid4().hex[:6]}.mp3"
-            output_path = os.path.join("outputs", filename)
+            filename_base = f"{prompt[:30].strip().replace(' ', '_')}_{uuid.uuid4().hex[:6]}"
+            mp3_path = os.path.join("outputs", f"{filename_base}.mp3")
+            ogg_path = os.path.join("outputs", f"{filename_base}.ogg")
 
             os.makedirs("outputs", exist_ok=True)
-            print("🔊 Output path:", output_path)
+            print("🔊 Output path (MP3):", mp3_path)
 
-            searcher.pipeline_self_reflection(prompt, output_path)
-            print(f"✅ Audio saved to: {output_path}")
+            # Generate MP3
+            searcher.pipeline_self_reflection(prompt, mp3_path)
+            print(f"✅ MP3 saved to: {mp3_path}")
 
-            return output_path
+            # Convert MP3 to OGG using ffmpeg
+            print("🔄 Converting to OGG (quality 4)...")
+            subprocess.run([
+                "ffmpeg", "-y", "-i", mp3_path,
+                "-c:a", "libvorbis", "-qscale:a", "4",
+                ogg_path
+            ], check=True)
+            print(f"✅ OGG saved to: {ogg_path}")
+
+            return mp3_path  # returning original .mp3 path for compatibility
 
         except Exception as e:
             print(f"❌ Failed to generate audio: {e}")

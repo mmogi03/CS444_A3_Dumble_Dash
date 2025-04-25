@@ -299,12 +299,12 @@ map_assets:
       "enemy_icons": ["outputs/enemy_icon.png"]
       "environment_background": "outputs/environment_background.png"
       "card_image": "outputs/card_attack.png"
-      "menu_music": "outputs/menu_music.wav"
-      "background_music": "outputs/background_music.wav"
-      "victory_music": "outputs/victory_music.wav"
-      "defeat_music": "outputs/defeat_music.wav"
+      "menu_music": "outputs/menu_music.ogg"
+      "background_music": "outputs/background_music.ogg"
+      "victory_music": "outputs/victory_music.ogg"
+      "defeat_music": "outputs/defeat_music.ogg"
       "game_icon": "outputs/game_icon.png"
-      "floor_texture": "outputs/floor_texture.wav"
+      "floor_texture": "outputs/floor_texture.ogg"
     }}
 
   expected_output: >

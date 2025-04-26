@@ -11,6 +11,7 @@ export function updateHealthBar(current, max) {
     if (manaFill) manaFill.style.width = pct + "%";
   }
   
+
   export function updateEnemyHealthBar(current, max) {
     const pct = (current / max) * 100;
     const enemyHealthFill = document.getElementById("enemy-health-fill");

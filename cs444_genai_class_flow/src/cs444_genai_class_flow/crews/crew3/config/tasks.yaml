@@ -16,6 +16,7 @@ build_ui:
 
   expected_output: >
     - JavaScript and HTML code for UI components
+    - Build UI componenets for mobile application
     - Clearly labeled functions or modules
     - Include brief comments explaining layout and interaction logic
 
@@ -163,7 +164,9 @@ bundle_and_export_game:
     Package all game files (HTML, CSS, JS, assets) using a tool like Webpack or Parcel. Output a bundled directory with everything in place and ready to be zipped.
 
   expected_output: >
-    A structured, complete directory ready to be deployed in the browser. Should include `index.html`, `style.css`, `bundle.js`, and an `assets/` folder.
+    A structured, complete directory ready to be deployed in the browser. Should include `index.html`, `style.css`, `bundle.js`, and an `assets/` folder. 
+    
+    Make it so that mobile buttons are only displayed in portrait mode with a 597 width and 900 height aspect ratio or smaller. 
 
   context: [generate_game_entry_point, generate_index_html, generate_style_css]
 

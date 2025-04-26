@@ -41,6 +41,13 @@
       align-items: center;
     }
 
+    #settings-screen {
+      background: url("assets/textures/settings.png") center center / contain no-repeat;
+    }
+    #instructions-screen {
+      background: url("assets/textures/instructions.png") center center / contain no-repeat;
+    }
+
     .container {
       text-align: center;
       max-width: 600px;
@@ -165,12 +172,12 @@
     }
 
     /* show on small devices */
-    @media (max-width: 600px) {
-      #mobile-controls {
-        display: grid;
-        pointer-events: all;
-      }
+    @media (max-width: 600px) and (orientation: portrait) {
+    #mobile-controls {
+      display: grid;
+      pointer-events: all;
     }
+  }
 
     /* place arrows into the grid areas */
     #up-btn {
@@ -549,11 +556,31 @@
 
   <script type="module" src="main.js"></script>
   <script>
+    // prevent context‐menu on mobile arrows
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('#mobile-controls button').forEach(btn => {
-        btn.addEventListener('contextmenu', e => e.preventDefault());
-      });
+      document.querySelectorAll('#mobile-controls button')
+        .forEach(btn => btn.addEventListener('contextmenu', e => e.preventDefault()));
     });
+
+    // continuously check aspect ratio and toggle mobile-controls
+    (function checkLoop() {
+      const mc = document.getElementById('mobile-controls');
+      if (mc) {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const isPortrait = h > w;
+        // if width >597 OR landscape, hide; otherwise show
+        if (w > 597 || !isPortrait) {
+          mc.style.display = 'none';
+          mc.style.pointerEvents = 'none';
+        } else {
+          mc.style.display = 'grid';
+          mc.style.pointerEvents = 'all';
+        }
+      }
+      // run on next frame
+      requestAnimationFrame(checkLoop);
+    })();
   </script>
 </body>
 

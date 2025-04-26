@@ -231,6 +231,40 @@ generate_game_icon:
   context: [design_story]
   return_output: true
 
+generate_instructions_background:
+  description: >
+    Create a DALL·E prompt for a full-screen **instructions screen background** for "Reef Escape". 
+    It should reflect the game's underwater fantasy theme and clearly display instructional framing in a cartoon style.
+    Can simply be another pose for the mermaid in the game icon.
+  expected_output: >
+    Output a JSON string like this:
+    {
+      "name": "instructions_background",
+      "image_url": "<returned dalle image url>"
+    }
+
+    ✅ Must be valid JSON  
+    ✅ "name" must be "instructions_background"
+  context: [design_story]
+  return_output: true
+
+generate_settings_background:
+  description: >
+    Create a DALL·E prompt for a full-screen **settings screen background** for "Reef Escape". 
+    It should convey an immersive coral-reef control panel vibe in a consistent cartoon style.
+    Can simply be another pose for the mermaid in the game icon.
+  expected_output: >
+    Output a JSON string like this:
+    {
+      "name": "settings_background",
+      "image_url": "<returned dalle image url>"
+    }
+
+    ✅ Must be valid JSON  
+    ✅ "name" must be "settings_background"
+  context: [design_story]
+  return_output: true
+
 generate_card_image:
   description: >
     Based on the game concept and story:

@@ -10,7 +10,7 @@ export default class BootScene extends Phaser.Scene {
     // boss/enemy sprite
     this.load.image("enemy", "assets/textures/boss_1.png");
     // (we still keep the castle if you use it elsewhere)
-    this.load.image("castle", "assets/castle.png");
+    //this.load.image("castle", "assets/castle.png");
     // dungeon floor → water tiles
     this.load.image("ground", "assets/textures/water_tile.png");
     // brick wall → coral wall

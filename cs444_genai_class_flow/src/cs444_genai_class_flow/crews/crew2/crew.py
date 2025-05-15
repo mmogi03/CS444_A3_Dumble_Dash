@@ -24,10 +24,12 @@ class AssetMap(BaseModel):
     start_game_sound: str
     game_icon: str
     floor_texture: str
+    boss_music: str
+    boss_icon: str
 
 @CrewBase
 class Crew2():
-    """Crew2: Story, Dialogue, and Audio based on Crew1 output"""
+    """Crew2: Story and Audio based on Crew1 output"""
 
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
@@ -50,6 +52,16 @@ class Crew2():
             llm=self.llm,
             memory=True
         )
+        
+    @agent
+    def boss_visual_artist(self) -> Agent:
+        return Agent(
+            config=self.agents_config['boss_visual_artist'],
+            tools=[self.dalle_tool],
+            verbose=True,
+            llm=self.llm,
+            memory=True
+        )
 
     @agent
     def main_character_card_sound_composer(self) -> Agent:
@@ -65,6 +77,16 @@ class Crew2():
     def enemy_sound_composer(self) -> Agent:
         return Agent(
             config=self.agents_config['enemy_sound_composer'],
+            tools=[FreeSoundAudioTool(result_as_answer=True)],
+            verbose=True,
+            llm=self.llm,
+            memory=True
+        )
+        
+    @agent
+    def boss_music_composer(self) -> Agent:
+        return Agent(
+            config=self.agents_config['boss_music_composer'],
             tools=[FreeSoundAudioTool(result_as_answer=True)],
             verbose=True,
             llm=self.llm,
@@ -112,17 +134,9 @@ class Crew2():
         )
 
     @agent
-    def game_title_creator(self) -> Agent:
+    def story_designer(self) -> Agent:
         return Agent(
-            config=self.agents_config['game_title_creator'],
-            verbose=True,
-            memory=True
-        )
-
-    @agent
-    def dialogue_writer(self) -> Agent:
-        return Agent(
-            config=self.agents_config['dialogue_writer'],
+            config=self.agents_config['story_designer'],
             verbose=True,
             memory=True
         )
@@ -139,18 +153,10 @@ class Crew2():
     # === TASKS ===
 
     @task
-    def create_name(self) -> Task:
+    def design_story(self) -> Task:
         return Task(
-            config=self.tasks_config['create_name'],
+            config=self.tasks_config['design_story'],
             agent=self.story_designer(),
-            # async_execution=False
-        )
-
-    @task
-    def write_dialogue(self) -> Task:
-        return Task(
-            config=self.tasks_config['write_dialogue'],
-            agent=self.dialogue_writer(),
             # async_execution=False
         )
 
@@ -209,6 +215,13 @@ class Crew2():
             config=self.tasks_config['generate_start_game_sound'],
             agent=self.start_game_sound_composer(),
         )
+        
+    @task
+    def generate_boss_music(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_boss_music'],
+            agent=self.boss_music_composer(),
+        )
 
     @task
     def generate_main_character_icon(self) -> Task:
@@ -224,6 +237,15 @@ class Crew2():
         return Task(
             config=self.tasks_config['generate_enemy_icons'],
             agent=self.visual_concept_agent(),
+            callback=dalle_image_callback,
+            # async_execution=True
+        )
+        
+    @task
+    def generate_boss_icon(self) -> Task:
+        return Task(
+            config=self.tasks_config['generate_boss_icon'],
+            agent=self.boss_visual_artist(),
             callback=dalle_image_callback,
             # async_execution=True
         )

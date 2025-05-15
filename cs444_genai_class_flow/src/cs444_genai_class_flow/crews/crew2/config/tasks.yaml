@@ -1,46 +1,32 @@
-create_name:
+design_story:
   description: >
     Based on the following game concept from Crew1:
-
     {crew1_output}
 
-    Design an overarching storyline for this game. It should be rich, full of twists, and consistent with the gameplay mechanics. Define the protagonist and how they progress through the game's levels.
+    Design an overarching storyline for this game. It should be rich, full of twists, and consistent with the gameplay mechanics. Define the protagonist and how they progress through the game's levels, with a distinct theme.
 
   expected_output: >
     A story document that includes:
      - Game Title
      - Protagonist's name and background
      - A detailed storyline (intro, journey, climax)
-     - The first cutscene
-     - Suggestions for visuals and music needed in that cutscene
+     - Suggestions for visuals, music, and sound effects needed to match the game's theme
   return_output: true
 
-write_dialogue:
-  description: >
-    Based on the following game concept and story output:
-
-    Game Concept:
-    {crew1_output}
-
-    Write in-game character dialogues that feel natural and connected to the story. Identify where music should play and what kind of visual should be shown in each scene.
-
   expected_output: >
-    - Dialogue samples in script format:
-      <character_name>: <dialogue>
-    - Specify:
-      - Where background music should play and describe its mood
-      - Where cutscenes happen and what art style fits
-
-  context: [design_story]
+    A story document that includes:
+     - Protagonist's name and background
+     - A detailed storyline (intro, journey, climax)
+     - Suggestions for visuals and music and sound effects needed
   return_output: true
 
 generate_card_attack_sound_1:
   description: >
     Using the game concept:
     {crew1_output}
-    Generate a tag-style prompt (max 5 words) for the main character's first **card attack** sound effect.
+    Generate a tag-style prompt (max 10 words) for the main character's first **card attack** sound effect.
   expected_output: >
-    - The prompt string (max 5 words, must include "sound")
+    - The prompt string (max 10 words, must include "sound")
     - The tool call in the format: generate_game_audio("...")
     - A short rationale for the chosen tags
   context: [design_story]
@@ -50,9 +36,9 @@ generate_card_attack_sound_2:
   description: >
     Using the game concept:
     {crew1_output}
-    Generate a tag-style prompt (max 5 words) for the main character's second **card attack** sound effect.
+    Generate a tag-style prompt (max 10 words) for the main character's second **card attack** sound effect.
   expected_output: >
-    - The prompt string (max 5 words, must include "sound")
+    - The prompt string (max 10 words, must include "sound")
     - The tool call in the format: generate_game_audio("...")
     - A brief rationale for the tag choice
   context: [design_story]
@@ -62,9 +48,9 @@ generate_heal_sound:
   description: >
     Based on the game concept:
     {crew1_output}
-    Produce a tag-style prompt (max 5 words) for the main character's **heal card** sound effect.
+    Produce a tag-style prompt (max 10 words) for the main character's **heal card** sound effect.
   expected_output: >
-    - The prompt string (max 5 words, must include "sound")
+    - The prompt string (max 10 words, must include "sound")
     - The exact tool call in the format: generate_game_audio("...")
     - A short explanation of your tag choice
   context: [design_story]
@@ -74,9 +60,9 @@ generate_enemy_attack:
   description: >
     Using the game concept:
     {crew1_output}
-    Develop a tag-style prompt (max 5 words) for an enemy attack sound effect.
+    Develop a tag-style prompt (max 10 words) for an enemy attack sound effect.
   expected_output: >
-    - The prompt string (max 5 words, must include "sound")
+    - The prompt string (max 10 words, must include "sound")
     - The tool call line in the required format: generate_game_audio("...")
     - A brief explanation of your tags
   context: [design_story]
@@ -86,9 +72,9 @@ generate_background_music:
   description: >
     Based on the game concept:
     {crew1_output}
-    Create a tag-style prompt (max 5 words) for immersive background music.
+    Create a tag-style prompt (max 10 words) for immersive background music.
   expected_output: >
-    - The prompt string (max 5 words, must include "music")
+    - The prompt string (max 10 words, must include "music")
     - The tool call in the format: generate_game_audio("...")
     - A 1-line rationale for the chosen tags
   context: [design_story]
@@ -98,9 +84,9 @@ generate_endgame_music:
   description: >
     Based on the game concept:
     {crew1_output}
-    Generate a tag-style prompt (max 5 words) for the end game music sound.
+    Generate a tag-style prompt (max 10 words) for the end game music sound.
   expected_output: >
-    - The prompt string (max 5 words, must include "music")
+    - The prompt string (max 10 words, must include "music")
     - The tool call in the format: generate_game_audio("...")
     - A brief explanation of your chosen words
   context: [design_story]
@@ -110,9 +96,9 @@ generate_level_victory:
   description: >
     From the game concept:
     {crew1_output}
-    Generate a tag-style prompt (max 5 words) for a level victory sound effect.
+    Generate a tag-style prompt (max 10 words) for a level victory sound effect.
   expected_output: >
-    - The prompt string (max 5 words, must include "sound")
+    - The prompt string (max 10 words, must include "sound")
     - The tool call in the required format: generate_game_audio("...")
     - A short rationale for your tag choice
   context: [design_story]
@@ -122,9 +108,9 @@ generate_start_game_sound:
   description: >
     Based on the game concept:
     {crew1_output}
-    Produce a tag-style prompt (max 5 words) for the start game audio cue (main menu sound).
+    Produce a tag-style prompt (max 10 words) for the start game audio cue (main menu sound).
   expected_output: >
-    - The prompt string (max 5 words, must include "sound")
+    - The prompt string (max 10 words, must include "sound")
     - The exact tool call in the format: generate_game_audio("...")
     - A brief explanation for your chosen tags
   context: [design_story]
@@ -179,6 +165,48 @@ generate_enemy_icons:
 
     ✅ Must be valid JSON
     ✅ Use "enemy_icon" or a short descriptive name for "name"
+
+  context: [design_story]
+  return_output: true
+
+generate_boss_music:
+  description: >
+    Based on the game concept:
+    {crew1_output}
+
+    Compose a tag-style prompt (max 10 words) to generate the boss fight music.
+    This music should be intense, intimidating, suspenseful, and match the emotional theme of the game.
+
+  expected_output: >
+    - The prompt string (max 10 words, must include "music")
+    - The tool call should be in the format: generate_game_audio("...")
+    - A short explanation for the tags that were chosen
+
+  context: [design_story]
+  return_output: True
+
+generate_boss_icon:
+  description: >
+    Based on the game concept:
+    {crew1_output}
+
+    Create a DALL-E prompt for the **main boss character** for the game.
+
+    This should be:
+    - Visually unique and imposing
+    - Thematically aligned with the story and theme
+    - Styled in a similar cartoon fantasy style
+
+  expected_output: >
+    Output a JSON string like this:
+    {{
+      "name": "boss_icon",
+      "image_url": "<returned dalle image url>"
+    }}
+
+    ✅ Must be valid JSON
+    ✅ "name" must be "boss_icon"
+    ✅ "image_url" must be the image url from the dalle_tool
 
   context: [design_story]
   return_output: true
@@ -350,7 +378,9 @@ map_assets:
       "level_victory_sound": "outputs/level_victory_sound.ogg",
       "start_game_sound": "outputs/start_game_sound.ogg",
       "game_icon": "outputs/game_icon.png",
-      "floor_texture": "outputs/floor_texture.ogg"
+      "floor_texture": "outputs/floor_texture.ogg",
+      "boss_music": "outputs/boss_music.ogg",
+      "boss_icon": "outputs/boss_icon.png"
     }}
 
   expected_output: >
@@ -375,7 +405,9 @@ map_assets:
     generate_level_victory,
     generate_start_game_sound,
     generate_card_image,
-    generate_floor_texture
+    generate_floor_texture,
+    generate_boss_music,
+    generate_boss_icon
   ]
 
   return_output: true

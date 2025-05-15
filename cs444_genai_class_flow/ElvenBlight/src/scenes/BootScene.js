@@ -6,17 +6,17 @@ export default class BootScene extends Phaser.Scene {
 
   preload() {
     // main character
-    this.load.image("player", "assets/textures/main_character.png");
+    this.load.image("player", "images/main_character.png");
     // boss/enemy sprite
-    this.load.image("enemy", "assets/textures/enemy.png");
+    this.load.image("enemy", "images/enemy.png");
     // (we still keep the castle if you use it elsewhere)
-    //this.load.image("castle", "assets/castle.png");
+    //this.load.image("castle", "images/castle.png");
     // dungeon floor → grass tiles
-    this.load.image("ground", "assets/textures/grass_tile.png");
+    this.load.image("ground", "images/grass_tile.png");
     // brick wall → elven wall
-    this.load.image("wall", "assets/textures/elven_wall.png");
+    this.load.image("wall", "images/elven_wall.png");
     // boss background for rhythm game
-    this.load.image("bossBackground", "assets/textures/boss_background.png");
+    this.load.image("bossBackground", "images/boss_background.png");
   }
 
   create() {

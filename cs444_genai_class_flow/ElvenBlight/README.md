@@ -123,32 +123,40 @@ ElvenBlight/
 
 ## 🔊 Audio Credits
 
-All sounds used in **Elven Blight** were sourced from [Freesound.org](https://freesound.org/) and are licensed under various Creative Commons licenses:
+All sounds used in **Elven Blight** were sourced from [Freesound.org](https://freesound.org/) and are licensed under various Creative Commons licenses. Below each entry shows the in-code filename, the original sound title and author, the source URL, and the applicable license:
 
 ### 🔹 Creative Commons Attribution 4.0 (CC BY 4.0)
 
-These sounds require attribution. You are free to use, remix, and share them with proper credit.
+* `level_victory_sound.ogg`  
+  **“Charm”** by Scrampunk — [https://freesound.org/people/Scrampunk/sounds/344696/](https://freesound.org/people/Scrampunk/sounds/344696/) — CC BY 4.0  
+* `background_music.ogg`  
+  **“Elf Harp”** by Awsapps — [https://freesound.org/people/Awsapps/sounds/628394/](https://freesound.org/people/Awsapps/sounds/628394/) — CC BY 4.0  
+* `card_attack_sound_2.ogg`  
+  **“Arrow_woosh__twang_01.wav”** by strangely_gnarled — [https://freesound.org/people/strangely_gnarled/sounds/72208/](https://freesound.org/people/strangely_gnarled/sounds/72208/) — CC BY 4.0  
+* `card_attack_sound_1.ogg`  
+  **“sword03.wav”** by Erdie — [https://freesound.org/people/Erdie/sounds/27857/](https://freesound.org/people/Erdie/sounds/27857/) — CC BY 4.0  
 
-* **"Elf Victory.wav"** by [eardeer](https://freesound.org/people/eardeer/) — [https://freesound.org/s/387233/](https://freesound.org/s/387233/)
-* **"Forest Death Music"** by [ItsRexxys](https://freesound.org/people/ItsRexxys/) — [https://freesound.org/s/738242/](https://freesound.org/s/738242/)
-* **"Ambienta Metaphysical.wav"** by [suonho](https://freesound.org/people/suonho/) — [https://freesound.org/s/54921/](https://freesound.org/s/54921/)
-* **"Monster Roar\_10"** by [mitchanary](https://freesound.org/people/mitchanary/) — [https://freesound.org/s/505121/](https://freesound.org/s/505121/)
-* **"Victory Percussion Music Cue"** by [joshuaempyre](https://freesound.org/people/joshuaempyre/) — [https://freesound.org/s/404024/](https://freesound.org/s/404024/)
+### 🔹 Creative Commons Attribution NonCommercial 4.0 (CC BY-NC 4.0)
+
+* `endgame_music.ogg`  
+  **“Suspense Ambiance Effect”** by Audio_Dread — [https://freesound.org/people/Audio_Dread/sounds/534572/](https://freesound.org/people/Audio_Dread/sounds/534572/) — CC BY-NC 4.0  
+* `start_game_sound.ogg`  
+  **“Mission of a Little Elf”** by Zankurō — [https://freesound.org/people/Zankur%C5%8D/sounds/435378/](https://freesound.org/people/Zankur%C5%8D/sounds/435378/) — CC BY-NC 4.0  
+
+### 🔹 Creative Commons Attribution NonCommercial 3.0 (CC BY-NC 3.0)
+
+* `boss_music.ogg`  
+  **“Final boss music”** by fidsml — [https://freesound.org/people/fidsml/sounds/515683/](https://freesound.org/people/fidsml/sounds/515683/) — CC BY-NC 3.0  
 
 ### 🔹 Creative Commons Attribution 3.0 (CC BY 3.0)
 
-This sound also requires attribution under an earlier version of the license.
-
-* **"Forest Splash.wav"** by [Yin\_Yang\_Jake007](https://freesound.org/people/Yin_Yang_Jake007/) — [https://freesound.org/s/406087/](https://freesound.org/s/406087/)
+* `heal_sound.ogg`  
+  **“8bit_different.wav”** by Soundholder — [https://freesound.org/people/Soundholder/sounds/425337/](https://freesound.org/people/Soundholder/sounds/425337/) — CC BY 3.0  
 
 ### 🔹 Creative Commons 0 (CC0)
 
-These sounds are in the public domain — no attribution required, but we still gratefully acknowledge the authors:
-
-* **"Elf Charge.wav"** by [szegvari](https://freesound.org/people/szegvari/) — [https://freesound.org/s/569367/](https://freesound.org/s/569367/)
-* **"Sword Swing.wav"** by [kingsrow](https://freesound.org/people/kingsrow/) — [https://freesound.org/s/348090/](https://freesound.org/s/348090/)
-* **"Heal - RPG"** by [colorsCrimsonTears](https://freesound.org/people/colorsCrimsonTears/) — [https://freesound.org/s/562292/](https://freesound.org/s/562292/)
-* **"Sad Forest Mood.wav"** by [szegvari](https://freesound.org/people/szegvari/) — [https://freesound.org/s/591012/](https://freesound.org/s/591012/)
+* `enemy_attack_sound.ogg`  
+  **“Demonic Anger.wav”** by LilMati — [https://freesound.org/people/LilMati/sounds/527636/](https://freesound.org/people/LilMati/sounds/527636/) — CC0   
 
 ---
 

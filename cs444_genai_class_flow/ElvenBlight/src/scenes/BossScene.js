@@ -135,8 +135,14 @@ export default class BossScene extends Phaser.Scene {
     if (this.timerEvent) this.timerEvent.remove(false);
     this.input.keyboard.removeAllListeners('keydown');
     // notify player
+
     this.sequenceText.setText("Boss Defeated!");
     // add 300 points for defeating the boss
+    const healthBar = document.getElementById("health-bar");
+    const manaBar = document.getElementById("mana-bar");
+
+    if (healthBar) healthBar.style.display = "block";
+    if (manaBar) manaBar.style.display = "block";
     window.score += 300;
     updateScoreText();
     // prepare next dungeon level

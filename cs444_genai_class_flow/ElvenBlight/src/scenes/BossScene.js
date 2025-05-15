@@ -55,7 +55,7 @@ export default class BossScene extends Phaser.Scene {
     this.currentIndex = 0;
 
     // display sequence prompt centered with styling
-    const promptText = "Press: " + this.sequence.join(" → ");
+    const promptText = "" + this.sequence.join(" → ");
     this.sequenceText = this.add.text(
       width / 2,
       height / 2,

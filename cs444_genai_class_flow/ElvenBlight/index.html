@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <title>Elven Blight</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <link rel="icon" href="assets/textures/main_menu_background.png" />
+  <link rel="icon" href="images/main_menu_background.png" />
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
   <style>
     html,
@@ -42,10 +42,10 @@
     }
 
     #settings-screen {
-      background: url("assets/textures/settings.png") center center / 100% 100% no-repeat;
+      background: url("images/settings.png") center center / 100% 100% no-repeat;
     }
     #instructions-screen {
-      background: url("assets/textures/instructions.png") center center / 100% 100% no-repeat;
+      background: url("images/instructions.png") center center / 100% 100% no-repeat;
     }
 
     .container {
@@ -328,7 +328,7 @@
     }
 
     #start-menu-screen {
-      background: url("assets/textures/main_menu_background.png") center center / 100% 100% no-repeat;
+      background: url("images/main_menu_background.png") center center / 100% 100% no-repeat;
     }
 
     #game-over-screen {
@@ -340,7 +340,7 @@
       height: 100%;
       justify-content: center;
       align-items: center;
-      background: url("assets/textures/losing_screen.png") center center / 100% 100% no-repeat;
+      background: url("images/losing_screen.png") center center / 100% 100% no-repeat;
       z-index: 999999;
       text-align: center;
     }
@@ -504,9 +504,9 @@
     </div>
     <div id="battle-ui">
       <div class="card-container">
-        <img id="fireball-card" src="assets/textures/arrow_shot.png" alt="Tail Whip" />
-        <img id="mudwall-card" src="assets/textures/sword_slash.png" alt="Tidal Splash" />
-        <img id="heal-card" src="assets/textures/nature_tree_heal.png" alt="Coral Heal" />
+        <img id="fireball-card" src="images/arrow_shot.png" alt="Tail Whip" />
+        <img id="mudwall-card" src="images/sword_slash.png" alt="Tidal Splash" />
+        <img id="heal-card" src="images/nature_tree_heal.png" alt="Coral Heal" />
       </div>
       <button id="skip-turn-button">Skip Turn</button>
     </div>
@@ -521,38 +521,38 @@
 
   <!-- main-menu music -->
   <audio id="start-game-sound" autoplay loop>
-    <source src="assets/music/start_game_music.ogg" type="audio/ogg" />
+    <source src="sounds/start_game_sound.ogg" type="audio/ogg" />
   </audio>
 
   <!-- in-game background music (JS‐controlled) -->
   <audio id="background-music" loop>
-    <source src="assets/music/background_music_1.ogg" type="audio/ogg" />
+    <source src="sounds/background_music.ogg" type="audio/ogg" />
   </audio>
 
   <!-- end-game music -->
   <audio id="end-game-music">
-    <source src="assets/music/end_game_music.ogg" type="audio/ogg" />
+    <source src="sounds/endgame_music.ogg" type="audio/ogg" />
   </audio>
 
   <!-- spell SFX -->
   <audio id="audio-tail-whip">
-    <source src="assets/audio/tail_whip.ogg" type="audio/ogg" />
+    <source src="sounds/card_attack_sound_2.ogg" type="audio/ogg" />
   </audio>
   <audio id="audio-tidal-splash">
-    <source src="assets/audio/tidal_splash.ogg" type="audio/ogg" />
+    <source src="sounds/card_attack_sound_1.ogg" type="audio/ogg" />
   </audio>
   <audio id="audio-coral-heal">
-    <source src="assets/audio/coral_heal.ogg" type="audio/ogg" />
+    <source src="sounds/heal_sound.ogg" type="audio/ogg" />
   </audio>
 
   <!-- enemy attack SFX -->
   <audio id="audio-enemy-attack">
-    <source src="assets/audio/enemy_attack_1.ogg" type="audio/ogg" />
+    <source src="sounds/enemy_attack_sound.ogg" type="audio/ogg" />
   </audio>
 
   <!-- level victory music -->
   <audio id="audio-level-victory">
-    <source src="assets/music/level_victory.ogg" type="audio/ogg" />
+    <source src="sounds/level_victory_sound.ogg" type="audio/ogg" />
   </audio>
 
   <script type="module" src="main.js"></script>

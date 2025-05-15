@@ -133,6 +133,10 @@ ElvenBlight/
 
 ---
 
+## Target Audience
+
+Our target audience is mostly people who enjoy strategy games, especially fans of turn-based card battlers and roguelikes. We were thinking about players who like games like Slay the Spire or Dicey Dungeons, where planning and decision-making are just as important as action. It's also meant to be accessible for casual gamers since the cartoon style and simple controls make it easy to get into. We wanted it to work well on both desktop and mobile so more people could play it on the go. Overall, it’s for anyone who likes fun, fast-paced battles with a bit of story and challenge mixed in.
+
 ## 🔊 Audio Credits
 
 All sounds used in **Elven Blight** were sourced from [Freesound.org](https://freesound.org/) and are licensed under various Creative Commons licenses. Below each entry shows the in-code filename, the original sound title and author, the source URL, and the applicable license:

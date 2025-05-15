@@ -62,41 +62,53 @@ If you don’t have `npx`, you can install it by installing [Node.js](https://no
 
 ```
 ElvenBlight/
-├── README.md                        # Game documentation and instructions
-├── assets/                          # Game assets (audio, music, textures)
-│   ├── audio/                       # Sound effects (e.g., sword slash, healing, enemy attacks)
-│   │   ├── forest_heal.wav
-│   │   ├── enemy_strike.mp3
-│   │   ├── sword_slash.wav
-│   │   └── arrow_flurry.wav
-│   ├── music/                       # Background music and event cues
-│   │   ├── forest_theme.wav
-│   │   ├── battle_theme.wav
-│   │   ├── end_theme.wav
-│   │   ├── victory_theme.wav
-│   │   └── intro_theme.wav
-│   ├── textures/                    # In-game visuals (characters, backgrounds, tiles)
-│   │   ├── boss_forest.webp
-│   │   ├── forest_heal.png
-│   │   ├── forest_background.png
-│   │   ├── losing_screen.png
-│   │   ├── elf_hero.webp
-│   │   ├── main_menu_background.png
-│   │   ├── sword_slash.png
-│   │   ├── arrow_flurry.png
-│   │   ├── forest_tile.jpg
-│   │   └── forest_tile.png
-├── index.html                       # Main entry point for the game
-├── main.js                          # Top-level game script
-└── src/                             # Core game logic and scene handling
-    ├── scenes/                      # Game scenes and flow control
-    │   ├── BootScene.js
-    │   └── OverworldScene.js
-    └── utils/                       # Reusable game utilities and helpers
-        ├── audio.js
-        ├── battle.js
-        ├── maze.js
-        └── ui.js
+├── README.md      
+├── index.html       
+├── main.js  
+├── assets/ 
+│   ├── textures/  
+├── images/  
+    ├── arrow_shot.png
+    ├── boss_background.png
+    ├── elven_wall.png
+    ├── enemy.png
+    ├── grass_tile.png
+    ├── instructions.png
+    ├── losing_screen.png
+    ├── main_character.png
+    ├── main_menu_background.png
+    ├── nature_tree_heal.png
+    ├── settings.png
+    ├── sword_slash.png
+|── sounds/                 
+    ├── background_music.mp3
+    ├── background_music.ogg
+    ├── boss_music.mp3
+    ├── boss_music.ogg
+    ├── card_attack_sound_1.mp3
+    ├── card_attack_sound_1.ogg
+    ├── card_attack_sound_2.mp3
+    ├── card_attack_sound_2.ogg
+    ├── endgame_music.mp3
+    ├── endgame_music.ogg
+    ├── enemy_attack_sound.mp3
+    ├── enemy_attack_sound.ogg
+    ├── heal_sound.mp3
+    ├── heal_sound.ogg
+    ├── level_victory_sound.mp3
+    ├── level_victory_sound.ogg
+    ├── start_game_sound.mp3
+    ├── start_game_sound.ogg
+├── src/ 
+│   ├── scenes/  
+│   │   ├── BootScene.js
+│   │   ├── BossScene.js
+│   │   └── OverworldScene.js
+│   └── utils/ 
+│       ├── audio.js
+│       ├── battle.js
+│       ├── maze.js
+│       └── ui.js
 ```
 
 ---

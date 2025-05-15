@@ -100,7 +100,7 @@ export default class OverworldScene extends Phaser.Scene {
     const enemyCells = openCells.filter(
       (cell) => !(cell.x === playerCell.x && cell.y === playerCell.y)
     );
-    const numEnemies = window.currentLevel + 1;
+    const numEnemies = window.currentLevel;
 
     for (let i = 0; i < numEnemies; i++) {
       if (enemyCells.length === 0) break;

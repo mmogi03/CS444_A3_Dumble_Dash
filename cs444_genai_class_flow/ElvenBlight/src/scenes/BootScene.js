@@ -17,6 +17,10 @@ export default class BootScene extends Phaser.Scene {
     this.load.image("wall", "images/elven_wall.png");
     // boss background for rhythm game
     this.load.image("bossBackground", "images/boss_background.png");
+    // boss scene audio
+    this.load.audio("bossMusic", "sounds/boss_music.ogg");
+    this.load.audio("enemyAttack", "sounds/enemy_attack_sound.ogg");
+    this.load.audio("victorySnd", "sounds/level_victory_sound.ogg");
   }
 
   create() {

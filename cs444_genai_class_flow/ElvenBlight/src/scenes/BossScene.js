@@ -9,6 +9,9 @@ export default class BossScene extends Phaser.Scene {
   create() {
     // hide battle-related UI elements and health/mana bars
     const battleUI = document.getElementById("battle-ui");
+    // stop any overworld background music
+    const bgMusic = document.getElementById("background-music");
+    if (bgMusic) { bgMusic.pause(); bgMusic.currentTime = 0; }
     const enemyBar = document.getElementById("enemy-health-bar");
     const healthBar = document.getElementById("health-bar");
     const manaBar = document.getElementById("mana-bar");
@@ -20,6 +23,10 @@ export default class BossScene extends Phaser.Scene {
     // background image
     const width = this.game.config.width;
     const height = this.game.config.height;
+    // play background boss music
+    this.bossBgm = this.sound.add("bossMusic", { loop: true, volume: 0.5 });
+    this.bossBgm.play();
+
     this.add.image(width / 2, height / 2, "bossBackground").setDisplaySize(width, height);
 
     // mistakes counter 
@@ -127,16 +134,21 @@ export default class BossScene extends Phaser.Scene {
   }
 
   failBoss() {
+    // stop boss music
+    if (this.bossBgm) this.bossBgm.stop();
     showGameOver();
   }
 
   winBoss() {
     // cancel timer and input
+    // stop boss music
+    if (this.bossBgm) this.bossBgm.stop();
     if (this.timerEvent) this.timerEvent.remove(false);
     this.input.keyboard.removeAllListeners('keydown');
     // notify player
-
     this.sequenceText.setText("Boss Defeated!");
+    // play victory sound
+    this.sound.play("victorySnd", { volume: 1 });
     // add 300 points for defeating the boss
     const healthBar = document.getElementById("health-bar");
     const manaBar = document.getElementById("mana-bar");

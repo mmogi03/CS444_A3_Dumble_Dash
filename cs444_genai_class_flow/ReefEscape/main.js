@@ -1,6 +1,7 @@
 // src/main.js
 
 import BootScene from "./src/scenes/BootScene.js";
+import BossScene from "./src/scenes/BossScene.js";
 import OverworldScene from "./src/scenes/OverworldScene.js";
 import { fadeAudio, setGlobalVolume } from "./src/utils/audio.js";
 import {
@@ -38,6 +39,7 @@ const game = new Phaser.Game(config);
 window.game = game;
 game.scene.add("BootScene", BootScene);
 game.scene.add("OverworldScene", OverworldScene);
+game.scene.add("BossScene", BossScene);
 
 document.addEventListener("DOMContentLoaded", () => {
   const startGameMusic = document.getElementById("start-game-sound");
@@ -50,6 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
   volumeSlider.addEventListener("input", (e) => {
     setGlobalVolume(e.target.value);
   });
+
+  // ensure menu music plays, fall back on user interaction if blocked
+  if (startGameMusic) {
+    const playPromise = startGameMusic.play();
+    if (playPromise !== undefined && playPromise.catch) {
+      playPromise.catch(() => {
+        const resumeAudio = () => {
+          startGameMusic.play();
+          document.removeEventListener('click', resumeAudio);
+        };
+        document.addEventListener('click', resumeAudio);
+      });
+    }
+  }
 
   // Difficulty radios
   const difficultyRadios = document.querySelectorAll(
@@ -144,23 +160,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   settingsBackButton.addEventListener("click", () => {
     stopEndGameMusic();
-    if (window.isGameActive) {
+    // if game is paused (pause menu), always return to main menu
+    if (game.scene.isPaused("OverworldScene") && window.isGameActive) {
+      showScreen(startMenuScreen);
+    } else if (window.isGameActive) {
+      // return to active game
       showScreen(gameScreen);
       if (game.scene.isPaused("OverworldScene")) {
         game.scene.resume("OverworldScene");
       }
     } else {
+      // not in game, go to main menu
       showScreen(startMenuScreen);
     }
   });
   instructionsBackButton.addEventListener("click", () => {
     stopEndGameMusic();
-    if (window.isGameActive) {
+    // if game is paused (pause menu), always return to main menu
+    if (game.scene.isPaused("OverworldScene") && window.isGameActive) {
+      showScreen(startMenuScreen);
+    } else if (window.isGameActive) {
+      // return to active game
       showScreen(gameScreen);
       if (game.scene.isPaused("OverworldScene")) {
         game.scene.resume("OverworldScene");
       }
     } else {
+      // not in game, go to main menu
       showScreen(startMenuScreen);
     }
   });

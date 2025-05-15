@@ -112,9 +112,9 @@ class Crew2():
         )
 
     @agent
-    def story_designer(self) -> Agent:
+    def game_title_creator(self) -> Agent:
         return Agent(
-            config=self.agents_config['story_designer'],
+            config=self.agents_config['game_title_creator'],
             verbose=True,
             memory=True
         )
@@ -139,9 +139,9 @@ class Crew2():
     # === TASKS ===
 
     @task
-    def design_story(self) -> Task:
+    def create_name(self) -> Task:
         return Task(
-            config=self.tasks_config['design_story'],
+            config=self.tasks_config['create_name'],
             agent=self.story_designer(),
             # async_execution=False
         )

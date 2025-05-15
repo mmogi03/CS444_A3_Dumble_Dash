@@ -49,6 +49,11 @@ class Crew3():
                      verbose=True, llm=self.openai_o1_mini_llm)
 
     @agent
+    def boss_scene_builder(self) -> Agent:
+        return Agent(config=self.agents_config['boss_scene_builder'],
+                     verbose=True, llm=self.openai_o1_mini_llm)
+
+    @agent
     def game_exporter(self) -> Agent:
         return Agent(config=self.agents_config['game_exporter'], 
                      verbose=True, llm=self.openai_o1_mini_llm)
@@ -135,6 +140,18 @@ class Crew3():
                     output_file="outputs/scenes_dg.js")
 
     @task
+    def create_boss_scene(self) -> Task:
+        return Task(config=self.tasks_config['create_boss_scene'],
+                    agent=self.boss_scene_builder(),
+                    output_file="outputs/boss_scene.js")
+
+    @task
+    def dg_create_boss_scene(self) -> Task:
+        return Task(config=self.tasks_config['dg_create_boss_scene'],
+                    agent=self.js_debugger(),
+                    output_file="outputs/boss_scene_dg.js")
+
+    @task
     def generate_index_html(self) -> Task:
         return Task(config=self.tasks_config['generate_index_html'], 
                     agent=self.html_css_specialist(), 
@@ -199,6 +216,7 @@ class Crew3():
                 self.gameplay_logic_developer(),
                 self.audio_integrator(),
                 self.scene_builder(),
+                self.boss_scene_builder(),
                 self.game_exporter(),
                 self.html_css_specialist(),
                 self.build_system_engineer(), 

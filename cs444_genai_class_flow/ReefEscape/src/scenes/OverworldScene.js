@@ -100,7 +100,7 @@ export default class OverworldScene extends Phaser.Scene {
     const enemyCells = openCells.filter(
       (cell) => !(cell.x === playerCell.x && cell.y === playerCell.y)
     );
-    const numEnemies = window.currentLevel + 1;
+    const numEnemies = window.currentLevel;
 
     for (let i = 0; i < numEnemies; i++) {
       if (enemyCells.length === 0) break;
@@ -263,14 +263,26 @@ export default class OverworldScene extends Phaser.Scene {
     const victory = document.getElementById("audio-level-victory");
     if (victory) { victory.currentTime = 0; victory.play(); }
 
-    // bump level, reset health/mana UI, then restart
-    window.currentLevel++;
-    this.playerHealth = this.playerMaxHealth;
-    this.playerMana = this.playerMaxMana;
-    updateHealthBar(this.playerHealth, this.playerMaxHealth);
-    updateManaBar(this.playerMana, this.playerMaxMana);
-    updateLevelText();
-
-    this.time.delayedCall(1000, () => { this.scene.restart(); });
+    // decide next wave: boss or dungeon
+    if (!window.justFinishedBoss) {
+      // after dungeon, go to boss level
+      this.time.delayedCall(1000, () => {
+        window.justFinishedBoss = true;
+        this.scene.start("BossScene");
+      });
+    } else {
+      // after boss, start next dungeon level
+      window.justFinishedBoss = false;
+      window.currentLevel++;
+      // reset player health/mana UI
+      this.playerHealth = this.playerMaxHealth;
+      this.playerMana = this.playerMaxMana;
+      updateHealthBar(this.playerHealth, this.playerMaxHealth);
+      updateManaBar(this.playerMana, this.playerMaxMana);
+      updateLevelText();
+      this.time.delayedCall(1000, () => {
+        this.scene.restart();
+      });
+    }
   }
 }

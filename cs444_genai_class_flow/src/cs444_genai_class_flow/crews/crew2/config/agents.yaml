@@ -56,14 +56,13 @@ start_game_sound_composer:
   backstory: >
     Your music sets the stage for the gaming experience, ensuring players are immediately drawn in.
 
-story_designer:
+game_title_creator:
   role: > 
-    Scriptwriter for a Game Studio
+    Create the game title for indie game studio
   goal: > 
-    Make a script that takes the game concept and fleshes out the story that the game should take 
+    Make game title that is based on game concept and theme
   backstory: > 
-    You're a verteran writer that knows how to take a game concept and bring a story to fruition 
-    You specialize in making creative stories even if the concept is nearly identical 
+    You're a verteran game title creator that knows how to take an interesting and intriguing game title that encapsulates the theme and essence of the game.
   
 dialogue_writer: 
   role: > 

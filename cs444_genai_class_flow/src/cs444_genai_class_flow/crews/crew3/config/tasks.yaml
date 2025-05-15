@@ -6,7 +6,49 @@ build_ui:
 
     and Based on the template coming from:
 
-    {template}
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     Use these game assets for images, icons, or references:
 
@@ -28,7 +70,49 @@ develop_gameplay_logic:
 
     and Based on the coming from:
 
-    {template}
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     Here are the game assets (images/audio) to use during gameplay:
 
@@ -49,7 +133,49 @@ add_audio:
 
     and Based on the template coming from:
 
-    {template}
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     Use these file paths to access the correct music files:
 
@@ -70,7 +196,49 @@ construct_scenes:
 
     and Based on the template coming from:
 
-    {template}
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     Use the following visual and audio assets during scene construction:
 
@@ -85,12 +253,121 @@ construct_scenes:
 
   context: [build_ui, develop_gameplay_logic, add_audio]
 
+create_boss_scene:
+  description: >
+    Create a boss level scene that alternates with main levels. The gameplay should be a rhythm game where players press on-screen buttons within a time limit, with a threshold for mistakes or misclicks. Use narrative elements from {crew1_output}, template from {base_template}, and assets from {asset_map}.
+
+    As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   ├── BossScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
+
+  expected_output: >
+    - JavaScript code for the boss level scene layout and alternating level logic
+    - Rhythm game mechanics handling timed on-screen button presses
+    - Mistake threshold mechanism to limit misclicks or mistakes
+    - Integration points for UI, audio, and gameplay systems
+    - You should make or utilize a new file for boss level scene as BossScene.js and integrate this with the rest of the game codebase files. This means you will need to update the other code base files as well to call the boss level scene after each level is completed. 
+
+  context: [construct_scenes, develop_gameplay_logic, add_audio]
+
+dg_create_boss_scene:
+  description: >
+    Review the boss level scene code for correct alternating level logic, timing of on-screen button presses, and mistake threshold. Validate integration with UI, audio, and gameplay modules.
+  expected_output: >
+    - Verified boss scene JavaScript code with flawless rhythm mechanics
+    - Confirmed mistake threshold and alternating level scene switching logic
+    - Integration checks with related subsystems
+  context: [dg_construct_scenes, dg_develop_gameplay_logic]
+
 export_game_code:
   description: >
     Finalize and export the complete game into a ready-to-run JavaScript bundle.
 
     Based on the template coming from:
-      {template}
+    
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   ├── BossScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
       
     These assets should be embedded properly:
 
@@ -108,13 +385,56 @@ export_game_code:
 generate_index_html:
   description: >
     Based on the template coming from:
-      {template}
+    
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     These asset paths can be used for audio/image tags:
 
     {asset_map}
 
-    Write the `index.html` file that will serve as the game’s entry point. It should load `main.js` and apply styles from `style.css`.
+    Write the `index.html` file that will serve as the game's entry point. It should load `main.js` and apply styles from `style.css`.
 
   expected_output: >
     A valid, responsive HTML file linked to the appropriate game files (including the mobile D-pad markup) and ready for deployment.
@@ -123,22 +443,106 @@ generate_style_css:
   description: >
     Based on the template coming from:
 
-    {template}
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     These visual assets (e.g. background texture) should be referenced where appropriate:
 
     {asset_map}
 
-    Create the base `style.css` file that defines layout and visual styling for the game’s menus and screens.
+    Create the base `style.css` file that defines layout and visual styling for the game's menus and screens.
 
   expected_output: >
-    A full `style.css` file with layout, font, and color definitions for the game’s user interface, including media-queries and grid/CSS-flex rules for the diamond-shaped on-screen D-pad.
+    A full `style.css` file with layout, font, and color definitions for the game's user interface, including media-queries and grid/CSS-flex rules for the diamond-shaped on-screen D-pad.
 
 generate_game_entry_point:
   description: >
    Based on the template coming from:
 
-    {template}
+    {base_template}
+
+        As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     Use this asset mapping to load and initialize visuals/audio:
 
@@ -155,13 +559,53 @@ bundle_and_export_game:
   description: >
     Based on the template coming from:
 
-    {template}
+    {base_template}
+
+    As a more specific example, here is the code base for a card turn based, dugeon crawler game. You can use this exact template and update/tweak the logic for some of the functions to make a new, innovative, and inspired card turn based game:
+
+    OverworldScene.js:
+    {OverworldScene_js}
+
+    BootScene.js:
+    {BootScene_js} 
+
+    ui.js:
+    {ui_js} 
+
+    maze.js:
+    {maze_js} 
+
+    battle.js:
+    {battle_js} 
+
+    audio.js:
+    {audio_js} 
+
+    index.html:
+    {index_html} 
+
+    main.js:
+    {main_js} 
+
+    Here is also the code file structure for this game so you can keep the same file structure when building this new game:
+
+    <game_title_folder_name>/
+    ├── assets/
+    ├── src/
+    │   ├── scenes/
+    │   │   ├── BootScene.js
+    │   │   └── OverworldScene.js
+    │   └── utils/
+    │       ├── audio.js
+    │       ├── battle.js
+    │       ├── maze.js
+    │       └── ui.js
+    ├── index.html
+    └── main.js
 
     Use this list of asset files for packaging:
 
     {asset_map}
-
-    Package all game files (HTML, CSS, JS, assets) using a tool like Webpack or Parcel. Output a bundled directory with everything in place and ready to be zipped.
 
   expected_output: >
     A structured, complete directory ready to be deployed in the browser. Should include `index.html`, `style.css`, `bundle.js`, and an `assets/` folder. 
@@ -291,7 +735,7 @@ dg_develop_gameplay_logic:
 
 dg_build_ui:
   description: >
-    Review the game’s UI implementation.
+    Review the game's UI implementation.
 
     Validate interactivity, layout behavior, button states, and visual responsiveness. Check that all UI elements are functional and connected to game logic.
 

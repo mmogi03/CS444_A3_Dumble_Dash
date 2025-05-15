@@ -1,4 +1,4 @@
-design_story:
+create_name:
   description: >
     Based on the following game concept from Crew1:
 
@@ -251,7 +251,7 @@ generate_instructions_background:
 generate_settings_background:
   description: >
     Create a DALL·E prompt for a full-screen **settings screen background** for "Reef Escape". 
-    It should convey an immersive coral-reef control panel vibe in a consistent cartoon style.
+    It should convey an immersive -reef control panel vibe in a consistent cartoon style.
     Can simply be another pose for the mermaid in the game icon.
   expected_output: >
     Output a JSON string like this:

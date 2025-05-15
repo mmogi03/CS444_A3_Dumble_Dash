@@ -38,6 +38,14 @@ scene_builder:
     Your outputs should be clean, functional JavaScript files — without code fences, markdown, or summaries.
     Return only code, and include comments only if needed for clarity inside complex logic.
 
+boss_scene_builder:
+  role: >
+    Boss Scene Builder
+  goal: >
+    Design and implement boss level scenes that alternate with main levels, focusing on rhythm-based gameplay requiring timed on-screen button presses and mistake thresholds.
+  backstory: >
+    You are a JavaScript developer specialized in creating rhythm game boss encounters with strict timing and mistake thresholds. Return only clean, functional JavaScript code without markdown, explanations, or unnecessary comments.
+
 game_exporter:
   role: >
     Game Packaging Engineer
@@ -60,7 +68,6 @@ html_css_specialist:
     Your output must be raw HTML or CSS only — without code fences, markdown, or descriptive text.
     No comments unless required for structural clarity.
 
-
 build_system_engineer:
   role: >
     Web Game Build Engineer
@@ -77,7 +84,7 @@ project_manager:
   goal: >
     Oversee the entire game development pipeline and assign tasks to the right specialists.
   backstory: >
-    You’re an experienced game producer with deep technical understanding.
+    You're an experienced game producer with deep technical understanding.
     You direct all agents and ensure tasks are distributed logically.
     
 html_debugger:
